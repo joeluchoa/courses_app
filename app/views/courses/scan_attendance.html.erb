@@ -1,0 +1,57 @@
+<h1>Scan Attendance for <%= @course.name %></h1>
+
+<div id="reader" style="width: 500px;"></div>
+<div id="scan-result" style="font-weight: bold; margin-top: 20px;"></div>
+
+<%# Include the JS library from a CDN %>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const resultDiv = document.getElementById('scan-result');
+
+    function onScanSuccess(decodedText, decodedResult) {
+      // decodedText will be the student's ID from the QR code
+      console.log(`Scan result: ${decodedText}`);
+
+      // Pause the scanner to prevent multiple submissions
+      html5QrcodeScanner.pause();
+      resultDiv.innerHTML = `Scanned student ID: ${decodedText}. Registering...`;
+
+      // Send the scanned student ID to the Rails backend
+      fetch('/courses/<%= @course.id %>/register_attendance', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector("[name='csrf-token']").content
+        },
+        body: JSON.stringify({ student_id: decodedText })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          resultDiv.style.color = 'green';
+          resultDiv.innerHTML = data.message;
+        } else {
+          resultDiv.style.color = 'red';
+          resultDiv.innerHTML = `Error: ${data.message}`;
+        }
+        // Resume scanning after a short delay
+        setTimeout(() => {
+          resultDiv.innerHTML = '';
+          html5QrcodeScanner.resume();
+        }, 3000); // 3-second delay
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        resultDiv.style.color = 'red';
+        resultDiv.innerHTML = 'An unexpected error occurred.';
+        setTimeout(() => html5QrcodeScanner.resume(), 3000);
+      });
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+  });
+</script>

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  course: one
+  attended_on: 2025-07-30
+
+two:
+  student: two
+  course: two
+  attended_on: 2025-07-30

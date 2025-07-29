@@ -1,0 +1,14 @@
+<%# app/views/students/badge.html.erb %>
+<div class="badge">
+  <h1>Student Badge</h1>
+  <p><strong>Name:</strong> <%= @student.first_name %> <%= @student.last_name %></p>
+  <p><strong>Student ID:</strong> <%= @student.student_id %></p>
+  <div class="qr-code">
+    <%= @qr_code.as_svg(module_size: 4).html_safe %>
+  </div>
+</div>
+
+<style>
+  /* Add some basic styling for printing */
+</style>
+
