@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :profile, only: [:show], controller: 'users'
+
   get 'dashboard', to: 'dashboard#index'
 
   resources :courses do
