@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
+  get 'dashboard', to: 'dashboard#index'
+
   resources :courses do
     get 'scan_attendance', on: :member # /courses/:id/scan_attendance
     post 'register_attendance', on: :member # API endpoint
   end
+
   resources :students do
     get 'badge', on: :member # /students/:id/badge path
   end
+
   devise_for :users
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,5 +23,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+   root "dashboard#index"
 end
