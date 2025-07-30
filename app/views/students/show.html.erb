@@ -12,15 +12,16 @@
 
     <div class="row align-items-center">
       <div class="col-md-3">
-        <%# Render our new QR code partial %>
-        <%= render 'students/qr_code', student: @student %>
+        <%# This new div gives us a target for our CSS rule %>
+        <div class="student-show-qr-code">
+          <%= render 'students/qr_code', student: @student %>
+        </div>
       </div>
       <div class="col-md-9">
         <h5>Attendance QR Code</h5>
         <p class="mb-2">
           This code uniquely identifies the student. Teachers can scan it using the mobile app to register attendance.
         </p>
-        <%# Here is the new link to the printable badge page %>
         <%= link_to "View Printable Badge", badge_student_path(@student), class: "btn btn-outline-primary", target: "_blank" %>
       </div>
     </div>
