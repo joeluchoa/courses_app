@@ -24,6 +24,21 @@
         <%= link_to "View Printable Badge", badge_student_path(@student), class: "btn btn-outline-primary", target: "_blank" %>
       </div>
     </div>
+
+    <hr>
+
+    <h5 class="mt-4">Enrolled Courses</h5>
+
+    <% if @student.courses.any? %>
+      <div class="list-group">
+        <% @student.courses.order(:name).each do |course| %>
+          <%= link_to course.name, course_path(course), class: "list-group-item list-group-item-action" %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">This student is not yet enrolled in any courses.</p>
+    <% end %>
+
   </div>
 
   <div class="card-footer d-flex gap-2">

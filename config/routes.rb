@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "enrollments/create"
+  get "enrollments/destroy"
   resource :profile, only: [:show], controller: 'users'
 
   get 'dashboard', to: 'dashboard#index'
@@ -6,6 +8,8 @@ Rails.application.routes.draw do
   resources :courses do
     get 'scan_attendance', on: :member # /courses/:id/scan_attendance
     post 'register_attendance', on: :member # API endpoint
+
+    resources :enrollments, only: [:create, :destroy]
   end
 
   resources :students do

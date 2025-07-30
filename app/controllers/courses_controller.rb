@@ -8,6 +8,16 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
+    # @course is already set by your set_course before_action
+
+    # Get students who are already in the course
+    @enrolled_students = @course.students.order(:last_name, :first_name)
+
+    # Get students who are NOT in the course to populate the enrollment dropdown
+    @potential_students = Student.where.not(id: @course.student_ids).order(:last_name, :first_name)
+
+    # Initialize an empty enrollment object for the form helper
+    @enrollment = Enrollment.new
   end
 
   # GET /courses/new

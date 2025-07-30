@@ -12,3 +12,54 @@
     <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
   </div>
 </div>
+
+<div class="row">
+  <%# --- Enrolled Students Column --- %>
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header">
+        <h5>Enrolled Students (<%= @enrolled_students.count %>)</h5>
+      </div>
+      <div class="card-body">
+        <% if @enrolled_students.any? %>
+          <ul class="list-group">
+            <% @enrolled_students.each do |student| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= link_to student.full_name, student_path(student) %>
+                <%# Find the specific enrollment record for this student/course combo %>
+                <% enrollment = @course.enrollments.find_by(student_id: student.id) %>
+                <%= button_to "Unenroll", course_enrollment_path(@course, enrollment), method: :delete, class: "btn btn-xs btn-outline-danger" %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted">No students are currently enrolled in this course.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# --- Enroll New Student Column --- %>
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        <h5>Enroll a Student</h5>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: [@course, @enrollment]) do |form| %>
+          <div class="mb-3">
+            <%= form.label :student_id, "Select a student", class: "form-label" %>
+            <%# The options for the select dropdown %>
+            <%= form.select :student_id,
+                            options_from_collection_for_select(@potential_students, :id, :full_name),
+                            { prompt: 'Select a student...' },
+                            class: "form-select" %>
+          </div>
+          <div class="d-grid">
+            <%= form.submit "Enroll Student", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
