@@ -1,0 +1,38 @@
+/*
+  This rule targets the QR code container specifically on the
+  student show page, resizing it to a more appropriate size.
+*/
+.student-show-qr-code {
+  width: 150px; /* Let's make it a bit larger than the one on the badge */
+  height: 150px;
+  margin-bottom: 1rem; /* Add some space below it */
+  border: 1px solid #dee2e6;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/*
+  This ensures the SVG itself scales properly within the container we just styled.
+*/
+.student-show-qr-code svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-profile-link {
+  transition: background-color 0.2s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+.nav-profile-link:hover,
+.nav-profile-link:focus {
+  /* On hover, change the background color to a subtle grey.
+     Using rgba allows the dark theme of the navbar to show through slightly. */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white; /* Ensure text stays white on hover */
+}
+
+/* Make the strong tag inside the link a slightly brighter white */
+.nav-profile-link strong {
+  color: #fff;
+}

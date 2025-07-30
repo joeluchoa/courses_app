@@ -1,0 +1,15 @@
+<%
+  qr_code_data = student.id.to_s
+  qr_code = RQRCode::QRCode.new(qr_code_data)
+
+  # SIMPLIFIED: Let CSS handle the sizing and styling.
+  # This makes the SVG more flexible.
+  svg = qr_code.as_svg(
+    standalone: true,
+    viewbox: true
+  )
+%>
+
+<div class="qr-code-container">
+  <%= svg.html_safe %>
+</div>

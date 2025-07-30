@@ -1,0 +1,42 @@
+<div class="dashboard-header">
+  <h1>Dashboard</h1>
+  <div class="quick-actions">
+    <%= link_to "Add New Student", new_student_path, class: "btn btn-primary" %>
+    <%= link_to "Add New Course", new_course_path, class: "btn btn-primary" %>
+    <%# Add a link to the first course's scanner, or create a dedicated selection page %>
+    <% if Course.any? %>
+      <%= link_to "Scan Attendance", scan_attendance_course_path(Course.first), class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="dashboard-grid">
+  <%# Stat Cards %>
+  <div class="stat-card">
+    <h2><%= @student_count %></h2>
+    <p>Total Students</p>
+  </div>
+
+  <div class="stat-card">
+    <h2><%= @course_count %></h2>
+    <p>Total Courses</p>
+  </div>
+
+  <%# Recent Activity List %>
+  <div class="activity-list">
+    <h3>Recent Activity</h3>
+    <ul>
+      <% @recent_attendances.each do |attendance| %>
+        <li>
+          <strong><%= attendance.student.first_name %> <%= attendance.student.last_name %></strong>
+          was marked present for
+          <strong><%= attendance.course.name %></strong>
+          on <%= attendance.attended_on.strftime("%B %d, %Y") %>
+        </li>
+      <% end %>
+      <% if @recent_attendances.empty? %>
+        <li>No recent attendance records found.</li>
+      <% end %>
+    </ul>
+  </div>
+</div>
