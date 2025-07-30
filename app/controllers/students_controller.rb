@@ -60,8 +60,8 @@ class StudentsController < ApplicationController
   # app/controllers/students_controller.rb
   def badge
     @student = Student.find(params[:id])
-    # The data encoded in the QR code is the student's unique ID
-    @qr_code = RQRCode::QRCode.new(@student.id.to_s)
+
+    render layout: 'badge'
   end
 
   private

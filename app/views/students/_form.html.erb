@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+  <div class="mb-3">
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+  <div class="mb-3">
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
+  <div class="mb-3">
+    <%= form.label :student_id, class: "form-label" %>
+    <%= form.text_field :student_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

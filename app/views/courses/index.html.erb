@@ -1,16 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Courses" %>
-
-<h1>Courses</h1>
-
-<div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Courses</h1>
+  <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
 </div>
 
-<%= link_to "New course", new_course_path %>
+<div id="courses" class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.code %></td>
+          <td><%= link_to "Show", course, class: "btn btn-sm btn-info" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

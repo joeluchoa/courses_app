@@ -1,14 +1,35 @@
-<%# app/views/students/badge.html.erb %>
-<div class="badge">
-  <h1>Student Badge</h1>
-  <p><strong>Name:</strong> <%= @student.first_name %> <%= @student.last_name %></p>
-  <p><strong>Student ID:</strong> <%= @student.student_id %></p>
-  <div class="qr-code">
-    <%= @qr_code.as_svg(module_size: 4).html_safe %>
+<div class="badge-container">
+  <div class="badge-card">
+    <div class="badge-header">
+      <div class="badge-logo">ATTENDANCE APP</div>
+      <div class="badge-school-name">Your Institution Name</div>
+    </div>
+
+    <div class="badge-body">
+      <div class="student-photo-placeholder">
+        <%# In a real app, you would have an image tag here %>
+        <%# <%= image_tag @student.photo_url \%\> %>
+        <span>PHOTO</span>
+      </div>
+
+      <div class="student-details">
+        <div class="student-name">
+          <span><%= @student.first_name %></span>
+          <strong><%= @student.last_name %></strong>
+        </div>
+        <div class="student-id-label">STUDENT ID</div>
+        <div class="student-id"><%= @student.student_id %></div>
+      </div>
+    </div>
+
+    <div class="badge-footer">
+      <div class="qr-code-area">
+        <%# Render the QR code partial we created earlier %>
+        <%= render 'students/qr_code', student: @student %>
+      </div>
+      <div class="issuing-info">
+        Issued: <%= Time.now.strftime("%m/%d/%Y") %>
+      </div>
+    </div>
   </div>
 </div>
-
-<style>
-  /* Add some basic styling for printing */
-</style>
-
