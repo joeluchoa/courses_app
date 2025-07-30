@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Course Details</h5>
+    <%= link_to "Back to courses", courses_path, class: "btn btn-sm btn-secondary" %>
+  </div>
 
-<%= render @course %>
+  <div class="card-body">
+    <%= render @course%>
 
-<div>
-  <%= link_to "Edit this course", edit_course_path(@course) %> |
-  <%= link_to "Back to courses", courses_path %>
-
-  <%= button_to "Destroy this course", @course, method: :delete %>
+  <div class="card-footer d-flex gap-2">
+    <%= link_to "Edit this cource", edit_course_path(@course), class: "btn btn-warning" %>
+    <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  </div>
 </div>
