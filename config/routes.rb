@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
+  # Enrollments routes.
   get "enrollments/create"
   get "enrollments/destroy"
+
+  # Scanner routes.
+  get 'scanner', to: 'scanner#index'
+  get 'scanner/confirm', to: 'scanner#confirm'
+  post 'scanner/register_attendance', to: 'scanner#register_attendance'
+
+  # User Profile routes.
   resource :profile, only: [:show], controller: 'users'
 
+  # Dashboard routes.
   get 'dashboard', to: 'dashboard#index'
 
   resources :courses do
