@@ -1,4 +1,17 @@
 <div id="<%= dom_id student %>">
+
+  <%# app/views/students/show.html.erb %>
+
+  <p>
+  </p>
+
+  <% if @student.photo.attached? %>
+    <%= image_tag @student.photo, width: 250, class: "img-thumbnail" %>
+  <% else %>
+    <strong>Photo:</strong>
+    <p class="text-muted">No photo provided.</p>
+  <% end %>
+
   <p>
     <strong>First name:</strong>
     <%= student.first_name %>

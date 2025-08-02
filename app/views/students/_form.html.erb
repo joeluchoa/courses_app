@@ -12,6 +12,40 @@
   <% end %>
 
   <div class="mb-3">
+    <%# Display current photo if it exists %>
+    <% if @student.photo.attached? %>
+      <div class="mb-2">
+        <label class="form-label">Current Photo</label><br>
+        <%= image_tag @student.photo.variant(resize_to_limit: [150, 150]), class: "img-thumbnail" %>
+      </div>
+    <% end %>
+
+    <%# Standard file input field %>
+    <%= form.label :photo, class: "form-label" %>
+    <%= form.file_field :photo, class: "form-control", accept: "image/*" %>
+  </div>
+
+  <hr>
+
+  <%# Camera Feature Section %>
+  <div class="mb-3">
+    <label class="form-label">Or Capture with Camera</label>
+    <div id="camera-container">
+      <%# The video stream will appear here %>
+      <video id="camera-stream" width="320" height="240" autoplay class="d-none border rounded"></video>
+
+      <%# This canvas is used for capturing the frame but is hidden from the user %>
+      <canvas id="camera-canvas" class="d-none"></canvas>
+
+      <div class="mt-2">
+        <button type="button" id="start-camera" class="btn btn-secondary">Start Camera</button>
+        <button type="button" id="take-photo" class="btn btn-primary d-none">Take Photo</button>
+        <span id="capture-success" class="text-success ms-2 d-none">✓ Photo captured! It will be uploaded on save.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :first_name, class: "form-label" %>
     <%= form.text_field :first_name, class: "form-control" %>
   </div>

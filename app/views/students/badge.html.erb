@@ -6,11 +6,13 @@
     </div>
 
     <div class="badge-body">
-      <div class="student-photo-placeholder">
-        <%# In a real app, you would have an image tag here %>
-        <%# <%= image_tag @student.photo_url \%\> %>
-        <span>PHOTO</span>
-      </div>
+      <% if @student.photo.attached? %>
+        <%= image_tag @student.photo, width: 120, class: "img-thumbnail" %>
+      <% else %>
+        <div class="student-photo-placeholder">
+          <span>PHOTO</span>
+        </div>
+      <% end %>
 
       <div class="student-details">
         <div class="student-name">

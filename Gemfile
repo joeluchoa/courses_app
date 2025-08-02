@@ -66,3 +66,6 @@ end
 gem 'devise'
 # QR code
 gem 'rqrcode'
+# For photos
+gem "image_processing", ">= 1.2"
+
