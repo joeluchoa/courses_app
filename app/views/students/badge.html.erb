@@ -7,7 +7,7 @@
 
     <div class="badge-body">
       <% if @student.photo.attached? %>
-        <%= image_tag @student.photo, width: 120, class: "img-thumbnail" %>
+        <%= image_tag @student.photo.variant(resize_to_fill: [150, 150]), class: "img-thumbnail rounded-circle" %>
       <% else %>
         <div class="student-photo-placeholder">
           <span>PHOTO</span>

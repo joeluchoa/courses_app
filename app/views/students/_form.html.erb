@@ -11,89 +11,100 @@
     </div>
   <% end %>
 
-  <div data-controller="camera">
-    <hr>
-    <div class="mb-3">
-      <label class="form-label">Student Photo</label>
-
-      <%# Current photo display doesn't need any special attributes %>
-      <% if student.photo.attached? %>
-        <div class="mb-2">
-          <%= image_tag student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
-        </div>
-      <% end %>
-
-      <%# Add a data-camera-target to the file input field %>
-      <%= form.file_field :photo, class: "form-control", accept: "image/png,image/jpeg,image/gif", data: { camera_target: "photoInput" } %>
-      <div class="form-text">Upload a file from your device.</div>
+  <div class="card" data-controller="camera">
+    <div class="card-header">
+      <h5 class="mb-0">
+        <i class="bi bi-person-bounding-box me-2"></i>Photo
+      </h5>
     </div>
+    <div class="card-body">
+      <div class="row g-4">
 
-    <div class="mb-3">
-      <label class="form-label">Or Capture with Camera</label>
-      <div class="border rounded p-3 bg-light">
+        <%# --- COLUMN 1: File Upload --- %>
+        <div class="col-md-6">
 
-        <%# Add data-camera-target attributes to each element %>
-        <video width="320" height="240" autoplay class="d-none rounded" data-camera-target="video"></video>
-        <canvas class="d-none" data-camera-target="canvas"></canvas>
-
-        <div class="mt-2">
-          <%# Add data-action to trigger controller methods on click %>
-          <button type="button" class="btn btn-secondary"
-            data-action="click->camera#start"
-            data-camera-target="startButton">Start Camera</button>
-
-          <button type="button" class="btn btn-primary d-none"
-            data-action="click->camera#takePhoto"
-            data-camera-target="takeButton">Take Photo</button>
-
-          <span class="text-success ms-2 d-none fw-bold" data-camera-target="successMsg">✓ Photo Captured!</span>
+          <%# Current photo display %>
+          <% if student.photo.attached? %>
+            <div class="mb-3 text-center">
+              <%= image_tag student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
+            </div>
+          <% end %>
         </div>
+
+        <%# --- COLUMN 2: Camera Capture --- %>
+        <div class="col-md-6 border-start-md">
+          <%# The file input field (with its Stimulus target) %>
+          <h6>Upload a new photo</h6>
+          <%= form.file_field :photo, class: "form-control", accept: "image/png,image/jpeg,image/gif", data: { camera_target: "photoInput" } %>
+
+          <hr class="mt-1 mb-3">
+          <h6>Take a new photo</h6>
+
+          <div class="border rounded p-3 bg-light text-center">
+            <video width="320" height="240" autoplay class="d-none rounded mb-2" data-camera-target="video"></video>
+            <canvas class="d-none" data-camera-target="canvas"></canvas>
+
+            <div class="mt-2">
+              <button type="button" class="btn btn-secondary" data-action="click->camera#start" data-camera-target="startButton">
+                <i class="bi bi-camera-video-fill me-1"></i> Start Camera
+              </button>
+
+              <button type="button" class="btn btn-primary d-none" data-action="click->camera#takePhoto" data-camera-target="takeButton">
+                <i class="bi bi-camera-fill me-1"></i> Take Photo
+              </button>
+            </div>
+            <span class="text-success mt-2 d-none fw-bold" data-camera-target="successMsg">✓ Photo Captured!</span>
+          </div>
+        </div>
+
       </div>
     </div>
-    <hr>
-  </div> <%# --- End of the data-controller="camera" div --- %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :first_name, class: "form-label" %>
-  <%= form.text_field :first_name, class: "form-control" %>
-</div>
+  <p/>
 
-<div class="mb-3">
-  <%= form.label :last_name, class: "form-label" %>
-  <%= form.text_field :last_name, class: "form-control" %>
-</div>
+  <%# --- Other fields --- %>
+  <div class="mb-3">
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :student_id, class: "form-label" %>
-  <%= form.text_field :student_id, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :email, class: "form-label" %>
-  <%= form.text_field :email, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :student_id, class: "form-label" %>
+    <%= form.text_field :student_id, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :date_of_birth, class: "form-label" %>
-  <%= form.date_field :date_of_birth, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :phone, class: "form-label" %>
-  <%= form.text_field :phone, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :date_of_birth, class: "form-label" %>
+    <%= form.date_field :date_of_birth, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :tax_code, class: "form-label" %>
-  <%= form.text_field :tax_code, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :phone, class: "form-label" %>
+    <%= form.text_field :phone, class: "form-control" %>
+  </div>
 
-<div class="mb-3">
-  <%= form.label :address, class: "form-label" %>
-  <%= form.text_area :address, class: "form-control" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :tax_code, class: "form-label" %>
+    <%= form.text_field :tax_code, class: "form-control" %>
+  </div>
 
-<div class="actions">
-  <%= form.submit class: "btn btn-success" %>
-</div>
+  <div class="mb-3">
+    <%= form.label :address, class: "form-label" %>
+    <%= form.text_area :address, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
+  </div>
 <% end %>

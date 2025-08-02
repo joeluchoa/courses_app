@@ -44,7 +44,7 @@
     function onScanFailure(error) {
       // This function is called frequently, so we only log errors
       // if they are not the "No QR code found" message.
-      if (!error.includes("No QR code found")) {
+      if (!error.includes("No barcode") && !error.includes("No Multi")) {
         console.warn(`QR scan failure: ${error}`);
       }
     }
