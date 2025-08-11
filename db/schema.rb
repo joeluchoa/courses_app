@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_02_001823) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_11_221048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_02_001823) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.json "weekly_schedule"
   end
 
   create_table "enrollments", force: :cascade do |t|

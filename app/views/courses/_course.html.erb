@@ -14,4 +14,19 @@
     <%= course.description %>
   </p>
 
+  <p>
+    <strong>Start date:</strong>
+    <%= @course.start_date %>
+  </p>
+
+  <p>
+    <strong>End date:</strong>
+    <%= @course.end_date %>
+  </p>
+
+  <p>
+    <strong>Weekly Schedule:</strong>
+    <pre><%= JSON.pretty_generate(@course.weekly_schedule) %></pre>
+  </p>
+
 </div>
