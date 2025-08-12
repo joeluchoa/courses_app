@@ -1,58 +1,49 @@
-<div id="<%= dom_id student %>">
+<p>
+  <strong>Photo:</strong>
+</p>
 
-  <%# app/views/students/show.html.erb %>
+<% if @student.photo.attached? %>
+  <%= image_tag @student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
+<% else %>
+  <p class="text-muted">No photo provided.</p>
+<% end %>
 
-  <p>
-  </p>
+<p>
+  <strong>First name:</strong>
+  <%= student.first_name %>
+</p>
 
-  <p>
-    <strong>Photo:</strong>
-  </p>
+<p>
+  <strong>Last name:</strong>
+  <%= student.last_name %>
+</p>
 
-  <% if @student.photo.attached? %>
-    <%= image_tag @student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
-  <% else %>
-    <p class="text-muted">No photo provided.</p>
-  <% end %>
+<p>
+  <strong>Student ID:</strong>
+  <%= student.student_id %>
+</p>
 
-  <p>
-    <strong>First name:</strong>
-    <%= student.first_name %>
-  </p>
+<p>
+  <strong>Email:</strong>
+  <%= student.email %>
+</p>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= student.last_name %>
-  </p>
+<p>
+  <strong>Date of birth:</strong>
+  <%= student.date_of_birth %>
+</p>
 
-  <p>
-    <strong>Student ID:</strong>
-    <%= student.student_id %>
-  </p>
+<p>
+  <strong>Phone:</strong>
+  <%= student.phone %>
+</p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= student.email %>
-  </p>
+<p>
+  <strong>Tax code:</strong>
+  <%= student.tax_code %>
+</p>
 
-  <p>
-    <strong>Date of birth:</strong>
-    <%= student.date_of_birth %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= student.phone %>
-  </p>
-
-  <p>
-    <strong>Tax code:</strong>
-    <%= student.tax_code %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= student.address %>
-  </p>
-
-</div>
+<p>
+  <strong>Address:</strong>
+  <%= student.address %>
+</p>

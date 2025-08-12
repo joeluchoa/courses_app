@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Teachers</h1>
+  <%= link_to "New teacher", new_teacher_path, class: "btn btn-primary" %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teachers.each do |teacher| %>
+        <tr>
+          <td><%= teacher.name %></td>
+          <td><%= teacher.phone_number %></td>
+          <td><%= teacher.email %></td>
+          <td><%= link_to "Show", teacher, class: "btn btn-sm btn-info" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

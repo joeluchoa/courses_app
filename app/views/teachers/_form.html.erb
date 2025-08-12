@@ -1,0 +1,33 @@
+<%# app/views/teachers/_form.html.erb %>
+
+<%= form_with(model: teacher, class: "needs-validation", novalidate: true) do |form| %>
+  <% if teacher.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h5>
+      <ul>
+        <% teacher.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :phone_number, class: "form-label" %>
+    <%= form.text_field :phone_number, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
+  </div>
+<% end %>

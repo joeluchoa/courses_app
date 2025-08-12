@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
     # Key Statistics
     @student_count = Student.count
     @course_count = Course.count
+    @teacher_count = Teacher.count
 
     # Recent Activity Feed
     # Eager load student and course to avoid N+1 queries in the view

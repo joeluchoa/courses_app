@@ -6,12 +6,16 @@
 
   <div class="card-body">
     <%= render @course%>
+  </div>
 
   <div class="card-footer d-flex gap-2">
     <%= link_to "Edit this cource", edit_course_path(@course), class: "btn btn-warning" %>
     <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
   </div>
 </div>
+
+<p/>
+<p/>
 
 <div class="row">
   <%# --- Enrolled Students Column --- %>
@@ -51,9 +55,9 @@
             <%= form.label :student_id, "Select a student", class: "form-label" %>
             <%# The options for the select dropdown %>
             <%= form.select :student_id,
-                            options_from_collection_for_select(@potential_students, :id, :full_name),
-                            { prompt: 'Select a student...' },
-                            class: "form-select" %>
+            options_from_collection_for_select(@potential_students, :id, :full_name),
+            { prompt: 'Select a student...' },
+            class: "form-select" %>
           </div>
           <div class="d-grid">
             <%= form.submit "Enroll Student", class: "btn btn-success" %>

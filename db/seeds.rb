@@ -10,14 +10,13 @@
 
 # db/seeds.rb
 
-# Clean out the database
 puts "Destroying all records..."
 Enrollment.destroy_all
 Student.destroy_all
 Course.destroy_all
 User.destroy_all
+Teacher.destroy_all
 
-# Create Users
 puts "Creating users..."
 10.times do
   User.create!(
@@ -28,7 +27,6 @@ puts "Creating users..."
 end
 users = User.all
 
-# Create Courses
 puts "Creating courses..."
 50.times do
   start_date = Faker::Date.forward(days: 365)
@@ -46,7 +44,6 @@ puts "Creating courses..."
 end
 courses = Course.all
 
-# Create Students
 puts "Creating students..."
 100.times do
   Student.create!(
@@ -57,7 +54,6 @@ puts "Creating students..."
 end
 students = Student.all
 
-# Create Enrollments
 puts "Creating enrollments..."
 200.times do
   Enrollment.create!(
@@ -66,8 +62,18 @@ puts "Creating enrollments..."
   )
 end
 
+puts "Creating teachers..."
+5.times do
+  Teacher.create!(
+    name: Faker::Name.name,
+    phone_number: Faker::PhoneNumber.phone_number,
+    email: Faker::Internet.unique.email
+  )
+end
+
 puts "Seeding finished!"
 puts "#{User.count} users created."
 puts "#{Course.count} courses created."
 puts "#{Student.count} students created."
 puts "#{Enrollment.count} enrollments created."
+puts "#{Teacher.count} teachers created."

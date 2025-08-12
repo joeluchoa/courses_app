@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :teachers
   # Enrollments routes.
   get "enrollments/create"
   get "enrollments/destroy"
