@@ -17,11 +17,6 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :code, class: "form-label" %>
-    <%= form.text_field :code, class: "form-control"  %>
-  </div>
-
-  <div class="mb-3">
     <%= form.label :description, class: "form-label" %>
     <%= form.textarea :description, class: "form-control"  %>
   </div>
@@ -36,47 +31,54 @@
     <%= form.date_field :end_date, class: "form-control"  %>
   </div>
 
-  <h3>Weekly Schedule</h3>
-  <p>Select the days the course will be held and set the times.</p>
+  <div class="mb-3">
+    <%= form.label :address, class: "form-label" %>
+    <%= form.text_area :address, class: "form-control", rows: 3 %>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Enabled</th>
-        <th>Day</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @course.weekly_schedule_for_form.each_with_index do |schedule_item, index| %>
-        <%= form.fields_for :weekly_schedule_attributes, schedule_item, index: index do |schedule_form| %>
-          <%# Add the controller and targets to the table row (<tr>) %>
-            <tr data-controller="schedule-row">
-              <td>
-                <%= schedule_form.check_box :enabled, {
-                  data: {
-                    action: "change->schedule-row#toggle",
-                    "schedule-row-target": "checkbox"
+  <div class="mb-3">
+    <h3>Weekly Schedule</h3>
+    <p>Select the days the course will be held and set the times.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Enabled</th>
+          <th>Day</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @course.weekly_schedule_for_form.each_with_index do |schedule_item, index| %>
+          <%= form.fields_for :weekly_schedule_attributes, schedule_item, index: index do |schedule_form| %>
+            <%# Add the controller and targets to the table row (<tr>) %>
+              <tr data-controller="schedule-row">
+                <td>
+                  <%= schedule_form.check_box :enabled, {
+                    data: {
+                      action: "change->schedule-row#toggle",
+                      "schedule-row-target": "checkbox"
+                    }
                   }
-                }
-              %>
-            </td>
-            <td>
-              <%= schedule_form.label :day, schedule_form.object.day %>
-              <%= schedule_form.hidden_field :day %>
-            </td>
-            <td>
-              <%= schedule_form.time_field :start_time, { data: { "schedule-row-target": "startTime" } } %>
-            </td>
-            <td>
-              <%= schedule_form.time_field :end_time, { data: { "schedule-row-target": "endTime" } } %>
-            </td>
-          </tr>
+                %>
+              </td>
+              <td>
+                <%= schedule_form.label :day, schedule_form.object.day %>
+                <%= schedule_form.hidden_field :day %>
+              </td>
+              <td>
+                <%= schedule_form.time_field :start_time, { data: { "schedule-row-target": "startTime" } } %>
+              </td>
+              <td>
+                <%= schedule_form.time_field :end_time, { data: { "schedule-row-target": "endTime" } } %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 
   <div class="actions">
     <%= form.submit  class: "btn btn-success" %>

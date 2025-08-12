@@ -105,6 +105,7 @@ class CoursesController < ApplicationController
       :description,
       :start_date,
       :end_date,
+      :address,
       weekly_schedule_attributes: [:day, :start_time, :end_time, :_destroy, :enabled]
     )
   end

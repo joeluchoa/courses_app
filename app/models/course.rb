@@ -5,6 +5,7 @@ class Course < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :attendances, dependent: :destroy
 
+  validates :address, presence: true
   validate :start_time_must_be_before_end_time
   validate :time_fields_must_be_present_if_enabled
 

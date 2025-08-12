@@ -37,6 +37,7 @@ puts "Creating courses..."
     description: Faker::Lorem.paragraph,
     start_date: start_date,
     end_date: end_date,
+    address: Faker::Address.full_address,
     weekly_schedule: [
       { day: "Monday", start_time: "18:00", end_time: "20:00" },
       { day: "Wednesday", start_time: "18:00", end_time: "20:00" }
