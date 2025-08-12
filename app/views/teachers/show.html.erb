@@ -13,3 +13,23 @@
     <%= button_to "Destroy this teacher", @teacher, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' } } %>
   </div>
 </div>
+
+<div class="card mt-4">
+  <div class="card-header">
+    Assigned Courses
+  </div>
+  <% if @teacher.courses.any? %>
+    <ul class="list-group list-group-flush">
+      <% @teacher.courses.each do |course| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= link_to course.name, course %>
+          <span class="badge bg-primary rounded-pill"><%= course.students.count %> Students</span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="card-body">
+      <p class="card-text">This teacher is not currently assigned to any courses.</p>
+    </div>
+  <% end %>
+</div>

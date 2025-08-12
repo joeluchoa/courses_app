@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_12_164058) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_220337) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,6 +61,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_164058) do
     t.date "end_date"
     t.json "weekly_schedule"
     t.string "address"
+    t.bigint "teacher_id"
+    t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -110,6 +112,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_164058) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "courses"
   add_foreign_key "attendances", "students"
+  add_foreign_key "courses", "teachers"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
 end

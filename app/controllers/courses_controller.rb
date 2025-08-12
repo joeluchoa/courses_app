@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_teachers, only: [:new, :create, :edit, :update]
 
   # GET /courses or /courses.json
   def index
@@ -98,6 +99,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params.expect(:id))
   end
 
+  def set_teachers
+    @teachers = Teacher.all.order(:name)
+  end
+
   # Only allow a list of trusted parameters through.
   def course_params
     params.require(:course).permit(
@@ -106,6 +111,7 @@ class CoursesController < ApplicationController
       :start_date,
       :end_date,
       :address,
+      :teacher_id,
       weekly_schedule_attributes: [:day, :start_time, :end_time, :_destroy, :enabled]
     )
   end

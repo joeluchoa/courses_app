@@ -4,6 +4,8 @@ class Course < ApplicationRecord
   attribute :state, :string
   after_initialize :set_state
 
+  belongs_to :teacher
+
   has_many :enrollments, dependent: :destroy
   has_many :students, through: :enrollments
   has_many :attendances, dependent: :destroy
@@ -73,17 +75,17 @@ class Course < ApplicationRecord
   end
 
   def in_progress?
-    false if self.start_date.nil? or self.end_date.nil?
+    return false if self.start_date.nil? or self.end_date.nil?
     self.start_date <= Time.now and Time.now <= self.end_date
   end
 
   def not_started?
-    false if self.start_date.nil? or self.end_date.nil?
+    return false if self.start_date.nil? or self.end_date.nil?
     Time.now < self.start_date
   end
 
   def finished?
-    false if self.start_date.nil? or self.end_date.nil?
+    return false if self.start_date.nil? or self.end_date.nil?
     self.end_date < Time.now
   end
 

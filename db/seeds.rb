@@ -28,6 +28,16 @@ puts "Creating users..."
 end
 users = User.all
 
+puts "Creating teachers..."
+5.times do
+  Teacher.create!(
+    name: Faker::Name.name,
+    phone_number: Faker::PhoneNumber.phone_number,
+    email: Faker::Internet.unique.email
+  )
+end
+teachers = Teacher.all
+
 puts "Creating courses..."
 50.times do
   start_date = Faker::Date.forward(days: 365)
@@ -38,6 +48,7 @@ puts "Creating courses..."
     start_date: start_date,
     end_date: end_date,
     address: Faker::Address.full_address,
+    teacher: teachers.sample,
     weekly_schedule: [
       { day: "Monday", start_time: "18:00", end_time: "20:00" },
       { day: "Wednesday", start_time: "18:00", end_time: "20:00" }
@@ -58,19 +69,14 @@ students = Student.all
 
 puts "Creating enrollments..."
 200.times do
+  begin
   Enrollment.create!(
     course: courses.sample,
     student: students.sample,
   )
-end
-
-puts "Creating teachers..."
-5.times do
-  Teacher.create!(
-    name: Faker::Name.name,
-    phone_number: Faker::PhoneNumber.phone_number,
-    email: Faker::Internet.unique.email
-  )
+  rescue Exception
+    puts "[WARN] Student already assigned to the course."
+  end
 end
 
 puts "Seeding finished!"

@@ -25,6 +25,11 @@
   </p>
 
   <p>
+    <strong>Teacher:</strong>
+    <%= link_to @course.teacher.name, @course.teacher %>
+  </p>
+
+  <p>
     <strong>Weekly Schedule:</strong>
     <ul>
       <% @course.weekly_schedule.each do |schedule| %>
