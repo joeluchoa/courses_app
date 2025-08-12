@@ -16,3 +16,4 @@ pin "controllers/index", to: "controllers/index.js"
 # 2. Pin every file that the loader imports
 pin "controllers/application", to: "controllers/application.js"
 pin "controllers/camera", to: "controllers/camera_controller.js"
+pin_all_from "app/javascript/controllers", under: "controllers"

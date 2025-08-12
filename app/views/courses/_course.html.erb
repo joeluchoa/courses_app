@@ -26,7 +26,13 @@
 
   <p>
     <strong>Weekly Schedule:</strong>
-    <pre><%= JSON.pretty_generate(@course.weekly_schedule) %></pre>
+    <ul>
+      <% @course.weekly_schedule.each do |schedule| %>
+        <li>
+          <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+        </li>
+      <% end %>
+    </ul>
   </p>
 
 </div>

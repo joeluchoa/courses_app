@@ -7,3 +7,6 @@ import CameraController from "controllers/camera"
 
 // Register the controllers
 application.register("camera", CameraController)
+
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)

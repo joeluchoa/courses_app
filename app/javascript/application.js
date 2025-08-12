@@ -3,3 +3,15 @@
 import "@hotwired/turbo-rails"
 import "controllers/index"
 import "bootstrap"
+import "controllers"
+
+import { Application } from "@hotwired/stimulus"
+
+const application = Application.start()
+
+// Configure Stimulus development experience
+application.debug = false
+window.Stimulus   = application
+
+// This is the most important line! It loads all your controller files.
+import "controllers"

@@ -66,7 +66,7 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
- 
+
   def scan_attendance
     @course = Course.find(params[:id])
   end
@@ -92,13 +92,20 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.expect(course: [ :name, :code, :description, :start_date, :end_date, :weekly_schedule ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course
+    @course = Course.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_params
+    params.require(:course).permit(
+      :name,
+      :description,
+      :start_date,
+      :end_date,
+      weekly_schedule_attributes: [:day, :start_time, :end_time, :_destroy, :enabled]
+    )
+  end
 end
