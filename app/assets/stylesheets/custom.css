@@ -3,8 +3,8 @@
   student show page, resizing it to a more appropriate size.
 */
 .student-show-qr-code {
-  width: 150px; /* Let's make it a bit larger than the one on the badge */
-  height: 150px;
+  width: 100px; /* Let's make it a bit larger than the one on the badge */
+  height: 100px;
   margin-bottom: 1rem; /* Add some space below it */
   border: 1px solid #dee2e6;
   padding: 5px;

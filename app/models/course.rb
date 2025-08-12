@@ -1,6 +1,9 @@
 require 'ostruct'
 
 class Course < ApplicationRecord
+  attribute :state, :string
+  after_initialize :set_state
+
   has_many :enrollments, dependent: :destroy
   has_many :students, through: :enrollments
   has_many :attendances, dependent: :destroy
@@ -8,6 +11,7 @@ class Course < ApplicationRecord
   validates :address, presence: true
   validate :start_time_must_be_before_end_time
   validate :time_fields_must_be_present_if_enabled
+
 
   # This method prepares a full 7-day schedule for the form.
   def weekly_schedule_for_form
@@ -68,4 +72,26 @@ class Course < ApplicationRecord
     end
   end
 
+  def in_progress?
+    false if self.start_date.nil? or self.end_date.nil?
+    self.start_date <= Time.now and Time.now <= self.end_date
+  end
+
+  def not_started?
+    false if self.start_date.nil? or self.end_date.nil?
+    Time.now < self.start_date
+  end
+
+  def finished?
+    false if self.start_date.nil? or self.end_date.nil?
+    self.end_date < Time.now
+  end
+
+  private
+
+  def set_state
+    self.state = "Ongoing" if in_progress?
+    self.state = "Waiting" if not_started?
+    self.state = "Finished" if finished?
+  end
 end
