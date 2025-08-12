@@ -20,6 +20,7 @@ Teacher.destroy_all
 puts "Creating users..."
 10.times do
   User.create!(
+    name: Faker::Name.name, # <-- Add this line
     email: Faker::Internet.unique.email,
     password: 'password',
     password_confirmation: 'password'
