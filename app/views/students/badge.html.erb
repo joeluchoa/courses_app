@@ -1,11 +1,11 @@
 <div class="badge-container">
   <div class="badge-card">
     <div class="badge-header">
-      <div class="badge-logo">Corsi Non sei solo</div>
-      <div class="badge-school-name">
-        Chiesa Evangelica Arca Missionária
-        <br/>
-        Via Il Prato, 40, 50123 Firenze FI, Italy
+      <div class="row">
+        <div class="badge-school-name">
+          <strong>Chiesa Evangelica Arca Missionária</strong> 
+          <span> - Via Il Prato, 40, 50123 Firenze FI, Italy</span>
+        </div>
       </div>
     </div>
 
@@ -17,33 +17,40 @@
       <div class="student-details">
         <div class="student-name">
           <span><%= @student.first_name %></span>
-          <strong><%= @student.last_name %></strong>
+          <strong><%= truncate(@student.last_name, length: 20) %></strong>
         </div>
 
         <span class="field-label">Corso</span>
         <strong class="field-value"><%= @course.name %></strong>
+        <br/>
+        <span class="field-label">Insegnante</span>
+        <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
         <br/>
         <span class="field-label">Inizio</span>
         <strong class="field-value"><%= @course.start_date %></strong>
         <span class="field-label">Fine</span>
         <strong class="field-value"><%= @course.end_date %></strong>
         <br/>
-        <span class="field-label">Tempo</span> <br/>
         <strong class="field-value">
-          <% @course.weekly_schedule.each do |schedule| %>
-            <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %> <br/>
+          <% @course.weekly_schedule.each_with_index do |schedule, idx| %>
+            <span class="field-label">
+              <%= schedule["day"] %>
+            </span>
+            <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+            <% if idx.odd? %>
+              <br/>
+            <% end %>
           <% end %>
-        <br/>
-        <span class="field-label">Indirizzo</span>
-        <strong><%= @course.address %></strong>
+          <span class="field-label">Indirizzo</span>
+          <strong class="field-value"><%= @course.address %></strong>
 
+        </div>
       </div>
-    </div>
 
-    <div class="badge-footer">
-      <div class="issuing-info">
-        Issued: <%= Time.now.strftime("%m/%d/%Y") %>
+      <div class="badge-footer">
+        <div class="issuing-info">
+          Issued: <%= Time.now.strftime("%m/%d/%Y") %>
+        </div>
       </div>
     </div>
   </div>
-</div>

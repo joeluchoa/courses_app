@@ -34,16 +34,16 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        padding: 0.1rem;
+        padding: 1rem;
       }
 
       /* The badge itself, styled like a plastic ID card and sized for A6 landscape */
       .badge-card {
-        width: 85mm;
-        height: 54mm;
+        width: 200mm;
+        height: 120mm;
         background-color: #ffffff;
         border-radius: 12px;
-        border: 1px solid rgba(1,1,1,0.1);
+        border: 2px solid rgba(1,1,1,0.1);
         display: flex;
         flex-direction: column;
         overflow: hidden; /* Keeps contents within the rounded corners */
@@ -53,20 +53,20 @@
       /* Header styling */
       .badge-header {
         color: black;
-        padding: 5px 9px;
+        padding: 10px 18px;
         border-bottom: 1px solid #eee;
       }
       .badge-logo {
-        font-weight: 700;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
+        font-weight: 800;
+        font-size: 2.5rem;
+        letter-spacing: -1px;
         opacity: 0.8;
         text-align: left;
+        vertical-align: top;
       }
       .badge-school-name {
-        font-weight: 400;
-        font-size: 0.6rem;
-        text-align: right;
+        font-size: 1.2rem;
+        text-align: center;
       }
 
       /* Main content area */
@@ -78,10 +78,11 @@
 
       .student-details {
         text-align: left;
-        padding: 5px;
+        padding: 10px;
       }
       .student-name {
-        font-size: 1rem;
+        font-size: 2.5rem;
+        padding: 2px;
       }
       .student-name span {
         font-weight: 300;
@@ -90,14 +91,15 @@
         font-weight: 700;
       }
       .field-label {
-        font-size: 0.6rem;
-        color: #6c757d;
-        font-weight: 600;
-        padding: 0px;
+        font-size: 1.3rem;
+        opacity: 0.7;
+        font-weight: 300;
+        padding: 2px;
       }
       .field-value {
-        font-size: 0.6rem;
-        font-weight: 800;
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding: 2px;
       }
 
       /* Footer area with QR code */
@@ -105,14 +107,15 @@
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        padding: 5px 9px;
+        padding: 10px 18px;
         border-top: 1px solid #eee;
+        font-weight: 300;
       }
       .qr-code-area {
         /* Ddgeefine a fixed size for the QR code's container */
-        width: 120px;
-        height: 120px;
-        padding: 9px 5px; /* A small inner padding */
+        width: 250px;
+        height: 250px;
+        padding: 0 10px 0 20px; /* A small inner padding */
         background-color: white;
         display: flex;
         justify-content: center;
@@ -131,9 +134,9 @@
         object-fit: contain;
       }
       .issuing-info {
-        font-size: 0.8rem;
-        color: #adb5bd;
+        font-size: 1rem;
         text-align: right;
+        opacity: 0.7;
       }
     </style>
   </head>
