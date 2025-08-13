@@ -1,34 +1,46 @@
 <div class="badge-container">
   <div class="badge-card">
     <div class="badge-header">
-      <div class="badge-logo">ATTENDANCE APP</div>
-      <div class="badge-school-name">Your Institution Name</div>
+      <div class="badge-logo">Corsi Non sei solo</div>
+      <div class="badge-school-name">
+        Chiesa Evangelica Arca Missionária
+        <br/>
+        Via Il Prato, 40, 50123 Firenze FI, Italy
+      </div>
     </div>
 
     <div class="badge-body">
-      <% if @student.photo.attached? %>
-        <%= image_tag @student.photo.variant(resize_to_fill: [150, 150]), class: "img-thumbnail rounded-circle" %>
-      <% else %>
-        <div class="student-photo-placeholder">
-          <span>PHOTO</span>
-        </div>
-      <% end %>
+      <div class="qr-code-area">
+        <%= render 'students/qr_code', student: @student, course: @course %>
+      </div>
 
       <div class="student-details">
         <div class="student-name">
           <span><%= @student.first_name %></span>
           <strong><%= @student.last_name %></strong>
         </div>
-        <div class="student-id-label">STUDENT ID</div>
-        <div class="student-id"><%= @student.student_id %></div>
+
+        <span class="field-label">Corso</span>
+        <strong class="field-value"><%= @course.name %></strong>
+        <br/>
+        <span class="field-label">Inizio</span>
+        <strong class="field-value"><%= @course.start_date %></strong>
+        <span class="field-label">Fine</span>
+        <strong class="field-value"><%= @course.end_date %></strong>
+        <br/>
+        <span class="field-label">Tempo</span> <br/>
+        <strong class="field-value">
+          <% @course.weekly_schedule.each do |schedule| %>
+            <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %> <br/>
+          <% end %>
+        <br/>
+        <span class="field-label">Indirizzo</span>
+        <strong><%= @course.address %></strong>
+
       </div>
     </div>
 
     <div class="badge-footer">
-      <div class="qr-code-area">
-        <%# Render the QR code partial we created earlier %>
-        <%= render 'students/qr_code', student: @student %>
-      </div>
       <div class="issuing-info">
         Issued: <%= Time.now.strftime("%m/%d/%Y") %>
       </div>

@@ -59,7 +59,8 @@ class StudentsController < ApplicationController
 
   # app/controllers/students_controller.rb
   def badge
-    @student = Student.find(params[:id])
+    @student = Student.find(params[:student_id])
+    @course = Course.find(params[:course_id])
 
     render layout: 'badge'
   end

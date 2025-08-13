@@ -1,9 +1,8 @@
 <%
-  qr_code_data = student.id.to_s
-  qr_code = RQRCode::QRCode.new(qr_code_data)
+  # TODO: Move the qr_code_data generation to a helper library.
+  qr_code_data = student.id.to_s + '-' + course.id.to_s
 
-  # SIMPLIFIED: Let CSS handle the sizing and styling.
-  # This makes the SVG more flexible.
+  qr_code = RQRCode::QRCode.new(qr_code_data)
   svg = qr_code.as_svg(
     standalone: true,
     viewbox: true

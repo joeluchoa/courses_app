@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :teachers
+
   # Enrollments routes.
   get "enrollments/create"
   get "enrollments/destroy"
@@ -22,9 +23,8 @@ Rails.application.routes.draw do
     resources :enrollments, only: [:create, :destroy]
   end
 
-  resources :students do
-    get 'badge', on: :member # /students/:id/badge path
-  end
+  resources :students
+  get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
 
   devise_for :users
 

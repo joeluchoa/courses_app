@@ -13,7 +13,7 @@
       /* Page layout for printing */
       @media print {
         @page {
-          size: A7 landscape;
+          size: card landscape;
           margin: 0;
         }
         body {
@@ -34,16 +34,16 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        padding: 2rem;
+        padding: 0.1rem;
       }
 
       /* The badge itself, styled like a plastic ID card and sized for A6 landscape */
       .badge-card {
-        width: 148mm; /* A6 landscape width */
-        height: 105mm; /* A6 landscape height */
+        width: 85mm;
+        height: 54mm;
         background-color: #ffffff;
         border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        border: 1px solid rgba(1,1,1,0.1);
         display: flex;
         flex-direction: column;
         overflow: hidden; /* Keeps contents within the rounded corners */
@@ -52,75 +52,52 @@
 
       /* Header styling */
       .badge-header {
-        background: linear-gradient(45deg, #0d6efd, #0dcaf0); /* A nice blue gradient */
-        color: white;
-        padding: 12px 18px;
-        text-align: right;
+        color: black;
+        padding: 5px 9px;
+        border-bottom: 1px solid #eee;
       }
       .badge-logo {
         font-weight: 700;
-        font-size: 1.1rem;
-        letter-spacing: 2px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
         opacity: 0.8;
+        text-align: left;
       }
       .badge-school-name {
         font-weight: 400;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
+        text-align: right;
       }
 
       /* Main content area */
       .badge-body {
         display: flex;
         align-items: center;
-        padding: 20px;
         flex-grow: 1; /* Makes this section fill available space */
       }
 
-      /* Placeholder for the student's photo */
-      .student-photo-placeholder {
-        width: 130px;
-        height: 130px;
-        border: 2px dashed #adb5bd;
-        background-color: #f8f9fa;
-        border-radius: 50%; /* Circular photo */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 25px;
-      }
-      .student-photo-placeholder span {
-        color: #adb5bd;
-        font-weight: 600;
-        font-size: 1.2rem;
-      }
-
-      /* Student's name and ID details */
       .student-details {
         text-align: left;
+        padding: 5px;
       }
       .student-name {
-        font-size: 2.2rem;
-        line-height: 1.1;
-        margin-bottom: 10px;
+        font-size: 1rem;
       }
       .student-name span {
-        display: block;
         font-weight: 300;
       }
       .student-name strong {
-        display: block;
         font-weight: 700;
       }
-      .student-id-label {
-        font-size: 0.8rem;
+      .field-label {
+        font-size: 0.6rem;
         color: #6c757d;
         font-weight: 600;
-        letter-spacing: 1px;
+        padding: 0px;
       }
-      .student-id {
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 1.5rem;
-        font-weight: 600;
+      .field-value {
+        font-size: 0.6rem;
+        font-weight: 800;
       }
 
       /* Footer area with QR code */
@@ -128,17 +105,15 @@
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        padding: 10px 18px;
+        padding: 5px 9px;
         border-top: 1px solid #eee;
       }
       .qr-code-area {
-        /* Define a fixed size for the QR code's container */
-        width: 90px;
-        height: 90px;
-        padding: 5px; /* A small inner padding */
+        /* Ddgeefine a fixed size for the QR code's container */
+        width: 120px;
+        height: 120px;
+        padding: 9px 5px; /* A small inner padding */
         background-color: white;
-        border: 1px solid #dee2e6;
-        border-radius: 4px; /* Slightly rounded corners */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -156,7 +131,7 @@
         object-fit: contain;
       }
       .issuing-info {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         color: #adb5bd;
         text-align: right;
       }
@@ -164,7 +139,6 @@
   </head>
 
   <body>
-    <%# This just renders the content of the badge.html.erb view, nothing else %>
     <%= yield %>
   </body>
 </html>
