@@ -92,7 +92,40 @@ class CoursesController < ApplicationController
     end
   end
 
+  def attendance_table
+    @course = Course.find(params[:id])
+    @students = @course.students.order(:last_name, :first_name)
+
+    # 1. Determine the columns: Calculate all the specific dates the class runs.
+    @class_days = []
+    wdays = selected_days(@course)
+    if @course.start_date.present? && @course.end_date.present?
+      (@course.start_date..@course.end_date).each do |date|
+        day_name = date.strftime('%A').downcase
+        if wdays.include?(day_name)
+          @class_days << date
+        end
+      end
+    end
+
+    # 2. Fetch all attendance data for this course in a single, efficient query.
+    # We transform it into a Hash for instant lookups in the view.
+    # The structure will be: { [student_id, date] => present_status }
+    # Example: { [1, '2025-08-20'] => true, [2, '2025-08-20'] => false }
+    @attendance_data = @course.attendances
+      .pluck(:student_id, :attended_on)
+      .to_h { |student_id, date, present| [[student_id, date], true] }
+  end
+
   private
+
+  def selected_days(course)
+    wdays = []
+    course.weekly_schedule.each do |schedule|
+      wdays << schedule["day"].downcase
+    end
+    wdays
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course

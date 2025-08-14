@@ -1,0 +1,96 @@
+<%# app/views/courses/attendance.html.erb %>
+
+<style>
+  /* --- Main Table Styling --- */
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns are of equal width */
+  }
+
+  /* --- General Cell Styling --- */
+  .attendance-table th, .attendance-table td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    width: 10px; /* Set a fixed width for data cells */
+    font-size: 14px;
+  }
+
+  /* --- Student Name Cell --- */
+  .attendance-table .student-name {
+    width: 80px; /* Give the student name column more space */
+    text-align: left;
+    font-weight: bold;
+  }
+
+  /* --- Rotated Header Styling --- */
+  .attendance-table th.rotated-header {
+    height: 30px; /* Give space for the rotated text */
+    vertical-align: button;
+    padding-bottom: 30px;
+    white-space: nowrap; /* Prevents text from wrapping */
+  }
+
+  .attendance-table th.rotated-header > div {
+    transform:
+      translate(0, 25px) /* Move text down */
+      rotate(-90deg); /* The rotation */
+    width: 10px; /* Match this to the cell width */
+  }
+
+  /* --- Container for Horizontal Scrolling --- */
+  .table-container {
+    overflow-x: auto; /* The magic for horizontal scrolling */
+    max-width: 100%;
+  }
+
+  /* --- Status Colors --- */
+  .status-present { color: #008000; font-weight: bold; font-size: 12px; }
+  .status-absent { color: #d9534f; font-weight: bold; font-size: 12px; }
+  .status-na { color: #999; }
+</style>
+
+<h1>Attendance for <%= @course.name %></h1>
+
+<% if @students.empty? || @class_days.empty? %>
+  <p>There are no students enrolled or no scheduled class days to display for this course.</p>
+<% else %>
+  <%# Wrap the table in our scrollable container %>
+  <div class="table-container">
+    <table class="attendance-table">
+      <thead class="font-monospace">
+        <tr>
+          <th class="student-name">Student</th>
+          <% @class_days.each do |day| %>
+            <th class="rotated-header">
+              <div><%= day.strftime('%b %d') %></div>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td class="student-name"><%= student.full_name %></td>
+            <% @class_days.each do |day| %>
+              <td>
+                <% status = @attendance_data[[student.id, day]] %>
+                <% if status == true %>
+                  <span class="status-present">✓</span>
+                <% elsif status == false %>
+                  <span class="status-absent">✗</span>
+                <% else %>
+                  <span class="status-na">-</span>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<br>
+<%= link_to 'Back to Course', course_path(@course), class: 'btn btn-secondary' %>

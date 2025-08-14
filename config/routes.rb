@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :courses do
     get 'scan_attendance', on: :member # /courses/:id/scan_attendance
     post 'register_attendance', on: :member # API endpoint
+    get :attendance_table, on: :member
 
     resources :enrollments, only: [:create, :destroy]
   end
