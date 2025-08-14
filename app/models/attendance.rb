@@ -2,29 +2,37 @@ class Attendance < ApplicationRecord
   belongs_to :student
   belongs_to :course
 
-  validate :must_be_valid_class_day_and_time, on: :create
   validates :student_id, uniqueness: {
     scope: [:course_id, :attended_on],
-    message: "has already been recorded for this course"
+    message: "has already registered attedance for this course today."
   }
+  validate :course_must_be_in_progress, :must_be_valid_class_day_and_time, on: :create
 
   private
 
   TIME_TOLERANCE = 15.minutes
 
+  def course_must_be_in_progress
+    return if (not errors.empty?) || course.nil? || attended_on.nil?
+
+    unless attended_on.between?(course.start_date, course.end_date)
+      errors.add(:base, "The course must be in progress to register attendance.")
+    end
+  end
+
   def must_be_valid_class_day_and_time
     logger = Logger.new(STDOUT)
 
-    return if course.nil? || attended_on.nil?
+    return if course.nil? || (not course.in_progress?) || attended_on.nil?
 
     today_schedule = get_course_today_schedule
     logger.info("Today schedule: #{today_schedule}")
     if today_schedule.nil?
-      errors.add(:base, "Today is not a scheduled day for this course")
+      errors.add(:base, "Today is not a scheduled day for this course.")
       return
     end
 
-    now = Time.current
+    now = Time.zone.now
     logger.info("Now #{now}")
     valid_start_time = attendance_start_time(today_schedule)
     logger.info("Start date: #{valid_start_time}");

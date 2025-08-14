@@ -16,7 +16,7 @@
         <tbody class="align-middle">
         <% @student.courses.order(:start_date).reverse_order.each do |course| %>
           <tr>
-            <td scope="row" class="text-center <%= course_row_color(course) %>"><%= course.state %></td>
+            <td scope="col" class="text-center <%= course_row_color(course) %>"><%= course.state %></td>
             <td><%= link_to course.name, course_path(course) %></td>
             <td>
               <% if course.in_progress? %>
@@ -24,14 +24,14 @@
                   <%= render 'students/qr_code', student: @student, course: course %>
                 </div>
               <% else %>
-                <p> Not available. </p>
+                Not available.
               <% end %>
             </td>
             <td>
               <% unless course.finished? %>
-                <%= link_to "View Badge", student_badge_path(@student, course), class: "btn btn-outline-primary", target: "_blank" %>
+                <%= link_to "View Badge", student_badge_path(@student, course), class: "btn btn-sm btn-outline-primary", target: "_blank" %>
               <% else %>
-                <p> Not available. </p>
+                Not available.
               <% end %>
             </td>
           </tr>

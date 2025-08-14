@@ -76,24 +76,24 @@ class Course < ApplicationRecord
 
   def in_progress?
     return false if self.start_date.nil? or self.end_date.nil?
-    self.start_date <= Time.now and Time.now <= self.end_date
+    self.start_date <= Time.zone.now and Time.zone.now <= self.end_date
   end
 
   def not_started?
     return false if self.start_date.nil? or self.end_date.nil?
-    Time.now < self.start_date
+    Time.zone.now < self.start_date
   end
 
   def finished?
     return false if self.start_date.nil? or self.end_date.nil?
-    self.end_date < Time.now
+    self.end_date < Time.zone.now
   end
 
   private
 
   def set_state
     self.state = "Ongoing" if in_progress?
-    self.state = "Waiting" if not_started?
+    self.state = "Upcoming" if not_started?
     self.state = "Finished" if finished?
   end
 end
