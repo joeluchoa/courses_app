@@ -34,8 +34,11 @@
       // Stop the camera stream
       scanner.stop().then((ignore) => {
         // Show success message and redirect
+        var student_id = decodedText.split('-')[0];
+        var course_id = decodedText.split('-')[1];
+
         document.getElementById('scan-result').innerHTML = `<span class="text-success">Student Found! Redirecting...</span>`;
-        window.location.href = `/scanner/confirm?student_id=${decodedText}`;
+        window.location.href = `/scanner/confirm?student_id=${decodedText}&course_id=${course_id}`;
       }).catch((err) => {
         console.error("Error stopping the scanner: ", err);
       });

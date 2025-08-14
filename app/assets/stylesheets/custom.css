@@ -41,8 +41,8 @@
  Style for the photo placeholder on the student verification card.
 */
 .student-verification-photo {
-  width: 160px;
-  height: 160px;
+  width: 250px;
+  height: 250px;
   background-color: #f8f9fa;
   border: 3px solid #dee2e6;
   border-radius: 50%; /* Makes it a circle */

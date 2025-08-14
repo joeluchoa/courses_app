@@ -1,33 +1,24 @@
 <div class="row">
-  <%# Column for Student Verification Badge %>
-  <div class="col-lg-7">
+  <div class="col-lg-6 d-flex flex-column">
     <h4 class="mb-3">1. Verify Student</h4>
-    <%# Render our new, purpose-built verification card partial %>
     <%= render 'students/verification_card', student: @student %>
   </div>
 
-  <%# Column for Course Selection & Confirmation %>
-  <div class="col-lg-5">
-    <h4 class="mb-3">2. Select Course & Confirm</h4>
-    <div class="card">
-      <div class="card-body">
-        <%= form_with url: scanner_register_attendance_path, method: :post do |form| %>
-          <%# Hidden field to pass the student_id along %>
-          <%= form.hidden_field :student_id, value: @student.id %>
-
-          <div class="mb-3">
-            <%= form.label :course_id, "Select Course for Attendance:", class: "form-label" %>
-            <%= form.select :course_id, 
-                            options_from_collection_for_select(@enrolled_courses, :id, :name), 
-                            {}, 
-                            class: "form-select form-select-lg" %>
-          </div>
-
-          <div class="d-grid">
-            <%= form.submit "Confirm Attendance", class: "btn btn-success btn-lg" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+  <div class="col-lg-6 d-flex flex-column">
+    <h4 class="mb-3">2. Verify Course</h4>
+    <%= render 'courses/verification_card', course: @course %>
   </div>
 </div>
+<p></p>
+<div class="row">
+  <%= form_with url: scanner_register_attendance_path, method: :post do |form| %>
+    <%# Hidden field to pass the student_id along %>
+    <%= form.hidden_field :student_id, value: @student.id %>
+    <%= form.hidden_field :course_id, value: @course.id %>
+
+    <div class="d-grid">
+      <%= form.submit "Confirm Attendance", class: "btn btn-success btn-lg" %>
+    </div>
+  <% end %>
+</div>
+<p></p>

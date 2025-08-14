@@ -1,9 +1,5 @@
-<%#
-  This partial expects a local variable named 'student' to be passed in.
-  Example: render 'students/verification_card', student: @student
-%>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm flex-grow-1">
   <div class="card-body p-4 text-center">
 
     <%# Student Photo Area %>
@@ -18,11 +14,13 @@
 
 
     <%# Student Name %>
-    <h3 class="card-title mb-1"><%= student.full_name %></h3>
+    <h3 class="card-title mb-1"><%= @student.full_name %></h3>
 
-    <%# Student ID %>
-    <p class="card-text text-muted">
-      Student ID: <%= student.student_id %>
+    <p>
+      <strong>Email:</strong>
+      <%= student.email %>
+      <strong>Date of birth:</strong>
+      <%= student.date_of_birth %>
     </p>
 
   </div>

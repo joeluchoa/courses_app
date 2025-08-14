@@ -5,13 +5,15 @@ class ScannerController < ApplicationController
   def confirm
     begin
       @student = Student.find(params[:student_id])
+      @course = Course.find(params[:course_id])
+
       @enrolled_courses = @student.courses.order(:name)
 
-      if @enrolled_courses.empty?
-        redirect_to scanner_path, alert: "This student is not enrolled in any courses."
+      unless @enrolled_courses.include?(@course)
+        redirect_to scanner_path, alert: "The student (id: #{params[:student_id]}) is not enrolled in the course (id: #{params[:course_id]})."
       end
     rescue ActiveRecord::RecordNotFound
-      redirect_to scanner_path, alert: "Invalid QR Code: Student not found."
+      redirect_to scanner_path, alert: "Invalid QR Code: Student (id: #{params[:student_id]}) or Course (id: #{params[:course_id]}) not found."
     end
   end
 
