@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module CoursesApp
   class Application < Rails::Application
+    # Use Italy time zone.
+    config.time_zone = 'Rome'
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
