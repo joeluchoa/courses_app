@@ -4,7 +4,7 @@
 </div>
 
 <div class="table-responsive">
-  <table class="table table-striped table-hover">
+  <table class="table table-striped table-hover table-borderless">
     <thead>
       <tr>
         <th>Name</th>
@@ -13,13 +13,15 @@
         <th colspan="1"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="align-middle">
       <% @teachers.each do |teacher| %>
         <tr>
           <td><%= teacher.name %></td>
           <td><%= teacher.phone_number %></td>
           <td><%= teacher.email %></td>
-          <td><%= link_to "Show", teacher, class: "btn btn-sm btn-info" %></td>
+          <td>
+            <%= link_to "Show", teacher, class: "btn btn-sm btn-outline-primary" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
