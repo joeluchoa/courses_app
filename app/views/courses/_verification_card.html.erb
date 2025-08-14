@@ -1,0 +1,34 @@
+
+<div class="card shadow-sm flex-grow-1">
+  <div class="card-body p-4">
+    <h2 class="card-title mb-5 text-center"><%= @course.name %></h2>
+    <div>
+      <p>
+        <strong>Teacher:</strong>
+        <%= link_to @course.teacher.name, @course.teacher %>
+      </p>
+      <p>
+        <strong>Date: </strong>
+        <%= @course.start_date %>
+        -
+        <%= @course.end_date %>
+      </p>
+
+      <p>
+        <strong>Address:</strong>
+        <%= @course.address %>
+      </p>
+
+        <strong>Weekly Schedule:</strong>
+        <ul>
+          <% @course.weekly_schedule.each do |schedule| %>
+            <li>
+              <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+            </li>
+          <% end %>
+        </ul>
+
+    </div>
+  </div>
+</div>
+
