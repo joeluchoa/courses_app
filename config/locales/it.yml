@@ -1,0 +1,25 @@
+# config/locales/it.yml
+it:
+  courses:
+    attendance:
+      title: "Registro Presenze per %{course_name}"
+      student_header: "Studente"
+      no_students_or_days: "Non ci sono studenti iscritti o giorni di lezione programmati per questo corso."
+      back_to_course: "Torna al Corso"
+
+  activerecord:
+    models:
+      course: "Corso"
+      student: "Studente"
+    attributes:
+      course:
+        name: "Nome"
+        start_date: "Data di Inizio"
+        end_date: "Data di Fine"
+
+  flash:
+    courses:
+      create:
+        success: "Corso creato con successo."
+      update:
+        success: "Corso aggiornato con successo."
