@@ -1,0 +1,16 @@
+<div class="language-switcher">
+  <%# Iterate over the languages your application supports %>
+  <% I18n.available_locales.each do |locale| %>
+    <%# For each locale, create a link unless it's the currently active one %>
+    <% if locale != I18n.locale %>
+      <%= link_to url_for(locale: locale) do %>
+        <%# Display the flag image. The name must match the locale code. %>
+        <%= image_tag "flags/#{locale}.svg", alt: locale, class: "flag-icon" %>
+      <% end %>
+    <% else %>
+      <%# For the active locale, just show the flag without a link %>
+      <%= image_tag "flags/#{locale}.svg", alt: locale, class: "flag-icon active" %>
+    <% end %>
+  <% end %>
+</div>
+

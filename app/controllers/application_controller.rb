@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_locale
+
 
   protected
 
@@ -12,5 +14,13 @@ class ApplicationController < ActionController::Base
 
     # Permit the 'name' parameter for the account update form
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+  def set_locale
+    begin
+      # if params[:locale] is nil then I18n.default_locale will be used
+      I18n.locale = params[:locale]
+    rescue
+    end
   end
 end

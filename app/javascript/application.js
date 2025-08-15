@@ -1,9 +1,9 @@
 // app/javascript/application.js
 
 import "@hotwired/turbo-rails"
+import "controllers"
 import "controllers/index"
 import "bootstrap"
-import "controllers"
 
 import { Application } from "@hotwired/stimulus"
 

@@ -8,9 +8,6 @@ Bundler.require(*Rails.groups)
 
 module CoursesApp
   class Application < Rails::Application
-    # Use Italy time zone.
-    config.time_zone = 'Rome'
-
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
@@ -26,5 +23,10 @@ module CoursesApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = 'Europe/Rome'
+    config.i18n.available_locales = [:en, :pt, :it]
+    config.i18n.default_locale = :it
+    config.i18n.locale = :it
   end
 end

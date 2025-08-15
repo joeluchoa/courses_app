@@ -72,5 +72,7 @@ gem 'rqrcode'
 gem "image_processing", ">= 1.2"
 
 gem "dartsass-rails"
+gem "sass-rails"
+
 gem 'bootstrap', '~> 5.3.3'
 

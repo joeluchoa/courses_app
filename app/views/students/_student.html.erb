@@ -48,5 +48,10 @@
       <strong>Address:</strong>
       <%= student.address %>
     </p>
+
+    <p>
+      <strong>Total Paid:</strong>
+      <%= number_to_currency(@student.total_paid, unit: '€') %>
+    </p>
   </div>
 </div>

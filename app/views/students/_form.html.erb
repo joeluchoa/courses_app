@@ -104,6 +104,11 @@
     <%= form.text_area :address, class: "form-control" %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :total_paid, class: "form-label" %>
+    <%= form.number_field :total_paid, step: 1.00, class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= form.submit class: "btn btn-success" %>
   </div>
