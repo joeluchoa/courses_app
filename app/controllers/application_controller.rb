@@ -16,11 +16,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
+  private
+
   def set_locale
-    begin
-      # if params[:locale] is nil then I18n.default_locale will be used
-      I18n.locale = params[:locale]
-    rescue
-    end
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
   end
 end

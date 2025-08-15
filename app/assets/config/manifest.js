@@ -9,3 +9,5 @@
 //= link popper.js
 //= link html5-qrcode.min.js
 
+//= link mdb-ui-kit.js
+

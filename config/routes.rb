@@ -1,44 +1,46 @@
 Rails.application.routes.draw do
-  resources :teachers
+  scope "(:locale)", locale: /en|pt|it/ do
+    resources :teachers
 
-  # Enrollments routes.
-  get "enrollments/create"
-  get "enrollments/destroy"
+    # Enrollments routes.
+    get "enrollments/create"
+    get "enrollments/destroy"
 
-  # Scanner routes.
-  get 'scanner', to: 'scanner#index'
-  get 'scanner/confirm', to: 'scanner#confirm'
-  post 'scanner/register_attendance', to: 'scanner#register_attendance'
+    # Scanner routes.
+    get 'scanner', to: 'scanner#index'
+    get 'scanner/confirm', to: 'scanner#confirm'
+    post 'scanner/register_attendance', to: 'scanner#register_attendance'
 
-  # User Profile routes.
-  resource :profile, only: [:show], controller: 'users'
+    # User Profile routes.
+    resource :profile, only: [:show], controller: 'users'
 
-  # Dashboard routes.
-  get 'dashboard', to: 'dashboard#index'
+    # Dashboard routes.
+    get 'dashboard', to: 'dashboard#index'
 
-  resources :courses do
-    get 'scan_attendance', on: :member # /courses/:id/scan_attendance
-    post 'register_attendance', on: :member # API endpoint
-    get :attendance_table, on: :member
+    resources :courses do
+      get 'scan_attendance', on: :member # /courses/:id/scan_attendance
+      post 'register_attendance', on: :member # API endpoint
+      get :attendance_table, on: :member
 
-    resources :enrollments, only: [:create, :destroy]
+      resources :enrollments, only: [:create, :destroy]
+    end
+
+    resources :students
+    get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
+
+    devise_for :users
+
+    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+    # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+    # Can be used by load balancers and uptime monitors to verify that the app is live.
+    get "up" => "rails/health#show", as: :rails_health_check
+
+    # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+    # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+    # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+    # Defines the root path route ("/")
+    root "dashboard#index"
   end
-
-  resources :students
-  get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
-
-  devise_for :users
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-   root "dashboard#index"
 end
