@@ -7,4 +7,5 @@
 
 //= link bootstrap.min.js
 //= link popper.js
+//= link html5-qrcode.min.js
 

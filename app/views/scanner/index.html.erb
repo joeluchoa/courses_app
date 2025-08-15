@@ -4,77 +4,12 @@
   </div>
   <div class="card-body text-center">
     <p>Position the student's QR code in front of the camera.</p>
-    <div id="reader" style="width: 500px; max-width: 100%; margin: auto;"></div>
-    <div id="scan-result" class="mt-3 fw-bold"></div>
+    <div style="text-align: center;" data-controller="scanner">
+      <div id="qr-reader" data-scanner-target="reader" style="width: 500px; margin: 0 auto;"></div>
+      <div data-scanner-target="result" id="scan-result"></div>
+    </div>
   </div>
 </div>
-
-<%# The <script> block at the bottom of app/views/scanner/index.html.erb %>
-
-<%# Include the JS library from a CDN %>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
-<script>
-  // This function contains all the logic for our scanner
-  function startQrScanner() {
-    // This message will appear in the browser's developer console.
-    // It confirms that our script is at least starting to run.
-    console.log("Attempting to start QR Scanner...");
-
-    // Check if the scanner element exists on the page
-    const readerElement = document.getElementById("reader");
-    if (!readerElement) {
-      console.error("Scanner Error: The 'reader' element was not found on the page.");
-      return; // Stop if the element is missing
-    }
-
-    function onScanSuccess(decodedText, decodedResult) {
-      console.log(`Scan successful. Student ID: ${decodedText}`);
-
-      // Stop the camera stream
-      scanner.stop().then((ignore) => {
-        // Show success message and redirect
-        var student_id = decodedText.split('-')[0];
-        var course_id = decodedText.split('-')[1];
-
-        document.getElementById('scan-result').innerHTML = `<span class="text-success">Student Found! Redirecting...</span>`;
-        window.location.href = `/scanner/confirm?student_id=${decodedText}&course_id=${course_id}`;
-      }).catch((err) => {
-        console.error("Error stopping the scanner: ", err);
-      });
-    }
-
-    function onScanFailure(error) {
-      // This function is called frequently, so we only log errors
-      // if they are not the "No QR code found" message.
-      if (!error.includes("No barcode") && !error.includes("No Multi")) {
-        console.warn(`QR scan failure: ${error}`);
-      }
-    }
-
-    // Use the Html5Qrcode class for more control
-    const scanner = new Html5Qrcode("reader");
-    const config = {
-      fps: 10,
-      qrbox: { width: 250, height: 250 }
-    };
-
-    // Start the scanner using the device's back camera
-    scanner.start({ facingMode: "environment" }, config, onScanSuccess, onScanFailure)
-      .then(() => {
-        console.log("Scanner started successfully.");
-      })
-      .catch(err => {
-        console.error("Unable to start scanner", err);
-        document.getElementById('scan-result').innerHTML = `<span class="text-danger">ERROR: Could not start camera. Please grant permission and refresh.</span>`;
-      });
-  }
-
-  // This ensures our function runs regardless of how Turbo loads the page.
-  // It checks if the DOM is already loaded or waits for it to load.
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startQrScanner);
-  } else {
-    startQrScanner();
-  }
-</script>
+<div style="text-align: center;">
+  <h1>Scanner</h1>
+</div>
