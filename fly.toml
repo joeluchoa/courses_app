@@ -12,7 +12,6 @@ console_command = '/rails/bin/rails console'
   builder = "paketobuildpacks/builder:base"
 
 [http_service]
-  processes = ["app"]
   internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
