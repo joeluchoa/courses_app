@@ -49,25 +49,3 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
-
-# .dockerignore
-
-# Ignore docker config and sensitive files
-.dockerignore
-Dockerfile
-fly.toml  # <<< ADD THIS LINE
-
-# Ignore git and other version control files
-.git
-.gitignore
-
-# Ignore local development artifacts
-/log/*
-/tmp/*
-/storage/*
-/public/assets
-.byebug_history
-
-# Ignore local gems and node modules
-/vendor/bundle/
-/node_modules/
