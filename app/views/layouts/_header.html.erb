@@ -1,39 +1,68 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <%= link_to "Attendance App", root_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <% if user_signed_in? %>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to "Students", students_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Teachers", teachers_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Courses", courses_path, class: "nav-link" %>
-            </li>
-          </ul>
-          <ul class="navbar-nav align-items-center">
-            <%= language_switcher %>
-
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to profile_path, class: "nav-link nav-profile-link rounded px-3" do %>
-                  <strong><%= current_user.email %></strong>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
+<header class="p-3 mb-3 border-bottom p-3 text-bg-dark">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="d-flex col-md-2 mb-2 mb-md-0">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+          <div class="rounded-pill" style="overflow: hidden;">
+            <img src="/assets/logo.png" width="75" height="75" class="" title="Non-Sei-Solo Corsi">
+            <img src="/assets/name.png" width="75" height="75" class="" title="Non-Sei-Solo Corsi">
+          </div>
+          <!--<span class="fs-4 px-2">Corsi</span>-->
+        </a>
       </div>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li>
+          <%= link_to "Overview", root_path, class: "nav-link px-2 text-white" %>
+        </li>
+        <li>
+          <%= link_to "Students", students_path, class: "nav-link px-2 text-white" %>
+        </li>
+        <li>
+          <%= link_to "Teachers", teachers_path, class: "nav-link px-2 text-white" %>
+        </li>
+        <li>
+          <%= link_to "Courses", courses_path, class: "nav-link px-2 text-white" %>
+        </li>
+      </ul>
+      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      </div>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+      </form>
+      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <% if user_signed_in? %>
+          <li>
+            <div class="nav-link px-2">
+              <%= language_switcher %>
+            </div>
+          </li>
+          <li>
+            <%= link_to profile_path, class: "nav-link px-2 text-white" do %>
+              <%= current_user.name %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
+          </li>
+        <% end %>
+      </ul>
+      </div>
+
+
+      <!--<div class="dropdown text-end">
+        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+          </svg>
+        </a>
+        <ul class="dropdown-menu text-small">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>-->
     </div>
-  </nav>
+  </div>
 </header>
