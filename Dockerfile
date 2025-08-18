@@ -1,44 +1,69 @@
-# Dockerfile
+# syntax = docker/dockerfile:1
 
-# Use a specific, slim version of the official Ruby image for reproducibility
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.3.3
-FROM ruby:$RUBY_VERSION-slim
+FROM ruby:$RUBY_VERSION
 
-# Set environment variables for production
-ENV RAILS_ENV=production \
+LABEL fly_launch_runtime="rails"
+
+# Rails app lives here
+WORKDIR /rails
+
+# Set production environment
+ENV BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
-    BUNDLE_DEPLOYMENT="1"
+    RAILS_ENV="production"
 
-# Install essential OS-level dependencies
-# - build-essential: For compiling gems
-# - libvips: For Active Storage image processing
-# - curl: For general networking
-# - postgresql-client: To allow the app to connect to the PG database
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler
+
+
+# Throw-away build stage to reduce size of final image
+FROM base AS build
+
+# Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
-    libvips \
-    curl \
-    postgresql-client
+    apt-get install --no-install-recommends -y build-essential libpq-dev
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the Gemfile and Gemfile.lock first to leverage Docker's layer caching.
-# If these files don't change, the 'bundle install' step won't run again.
+# Install application gems
 COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    bundle exec bootsnap precompile --gemfile && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
-# Install gems
-RUN bundle install --jobs 20 --retry 5
-
-# Copy the rest of your application code into the container.
-# This respects the .dockerignore file.
+# Copy application code
 COPY . .
 
-# Precompile assets for production.
-# The RAILS_MASTER_KEY is needed if your credentials are used during precompilation.
-RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
 
-# This is the command that will run when the container starts.
-# It launches the Rails server on all IPs (0.0.0.0) on port 3000.
-CMD ["bundle", "exec", "rails", "server"]
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+
+# Final stage for app image
+FROM base
+
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R 1000:1000 db log storage tmp
+USER 1000:1000
+
+# Entrypoint sets up the container.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD ["./bin/rails", "server"]
