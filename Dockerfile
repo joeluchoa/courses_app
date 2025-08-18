@@ -2,7 +2,7 @@
 
 # Use a specific, slim version of the official Ruby image for reproducibility
 ARG RUBY_VERSION=3.3.3
-FROM ruby:$RUBY_VERSION-slim-bullseye
+FROM ruby:$RUBY_VERSION-slim
 
 # Set environment variables for production
 ENV RAILS_ENV=production \
