@@ -1,15 +1,23 @@
-# fly.toml app configuration file generated for non-sei-solo-corsi on 2025-08-17T23:57:35+02:00
-
+# fly.toml app configuration file generated for non-sei-solo-corsi-corsi on 2025-08-18T19:39:04+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'non-sei-solo-corsi'
+app = 'non-sei-solo-corsi-corsi'
 primary_region = 'fra'
 console_command = '/rails/bin/rails console'
 
 [build]
-  builder = "paketobuildpacks/builder:base"
+  builder = 'paketobuildpacks/builder:base'
+
+[deploy]
+  release_command = './bin/rails db:prepare'
+
+[env]
+  PORT = '8080'
+
+[processes]
+  app = './bin/rails server'
 
 [http_service]
   internal_port = 8080
@@ -36,17 +44,6 @@ console_command = '/rails/bin/rails console'
   cpu_kind = 'shared'
   cpus = 1
 
-[env]
-  PORT = "8080"
-
-[processes]
-  app = "./bin/rails server"
-
-[deploy]
-  release_command = "./bin/rails db:prepare"
-
 [[statics]]
-  guest_path = "/rails/public"
-  url_prefix = "/"
-
-
+  guest_path = '/rails/public'
+  url_prefix = '/'

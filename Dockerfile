@@ -1,7 +1,8 @@
 # Dockerfile
 
 # Use a specific, slim version of the official Ruby image for reproducibility
-FROM ruby:3.1.2-slim-bullseye
+ARG RUBY_VERSION=3.3.3
+FROM ruby:$RUBY_VERSION-slim-bullseye
 
 # Set environment variables for production
 ENV RAILS_ENV=production \
