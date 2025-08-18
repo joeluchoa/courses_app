@@ -44,7 +44,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
+            <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
           </li>
         <% end %>
       </ul>
