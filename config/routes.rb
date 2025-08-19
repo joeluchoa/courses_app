@@ -28,7 +28,13 @@ Rails.application.routes.draw do
     resources :students
     get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
 
-    devise_for :users
+    devise_for :users, controllers: {
+      registrations: 'users/registrations'
+    }
+
+    namespace :admin do
+      resources :users
+    end
 
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -24,6 +24,11 @@
         <li>
           <%= link_to "Courses", courses_path, class: "nav-link px-2 text-white" %>
         </li>
+        <% if user_signed_in? and current_user.administrator? %>
+          <li>
+            <%= link_to "Users", admin_users_path, class: "nav-link px-2 text-white" %>
+          </li>
+        <% end %>
       </ul>
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
       </div>
@@ -31,23 +36,23 @@
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
       </form>
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <% if user_signed_in? %>
-          <li>
-            <div class="nav-link px-2">
-              <%= language_switcher %>
-            </div>
-          </li>
-          <li>
-            <%= link_to profile_path, class: "nav-link px-2 text-white" do %>
-              <%= current_user.name %>
-            <% end %>
-          </li>
-          <li>
-            <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
-          </li>
-        <% end %>
-      </ul>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <% if user_signed_in? %>
+            <li>
+              <div class="nav-link px-2">
+                <%= language_switcher %>
+              </div>
+            </li>
+            <li>
+              <%= link_to profile_path, class: "nav-link px-2 text-white" do %>
+                <%= current_user.name %>
+              <% end %>
+            </li>
+            <li>
+              <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
+            </li>
+          <% end %>
+        </ul>
       </div>
 
 
