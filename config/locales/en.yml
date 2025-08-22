@@ -1,6 +1,18 @@
 en:
   language: "English"
   actions: 'Actions'
+  dashboard:
+    title: 'Overview'
+    total_students: 'Total Students'
+    total_courses: 'Total Courses'
+    total_teachers: 'Total Instructors'
+    add_student: 'Add Student'
+    add_course: 'Add Course'
+    add_teacher: 'Add Instructor'
+    scan_attendance: 'Scan Attendance'
+    activities:
+      title: 'Recent Activity'
+      attendance: "%{student} was marked present for %{course} on %{date}."
   status:
     title: 'Status'
     active: 'Active'

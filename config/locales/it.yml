@@ -1,6 +1,18 @@
 it:
   language: "Italiano"
   actions: 'Azioni'
+  dashboard:
+    title: 'Panoramica'
+    total_students: 'Totale studenti'
+    total_courses: 'Totale Corsi'
+    total_teachers: 'Totale Docenti'
+    add_student: 'Aggiungi Studente'
+    add_course: 'Aggiungi Corso'
+    add_teacher: 'Aggiungi Docenti'
+    scan_attendance: 'Scansiona presenze'
+    activities:
+      title: 'Attività recenti'
+      attendance: "%{student} è stato contrassegnato come presente per %{course} il %{date}."
   status:
     title: 'Stato'
     active: 'Attivo'

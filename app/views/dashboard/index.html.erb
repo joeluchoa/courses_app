@@ -1,13 +1,13 @@
 <div class="dashboard-header">
-  <h1>Overview</h1>
+  <h1><%= t('dashboard.title') %></h1>
   <div class="quick-actions">
-    <%= link_to "Add new Student", new_student_path, class: "btn btn-primary" %>
-    <%= link_to "Add new Course", new_course_path, class: "btn btn-primary" %>
-    <%= link_to "Add new Teacher", new_teacher_path, class: "btn btn-primary" %>
+    <%= link_to t('dashboard.add_student'), new_student_path, class: "btn btn-primary" %>
+    <%= link_to t('dashboard.add_course'), new_course_path, class: "btn btn-primary" %>
+    <%= link_to t('dashboard.add_teacher'), new_teacher_path, class: "btn btn-primary" %>
     <%# Add a link to the first course's scanner, or create a dedicated selection page %>
     <% if Course.any? %>
       <%# <%= link_to "Scan Attendance", scan_attendance_course_path(Course.first), class: "btn btn-success" %>
-      <%= link_to "Scan Attendance", scanner_path, class: "btn btn-success" %>
+      <%= link_to t('dashboard.scan_attendance'), scanner_path, class: "btn btn-success" %>
     <% end %>
   </div>
 </div>
@@ -15,26 +15,23 @@
 <div class="dashboard-grid">
   <div class="stat-card">
     <h2><%= @student_count %></h2>
-    <p>Total Students</p>
+    <p><%= t('dashboard.total_students') %></p>
   </div>
   <div class="stat-card">
     <h2><%= @course_count %></h2>
-    <p>Total Courses</p>
+    <p><%= t('dashboard.total_courses') %></p>
   </div>
   <div class="stat-card">
     <h2><%= @teacher_count %></h2>
-    <p>Total Teachers</p>
+    <p><%= t('dashboard.total_teachers') %></p>
   </div>
 
   <div class="activity-list">
-    <h3>Recent Activity</h3>
+    <h3><%= t('dashboard.activities.title') %></h3>
     <ul>
       <% @recent_attendances.each do |attendance| %>
         <li>
-          <strong><%= attendance.student.first_name %> <%= attendance.student.last_name %></strong>
-          was marked present for
-          <strong><%= attendance.course.name %></strong>
-          on <%= attendance.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+          <%= t('dashboard.activities.attendance', student: attendance.student.full_name, course: attendance.course.name, date: attendance.created_at) %>
         </li>
       <% end %>
       <% if @recent_attendances.empty? %>
