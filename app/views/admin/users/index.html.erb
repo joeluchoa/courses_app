@@ -1,35 +1,37 @@
-<h1>User Management</h1>
+<h1><%= t('users.index.title') %></h1>
 
 <p>
-  <%= link_to 'Create New User', new_admin_user_path, class: 'btn btn-primary' %>
+  <%= link_to t('users.new.title'), new_admin_user_path, class: 'btn btn-primary' %>
 </p>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Status</th>
-      <th colspan="2">Actions</th>
+      <th><%= User.human_attribute_name(:name) %></th>
+      <th><%= User.human_attribute_name(:email) %></th>
+      <th><%= User.human_attribute_name(:role) %></th>
+      <th><%= t('status.title') %></th>
+      <th colspan="2"><%= t('actions') %></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.role.titleize %></td>
         <td>
           <% if user.blocked_at? %>
-            <span class="badge bg-danger">Blocked</span>
+            <span class="badge bg-danger"><%= t('status.blocked') %></span>
           <% else %>
-            <span class="badge bg-success">Active</span>
+            <span class="badge bg-success"><%= t('status.active') %></span>
           <% end %>
         </td>
         <td>
-          <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-secondary btn-sm' %>
+          <%= link_to t('users.show.edit'), edit_admin_user_path(user), class: 'btn btn-secondary btn-sm' %>
+          <%= link_to t('users.show.destroy'), admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: t('devise.registrations.edit.are_you_sure') }, class: 'btn btn-danger btn-sm' %>
         </td>
         <td>
-          <%= link_to 'Delete', admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
         </td>
       </tr>
     <% end %>

@@ -1,5 +1,10 @@
 pt:
   language: "Português"
+  actions: 'Ações'
+  status:
+    title: 'Estado'
+    active: 'Ativo'
+    blocked: 'Bloqueado'
   activerecord:
     models:
       attendance: "Presença"
@@ -36,6 +41,22 @@ pt:
         email: "E-mail"
         role: "Função"
         blocked_at: "Bloqueado em"
+  users:
+    index:
+      title: "Usuários"
+    show:
+      edit: "Editar"
+      back: "Voltar para usuários"
+      destroy: "Excluir"
+    new:
+      title: "Novo usuário"
+      back: "Voltar para usuários"
+    edit:
+      title: "Editando usuário"
+      show: "Mostrar este usuário"
+      back: "Voltar para usuários"
+    form:
+      submit: "Salvar"
   devise:
     confirmations:
       confirmed: "A sua conta foi confirmada com sucesso."

@@ -1,5 +1,10 @@
 en:
   language: "English"
+  actions: 'Actions'
+  status:
+    title: 'Status'
+    active: 'Active'
+    blocked: 'Blocked'
   activerecord:
     models:
       attendance: "Attendance"
@@ -36,6 +41,22 @@ en:
         email: "Email"
         role: "Role"
         blocked_at: "Blocked at"
+  users:
+    index:
+      title: "Users"
+    show:
+      edit: "Edit"
+      back: "Back to users"
+      destroy: "Destroy"
+    new:
+      title: "New user"
+      back: "Back to users"
+    edit:
+      title: "Editing user"
+      show: "Show this user"
+      back: "Back to users"
+    form:
+      submit: "Save"
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
