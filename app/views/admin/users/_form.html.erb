@@ -11,6 +11,11 @@
   <% end %>
 
   <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :email, class: 'form-label' %>
     <%= form.email_field :email, class: 'form-control' %>
   </div>
@@ -33,11 +38,15 @@
     <%= form.select :role, User.roles.keys.map { |role| [role.titleize, role] }, {}, class: 'form-select' %>
   </div>
 
-  <%# Show the unblock option only for existing users who are currently blocked %>
-  <% if @user.persisted? && @user.blocked_at? %>
+  <% if @user.blocked_at? %>
     <div class="mb-3 form-check">
       <%= form.check_box :unblock, { class: 'form-check-input' }, '1', '0' %>
       <%= form.label :unblock, 'Unblock this user', class: 'form-check-label' %>
+    </div>
+  <% else %>
+    <div class="mb-3 form-check">
+      <%= form.check_box :block, { class: 'form-check-input' }, '1', '0' %>
+      <%= form.label :block, 'Block this user', class: 'form-check-label' %>
     </div>
   <% end %>
 

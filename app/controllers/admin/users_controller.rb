@@ -24,7 +24,13 @@ class Admin::UsersController < ApplicationController
 
   def update
     # Unblock user by clearing the blocked_at timestamp
-    @user.blocked_at = nil if params[:user][:unblock] == '1'
+    if params[:user][:unblock] == '1'
+      @user.blocked_at = nil 
+    end
+    if params[:user][:block] == '1'
+      @user.blocked_at = Time.current
+    end
+
 
     # Prevent password update if fields are blank
     params_to_update = user_params
