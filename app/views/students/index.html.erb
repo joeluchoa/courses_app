@@ -10,6 +10,7 @@
         <th class="col">Name</th>
         <th class="col">Date of birth</th>
         <th class="col">Email</th>
+        <th class="col">Corsi</th>
         <th class="col">Total paid</th>
         <th class="col" colspan="3"></th>
       </tr>
@@ -21,6 +22,12 @@
           <td><%= student.full_name %></td>
           <td><%= student.date_of_birth %></td>
           <td><%= student.email %></td>
+          <td>
+            <% student.courses.each do |course| %>
+              <%= "#{course.name} (#{course.teacher.name})" %>
+              <br/>
+            <% end %>
+          </td>
           <td><%= number_to_currency(student.total_paid, unit: '€') %></td>
           <td>
             <%= link_to "Show", student, class: "btn btn-sm btn-outline-primary" %>
