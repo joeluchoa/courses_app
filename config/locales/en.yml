@@ -1,6 +1,22 @@
 en:
-  language: "English"
-  actions: 'Actions'
+  language: 'English'
+  weekdays:
+    monday: 'Monday'
+    tuesday: 'Tuesday'
+    wednesday: 'Wednesday'
+    thursday: 'Thursday'
+    friday: 'Friday'
+    saturday: 'Saturday'
+    sunday: 'Sunday'
+  actions:
+    title: 'Actions'
+    new: 'New'
+    save: 'Save'
+    show: 'Show'
+    edit: 'Edit'
+    update: 'Update'
+    delete: 'Delete'
+    back: 'Back'
   dashboard:
     title: 'Overview'
     total_students: 'Total Students'
@@ -17,13 +33,18 @@ en:
     title: 'Status'
     active: 'Active'
     blocked: 'Blocked'
+  state:
+    title: 'State'
+    upcoming: 'Upcoming'
+    ongoing: 'Ongoing'
+    finished: 'Finished'
   activerecord:
     models:
       attendance: "Attendance"
       course: "Course"
       enrollment: "Enrollment"
       student: "Student"
-      teacher: "Teacher"
+      teacher: "Instructor"
       user: "User"
     attributes:
       attendance:
@@ -35,6 +56,7 @@ en:
         end_date: "End date"
         weekly_schedule: "Weekly schedule"
         address: "Address"
+        teacher: 'Instructor'
       student:
         first_name: "First name"
         last_name: "Last name"
@@ -56,19 +78,19 @@ en:
   users:
     index:
       title: "Users"
-    show:
-      edit: "Edit"
-      back: "Back to users"
-      destroy: "Destroy"
     new:
       title: "New user"
-      back: "Back to users"
     edit:
       title: "Editing user"
-      show: "Show this user"
-      back: "Back to users"
-    form:
-      submit: "Save"
+  courses:
+    index:
+      title: "Courses"
+    show:
+      title: "Course Details"
+    new:
+      title: "New Course"
+    edit:
+      title: "Editing Course"
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
