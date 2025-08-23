@@ -82,6 +82,10 @@ it:
       title: "Nuovo utente"
     edit:
       title: "Modifica utente"
+    form:
+      block_this_user: 'Blocca questo utente'
+      unblock_this_user: 'Sblocca questo utente'
+      leave_blank: 'lascia vuoto se non vuoi modificarlo'
   courses:
     index:
       title: "Corsi"

@@ -82,6 +82,10 @@ pt:
       title: "Novo usuário"
     edit:
       title: "Editando usuário"
+    form:
+      block_this_user: 'Bloquear este usuário'
+      unblock_this_user: 'Desbloquear este usuário'
+      leave_blank: 'deixe em branco se você não quer alterar'
   courses:
     index:
       title: "Cursos"

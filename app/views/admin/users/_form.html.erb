@@ -23,7 +23,7 @@
   <div class="mb-3">
     <%= form.label :password, class: 'form-label' %>
     <% if @user.persisted? %>
-      <small class="form-text text-muted"> (leave blank if you don't want to change it)</small>
+      <small class="form-text text-muted"> (<%= t('users.form.leave_blank') %>)</small>
     <% end %>
     <%= form.password_field :password, class: 'form-control' %>
   </div>
@@ -41,16 +41,16 @@
   <% if @user.blocked_at? %>
     <div class="mb-3 form-check">
       <%= form.check_box :unblock, { class: 'form-check-input' }, '1', '0' %>
-      <%= form.label :unblock, 'Unblock this user', class: 'form-check-label' %>
+      <%= form.label :unblock, t('users.form.unblock_this_user'), class: 'form-check-label' %>
     </div>
   <% else %>
     <div class="mb-3 form-check">
       <%= form.check_box :block, { class: 'form-check-input' }, '1', '0' %>
-      <%= form.label :block, 'Block this user', class: 'form-check-label' %>
+      <%= form.label :block, t('users.form.block_this_user'), class: 'form-check-label' %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= form.submit 'Save User', class: 'btn btn-success' %>
+    <%= form.submit t('actions.save'), class: 'btn btn-success' %>
   </div>
 <% end %>

@@ -82,6 +82,10 @@ en:
       title: "New user"
     edit:
       title: "Editing user"
+    form:
+      block_this_user: 'Block this user'
+      unblock_this_user: 'Unblock this user'
+      leave_blank: "leave blank if you don't want to change it"
   courses:
     index:
       title: "Courses"
