@@ -1,38 +1,54 @@
 it:
-  language: "Italiano"
-  actions: 'Azioni'
+  language: 'Italiano'
+  weekdays:
+    monday: 'Lunedì'
+    tuesday: 'Martedì'
+    wednesday: 'Mercoledì'
+    thursday: 'Giovedì'
+    friday: 'Venerdì'
+    saturday: 'Sabato'
+    sunday: 'Domenica'
+  actions:
+    title: 'Azioni'
+    new: 'Nuovo'
+    save: 'Salva'
+    show: 'Mostra'
+    edit: 'Modifica'
+    update: 'Aggiorna'
+    delete: 'Elimina'
+    back: 'Indietro'
   dashboard:
     title: 'Panoramica'
-    total_students: 'Totale studenti'
-    total_courses: 'Totale Corsi'
-    total_teachers: 'Totale Docenti'
+    total_students: 'Studenti Totali'
+    total_courses: 'Corsi Totali'
+    total_teachers: 'Istruttori Totali'
     add_student: 'Aggiungi Studente'
     add_course: 'Aggiungi Corso'
-    add_teacher: 'Aggiungi Docenti'
-    scan_attendance: 'Scansiona presenze'
+    add_teacher: 'Aggiungi Istruttore'
+    scan_attendance: 'Scansiona Presenza'
     activities:
-      title: 'Attività recenti'
-      attendance: "%{student} è stato contrassegnato come presente per %{course} il %{date}."
+      title: 'Attività Recente'
+      attendance: "%{student} è stato segnato presente per %{course} il %{date}."
   status:
     title: 'Stato'
     active: 'Attivo'
     blocked: 'Bloccato'
   state:
     title: 'Stato'
-    upcoming: 'In attesa'
+    upcoming: 'In arrivo'
     ongoing: 'In corso'
-    finished: 'Finalizzato'
+    finished: 'Finito'
   activerecord:
     models:
       attendance: "Presenza"
       course: "Corso"
       enrollment: "Iscrizione"
       student: "Studente"
-      teacher: "Insegnante"
+      teacher: "Istruttore"
       user: "Utente"
     attributes:
       attendance:
-        attended_on: "Data di presenza"
+        attended_on: "Presente il"
       course:
         name: "Nome"
         description: "Descrizione"
@@ -40,11 +56,11 @@ it:
         end_date: "Data di fine"
         weekly_schedule: "Orario settimanale"
         address: "Indirizzo"
-        teacher: "Istruttore"
+        teacher: 'Istruttore'
       student:
         first_name: "Nome"
         last_name: "Cognome"
-        email: "E-mail"
+        email: "Email"
         date_of_birth: "Data di nascita"
         phone: "Telefono"
         tax_code: "Codice fiscale"
@@ -53,44 +69,25 @@ it:
       teacher:
         name: "Nome"
         phone_number: "Numero di telefono"
-        email: "E-mail"
+        email: "Email"
       user:
         name: "Nome"
-        email: "E-mail"
+        email: "Email"
         role: "Ruolo"
         blocked_at: "Bloccato il"
   users:
     index:
       title: "Utenti"
-    show:
-      edit: "Modifica"
-      back: "Torna agli utenti"
-      destroy: "Elimina"
     new:
       title: "Nuovo utente"
-      back: "Torna agli utenti"
     edit:
       title: "Modifica utente"
-      show: "Mostra questo utente"
-      back: "Torna agli utenti"
-    form:
-      submit: "Salva"
   courses:
     index:
       title: "Corsi"
-      new_course: "Nuovo corso"
     show:
-      edit: "Modifica"
-      back: "Torna ai corsi"
-      destroy: "Distruggi"
+      title: "Dettagli del Corso"
     new:
       title: "Nuovo Corso"
-      back: "Torna ai corsi"
     edit:
       title: "Modifica Corso"
-      show: "Mostra questo corso"
-      back: "Torna ai corsi"
-    form:
-      name: "Nome"
-      description: "Descrizione"
-      submit: "Salva"

@@ -1,38 +1,54 @@
 pt:
-  language: "Português"
-  actions: 'Ações'
+  language: 'Português (Brasil)'
+  weekdays:
+    monday: 'Segunda-feira'
+    tuesday: 'Terça-feira'
+    wednesday: 'Quarta-feira'
+    thursday: 'Quinta-feira'
+    friday: 'Sexta-feira'
+    saturday: 'Sábado'
+    sunday: 'Domingo'
+  actions:
+    title: 'Ações'
+    new: 'Novo'
+    save: 'Salvar'
+    show: 'Mostrar'
+    edit: 'Editar'
+    update: 'Atualizar'
+    delete: 'Excluir'
+    back: 'Voltar'
   dashboard:
     title: 'Visão Geral'
-    total_students: 'Total de Estudantes'
+    total_students: 'Total de Alunos'
     total_courses: 'Total de Cursos'
     total_teachers: 'Total de Instrutores'
-    add_student: 'Adicionar Estudante'
+    add_student: 'Adicionar Aluno'
     add_course: 'Adicionar Curso'
     add_teacher: 'Adicionar Instrutor'
-    scan_attendance: 'Registrar Presença'
+    scan_attendance: 'Escanear Presença'
     activities:
       title: 'Atividade Recente'
-      attendance: "%{student} foi marcado como presente no curso %{course} em %{date}."
+      attendance: "%{student} teve a presença marcada para %{course} em %{date}."
   status:
-    title: 'Estado'
+    title: 'Status'
     active: 'Ativo'
     blocked: 'Bloqueado'
   state:
     title: 'Estado'
-    upcoming: 'Aguardando'
-    ongoing: 'Em Andamento'
+    upcoming: 'Próximo'
+    ongoing: 'Em andamento'
     finished: 'Finalizado'
   activerecord:
     models:
       attendance: "Presença"
       course: "Curso"
       enrollment: "Matrícula"
-      student: "Estudante"
-      teacher: "Professor"
+      student: "Aluno"
+      teacher: "Instrutor"
       user: "Usuário"
     attributes:
       attendance:
-        attended_on: "Data da presença"
+        attended_on: "Presente em"
       course:
         name: "Nome"
         description: "Descrição"
@@ -44,7 +60,7 @@ pt:
       student:
         first_name: "Nome"
         last_name: "Sobrenome"
-        email: "E-mail"
+        email: "Email"
         date_of_birth: "Data de nascimento"
         phone: "Telefone"
         tax_code: "CPF"
@@ -52,45 +68,26 @@ pt:
         total_paid: "Total pago"
       teacher:
         name: "Nome"
-        phone_number: "Telefone"
-        email: "E-mail"
+        phone_number: "Número de telefone"
+        email: "Email"
       user:
         name: "Nome"
-        email: "E-mail"
+        email: "Email"
         role: "Função"
         blocked_at: "Bloqueado em"
   users:
     index:
       title: "Usuários"
-    show:
-      edit: "Editar"
-      back: "Voltar para usuários"
-      destroy: "Excluir"
     new:
       title: "Novo usuário"
-      back: "Voltar para usuários"
     edit:
       title: "Editando usuário"
-      show: "Mostrar este usuário"
-      back: "Voltar para usuários"
-    form:
-      submit: "Salvar"
   courses:
     index:
       title: "Cursos"
-      new_course: "Novo curso"
     show:
-      edit: "Editar"
-      back: "Voltar"
-      destroy: "Excluir"
+      title: "Detalhes do Curso"
     new:
       title: "Novo Curso"
-      back: "Voltar para cursos"
     edit:
       title: "Editando Curso"
-      show: "Mostrar"
-      back: "Voltar para cursos"
-    form:
-      name: "Nome"
-      description: "Descrição"
-      submit: "Salvar"

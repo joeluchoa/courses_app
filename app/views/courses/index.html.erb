@@ -1,35 +1,38 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h1>Courses</h1>
-  <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
+  <h1><%= t('courses.index.title') %></h1>
+  <%= link_to t('actions.new'), new_course_path, class: "btn btn-primary" %>
 </div>
 
 <table class="table table-striped table-hover table-responsive table-sm">
   <thead>
     <tr>
-      <th class="col">State</th>
-      <th class="col">Name (Teacher)</th>
-      <th class="col">Address</th>
-      <th class="col">Schedule</th>
-      <th colspan="2"><%= t('actions') %></th>
+      <th class="col"><%= t('state.title') %></th>
+      <th class="col">
+        <%= Course.human_attribute_name(:name) %>
+        (<%= t('activerecord.attributes.course.teacher') %>)
+      </th>
+      <th class="col"><%= Course.human_attribute_name(:address) %></th>
+      <th class="col"><%= Course.human_attribute_name(:weekly_schedule) %></th>
+      <th colspan="2"><%= t('actions.title') %></th>
     </tr>
   </thead>
   <tbody class="align-middle">
     <% @courses.each do |course| %>
       <tr>
         <td scope="col" class="small text-center <%= course_row_color(course) %>">
-          <%= course.state %>
+          <%= t("state.#{course.state.downcase}") %>
         </td>
         <td><%= course.name %> (<%= link_to course.teacher.name, teacher_path(course.teacher) %>)</td>
         <td class="small"><%= course.address %></td>
         <td class="small">
           <% course.weekly_schedule.each do |schedule| %>
-            <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+            <%= t("weekdays.#{schedule["day"].downcase}") %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
             <br/>
           <% end %>
         </td>
         <td>
-          <%= link_to "Show", course, class: "btn btn-sm btn-secondary" %>
-          <%= link_to t('courses.show.destroy'), course, data: { turbo_method: :delete, turbo_confirm: t('devise.registrations.edit.are_you_sure') }, class: 'btn btn-danger btn-sm' %>
+          <%= link_to t('actions.show'), course, class: "btn btn-sm btn-secondary" %>
+          <%= link_to t('actions.delete'), course, data: { turbo_method: :delete, turbo_confirm: t('devise.registrations.edit.are_you_sure') }, class: 'btn btn-danger btn-sm' %>
         </td>
       </tr>
     <% end %>
