@@ -57,6 +57,8 @@ pt:
         weekly_schedule: "Horário semanal"
         address: "Endereço"
         teacher: 'Instrutor'
+        start_time: 'Horário de inicio'
+        end_time: 'Horário de término'
       student:
         first_name: "Nome"
         last_name: "Sobrenome"
@@ -95,3 +97,7 @@ pt:
       title: "Novo Curso"
     edit:
       title: "Editando Curso"
+    form:
+      day: 'Dia'
+      select_a_teacher: 'Selecione um instrutor'
+      select_the_days: 'Selecione os dias e os horários das aulas do curso.'

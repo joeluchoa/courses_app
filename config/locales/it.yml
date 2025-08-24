@@ -38,6 +38,7 @@ it:
     upcoming: 'In arrivo'
     ongoing: 'In corso'
     finished: 'Finito'
+    unknown: ''
   activerecord:
     models:
       attendance: "Presenza"
@@ -57,6 +58,8 @@ it:
         weekly_schedule: "Orario settimanale"
         address: "Indirizzo"
         teacher: 'Istruttore'
+        start_time: 'Ora di inizio'
+        end_time: 'Ora di fine'
       student:
         first_name: "Nome"
         last_name: "Cognome"
@@ -95,3 +98,7 @@ it:
       title: "Nuovo Corso"
     edit:
       title: "Modifica Corso"
+    form:
+      day: 'Giorno'
+      select_a_teacher: 'Seleziona un istruttore.'
+      select_the_days: 'Seleziona i giorni in cui si terrà il corso e imposta gli orari.'

@@ -37,13 +37,13 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :teacher_id, class: "form-label" %>
-    <%= form.collection_select :teacher_id, @teachers, :id, :name, { prompt: "Select a teacher" }, { class: "form-select" } %>
+    <%= form.label :teacher_id, t('activerecord.attributes.course.teacher'), class: "form-label" %>
+    <%= form.collection_select :teacher_id, @teachers, :id, :name, { prompt: t('courses.form.select_a_teacher') }, { class: "form-select" } %>
   </div>
 
   <div class="mb-3">
-    <h5>Weekly Schedule</h5>
-    <p class="text-muted">Select the days the course will be held and set the times.</p>
+    <h5><%= t('activerecord.attributes.course.weekly_schedule') %></h5>
+    <p class="text-muted"><%= t('courses.form.select_the_days') %></p>
 
     <%# The responsive wrapper ensures the table doesn't break the layout on small screens %>
     <div class="card table-responsive">
@@ -52,9 +52,9 @@
         <thead class="table-light">
           <tr>
             <th scope="col" class="text-center"></th>
-            <th scope="col">Day</th>
-            <th scope="col">Start Time</th>
-            <th scope="col">End Time</th>
+            <th scope="col"><%= t('courses.form.day') %></th>
+            <th scope="col"><%= t('activerecord.attributes.course.start_time') %></th>
+            <th scope="col"><%= t('activerecord.attributes.course.end_time') %></th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +72,7 @@
                   } %>
                 </td>
                 <td>
-                  <%= schedule_form.label :day, schedule_form.object.day, class: "mb-0" %>
+                  <%= schedule_form.label :day, t("weekdays.#{schedule_form.object.day.downcase}"), class: "mb-0" %>
                   <%= schedule_form.hidden_field :day %>
                 </td>
                 <td>
@@ -96,6 +96,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit  class: "btn btn-success" %>
+    <%= form.submit t('actions.save'), class: "btn btn-success" %>
   </div>
 <% end %>

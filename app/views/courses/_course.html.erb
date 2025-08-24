@@ -1,40 +1,40 @@
 <div id="<%= dom_id course %>">
   <p>
-    <strong>Name:</strong>
+    <strong><%= Course.human_attribute_name(:name) %>:</strong>
     <%= course.name %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong><%= Course.human_attribute_name(:description) %>:</strong>
     <%= course.description %>
   </p>
 
   <p>
-    <strong>Start date:</strong>
+    <strong><%= Course.human_attribute_name(:start_date) %>:</strong>
     <%= @course.start_date %>
   </p>
 
   <p>
-    <strong>End date:</strong>
+    <strong><%= Course.human_attribute_name(:end_date) %>:</strong>
     <%= @course.end_date %>
   </p>
 
   <p>
-    <strong>Address:</strong>
+    <strong><%= Course.human_attribute_name(:address) %>:</strong>
     <%= @course.address %>
   </p>
 
   <p>
-    <strong>Teacher:</strong>
+    <strong><%= Course.human_attribute_name(:teacher) %>:</strong>
     <%= link_to @course.teacher.name, @course.teacher %>
   </p>
 
   <p>
-    <strong>Weekly Schedule:</strong>
+    <strong><%= Course.human_attribute_name(:weekly_schedule) %></strong>
     <ul>
       <% @course.weekly_schedule.each do |schedule| %>
         <li>
-          <%= schedule["day"] %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+          <%= t("weekdays.#{schedule["day"].downcase}") %>: <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
         </li>
       <% end %>
     </ul>

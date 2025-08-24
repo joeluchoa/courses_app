@@ -57,6 +57,8 @@ en:
         weekly_schedule: "Weekly schedule"
         address: "Address"
         teacher: 'Instructor'
+        start_time: 'Start time'
+        end_time: 'End time'
       student:
         first_name: "First name"
         last_name: "Last name"
@@ -95,3 +97,7 @@ en:
       title: "New Course"
     edit:
       title: "Editing Course"
+    form:
+      day: 'Day'
+      select_a_teacher: 'Select a instructor'
+      select_the_days: 'Select the days the course will be held and set the times.'

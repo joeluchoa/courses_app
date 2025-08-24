@@ -20,7 +20,7 @@
     <% @courses.each do |course| %>
       <tr>
         <td scope="col" class="small text-center <%= course_row_color(course) %>">
-          <%= t("state.#{course.state.downcase}") %>
+          <%= t("state.#{(course.state || 'unknown').downcase}") %>
         </td>
         <td><%= course.name %> (<%= link_to course.teacher.name, teacher_path(course.teacher) %>)</td>
         <td class="small"><%= course.address %></td>

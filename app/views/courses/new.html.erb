@@ -1,11 +1,11 @@
 <% content_for :title, "New course" %>
 
-<h1>New course</h1>
+<h1><%= t('courses.new.title') %></h1>
 
 <%= render "form", course: @course %>
 
 <br>
 
 <div>
-  <%= link_to "Back to courses", courses_path %>
+  <%= link_to t('actions.back'), courses_path %>
 </div>
