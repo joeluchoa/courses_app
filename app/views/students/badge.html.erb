@@ -1,56 +1,68 @@
 <div class="badge-container">
   <div class="badge-card">
-    <div class="badge-header">
-      <div class="row">
-        <div class="badge-school-name">
-          <strong>Chiesa Evangelica Arca Missionaria</strong>
-          <span> - Via Il Prato, 40R, 50123 Firenze FI, Italia</span>
-        </div>
-      </div>
-    </div>
+    <table>
+      <tr>
+        <td colspan=2>
+          <div class="badge-header">
+            <div class="row">
+              <div class="badge-school-name">
+                <strong>Chiesa Evangelica Arca Missionaria</strong>
+                <span> - Via Il Prato, 40R, 50123 Firenze FI, Italia</span>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
 
-    <div class="badge-body">
-      <div class="qr-code-area">
-        <%= render 'students/qr_code', student: @student, course: @course %>
-      </div>
+      <tr style="height: 104mm;">
+        <td>
+          <div class="qr-code-area">
+            <%= render 'students/qr_code', student: @student, course: @course %>
+          </div>
+        </td>
+        <td>
+          <div class="student-details">
+            <div class="student-name">
+              <span><%= @student.first_name %></span>
+              <strong><%= truncate(@student.last_name, length: 20) %></strong>
+            </div>
 
-      <div class="student-details">
-        <div class="student-name">
-          <span><%= @student.first_name %></span>
-          <strong><%= truncate(@student.last_name, length: 20) %></strong>
-        </div>
-
-        <span class="field-label">Corso</span>
-        <strong class="field-value"><%= @course.name %></strong>
-        <br/>
-        <span class="field-label">Insegnante</span>
-        <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
-        <br/>
-        <span class="field-label">Inizio</span>
-        <strong class="field-value"><%= @course.start_date %></strong>
-        <span class="field-label">Fine</span>
-        <strong class="field-value"><%= @course.end_date %></strong>
-        <br/>
-        <strong class="field-value">
-          <% @course.weekly_schedule.each_with_index do |schedule, idx| %>
-            <span class="field-label">
-              <%= schedule["day"] %>
-            </span>
-            <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
-            <% if idx.odd? %>
-              <br/>
+            <span class="field-label">Corso</span>
+            <strong class="field-value"><%= @course.name %></strong>
+            <br/>
+            <span class="field-label">Insegnante</span>
+            <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
+            <br/>
+            <span class="field-label">Inizio</span>
+            <strong class="field-value"><%= @course.start_date %></strong>
+            <span class="field-label">Fine</span>
+            <strong class="field-value"><%= @course.end_date %></strong>
+            <br/>
+            <% @course.weekly_schedule.each_with_index do |schedule, idx| %>
+              <span class="field-label">
+                <%= schedule["day"] %>
+              </span>
+              <strong class="field-value">
+                <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+              </strong>
+              <% if idx.odd? %>
+                <br/>
+              <% end %>
             <% end %>
-          <% end %>
-          <span class="field-label">Indirizzo</span>
-          <strong class="field-value"><%= @course.address %></strong>
-
-        </div>
-      </div>
-
-      <div class="badge-footer">
-        <div class="issuing-info">
-          Issued: <%= Time.now.strftime("%m/%d/%Y") %>
-        </div>
-      </div>
-    </div>
+            <span class="field-label">Indirizzo</span>
+            <strong class="field-value"><%= @course.address %></strong>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <div class="badge-footer">
+            <div class="issuing-info">
+              Issued: <%= Time.now.strftime("%m/%d/%Y") %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
+</div>

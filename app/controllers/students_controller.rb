@@ -62,17 +62,40 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:student_id])
     @course = Course.find(params[:course_id])
 
-    render layout: 'badge'
+    respond_to do |format|
+      format.html do
+        render layout: 'badge'
+      end
+      format.pdf do
+        render pdf: "badge-#{@student.full_name.parameterize}-#{@course.name.parameterize}",
+          layout: 'badge',
+          template: "students/badge",
+          handlers: [:erb],
+          formats: [:html],
+          disposition: 'attachment',
+
+          page_size: nil,
+          orientation: nil,
+          page_height: '132mm',
+          page_width: '206mm',
+          margin: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0
+          }
+      end
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params.expect(:id))
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params.expect(:id))
+  end
 
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :phone, :address, :photo, :tax_code, :total_paid, enrollments_attributes: [:id, :course_id, :_destroy])
-    end
+  # Only allow a list of trusted parameters through.
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :phone, :address, :photo, :tax_code, :total_paid, enrollments_attributes: [:id, :course_id, :_destroy])
+  end
 end

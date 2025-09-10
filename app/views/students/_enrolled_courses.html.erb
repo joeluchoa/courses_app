@@ -30,6 +30,7 @@
             <td>
               <% unless course.finished? %>
                 <%= link_to "View Badge", student_badge_path(@student, course), class: "btn btn-sm btn-outline-primary", target: "_blank" %>
+                <%= link_to "PDF", student_badge_path(@student, course, format: :pdf), download: "badge-#{@student.full_name.parameterize}-#{course.name.parameterize}.pdf", class: "btn btn-sm btn-primary" %>
               <% else %>
                 Not available.
               <% end %>
