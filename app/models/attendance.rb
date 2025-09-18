@@ -15,7 +15,12 @@ class Attendance < ApplicationRecord
   def course_must_be_in_progress
     return if (not errors.empty?) || course.nil? || attended_on.nil?
 
-    unless attended_on.between?(course.start_date, course.end_date)
+    # TODO: Force the course to have a start and end dates.
+    # This is a workaround for now.
+    start_date = course.start_date || 1.day.ago
+    end_date = course.end_date || 1.day.from_now
+
+    unless attended_on.between?(start_date, end_date)
       errors.add(:base, "The course must be in progress to register attendance.")
     end
   end
