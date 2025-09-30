@@ -6,6 +6,9 @@ class Student < ApplicationRecord
 
   accepts_nested_attributes_for :enrollments, reject_if: :all_blank, allow_destroy: true
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
 
   def full_name
     "#{first_name} #{last_name}"
