@@ -82,7 +82,7 @@ gem 'bootstrap', '~> 5.3.3'
 
 gem "dockerfile-rails", ">= 1.7", group: :development
 
-gem "aws-sdk-s3", "~> 1.196", require: false
+gem "aws-sdk-s3", "~> 1.200", require: false
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary' # This is the binary executable Wicked PDF uses
