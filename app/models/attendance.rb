@@ -37,16 +37,22 @@ class Attendance < ApplicationRecord
       return
     end
 
-    now = Time.zone.now
-    logger.info("Now #{now}")
-    valid_start_time = attendance_start_time(today_schedule)
-    logger.info("Start date: #{valid_start_time}");
-    valid_end_time = attendance_end_time(today_schedule)
-    logger.info("End date: #{valid_end_time}");
 
-    unless now.between?(valid_start_time, valid_end_time)
-      errors.add(:base, "Today attendance can only be recorded from #{valid_start_time} to #{valid_end_time} for this course")
-    end
+    # We are having problem with system fuso.
+    # Let's comment this validation out until we fix the problem.
+    #
+    # TODO: set the correct fuso (the user system one) for the application.
+    #
+    #now = Time.zone.now
+    #logger.info("Now #{now}")
+    #valid_start_time = attendance_start_time(today_schedule)
+    #logger.info("Start date: #{valid_start_time}");
+    #valid_end_time = attendance_end_time(today_schedule)
+    #logger.info("End date: #{valid_end_time}");
+
+    #unless now.between?(valid_start_time, valid_end_time)
+    #  errors.add(:base, "Today attendance can only be recorded from #{valid_start_time} to #{valid_end_time} for this course")
+    #end
   end
 
   def get_course_today_schedule
