@@ -99,6 +99,7 @@ class CoursesController < ApplicationController
     # 1. Determine the columns: Calculate all the specific dates the class runs.
     @class_days = []
     wdays = selected_days(@course)
+    logger.info "Cource weekdays: #{wdays}"
     if @course.start_date.present? && @course.end_date.present?
       (@course.start_date..@course.end_date).each do |date|
         day_name = date.strftime('%A').downcase
@@ -107,6 +108,7 @@ class CoursesController < ApplicationController
         end
       end
     end
+    logger.info "Attended days: #{@class_days}"
 
     # 2. Fetch all attendance data for this course in a single, efficient query.
     # We transform it into a Hash for instant lookups in the view.
@@ -114,7 +116,11 @@ class CoursesController < ApplicationController
     # Example: { [1, '2025-08-20'] => true, [2, '2025-08-20'] => false }
     @attendance_data = @course.attendances
       .pluck(:student_id, :attended_on)
-      .to_h { |student_id, date, present| [[student_id, date], true] }
+      .to_h { |student_id, date, present| [[student_id, date.strftime("%Y-%m-%d")], true] }
+    logger.info "Attendance data: #{@attendance_data}"
+
+    @attendance_counts = @course.attendances.group(:student_id).count
+    logger.info "Counts: #{@attendance_counts}"
   end
 
   private
