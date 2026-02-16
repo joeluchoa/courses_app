@@ -29,6 +29,7 @@ it:
     activities:
       title: 'Attività Recente'
       attendance: "%{student} è stato segnato presente per %{course} il %{date}."
+      no_recent: "Nessun registro delle presenze recente trovato."
   status:
     title: 'Stato'
     active: 'Attivo'
@@ -69,6 +70,7 @@ it:
         tax_code: "Codice fiscale"
         address: "Indirizzo"
         total_paid: "Totale pagato"
+        photo: "Foto"
       teacher:
         name: "Nome"
         phone_number: "Numero di telefono"
@@ -78,6 +80,25 @@ it:
         email: "Email"
         role: "Ruolo"
         blocked_at: "Bloccato il"
+    errors:
+      models:
+        course:
+          attributes:
+            base:
+              schedule_start_before_end: "Per %{day}, l'ora di inizio deve essere prima dell'ora di fine."
+              schedule_times_required: "Per %{day}, le ore di inizio e fine sono obbligatorie."
+        attendance:
+          attributes:
+            student_id:
+              already_registered: "ha già registrato la presenza per questo corso oggi."
+            base:
+              course_not_in_progress: "Il corso deve essere in corso per registrare la presenza."
+              not_scheduled_today: "Oggi non è un giorno programmato per questo corso."
+    enums:
+      user:
+        role:
+          admin: "Amministratore"
+          operator: "Operatore"
   users:
     index:
       title: "Utenti"
@@ -89,11 +110,12 @@ it:
       block_this_user: 'Blocca questo utente'
       unblock_this_user: 'Sblocca questo utente'
       leave_blank: 'lascia vuoto se non vuoi modificarlo'
+    show:
+      member_since: "Membro dal"
+      edit_account: "Modifica Account"
   courses:
     index:
       title: "Corsi"
-    show:
-      title: "Dettagli del Corso"
     new:
       title: "Nuovo Corso"
     edit:
@@ -102,3 +124,123 @@ it:
       day: 'Giorno'
       select_a_teacher: 'Seleziona un istruttore.'
       select_the_days: 'Seleziona i giorni in cui si terrà il corso e imposta gli orari.'
+    show:
+      title: "Dettagli del Corso"
+      enrolled_students: "Studenti Iscritti"
+      view_attendance_sheet: "Vedi Foglio Presenze"
+      no_students_enrolled: "Nessuno studente iscritto a questo corso."
+      enroll_student: "Iscrivi Studente"
+      select_student: "Seleziona uno studente"
+    scan_attendance:
+      title: "Scansiona Presenze per %{course}"
+      registering: "Registrazione..."
+      scanned_id: "ID studente scansionato: %{id}."
+      unexpected_error: "Si è verificato un errore imprevisto."
+  scanner:
+    index:
+      title: "Scansiona Badge Studente"
+      instruction: "Posiziona il codice QR dello studente davanti alla telecamera."
+      header: "Scanner"
+    confirm:
+      verify_student: "1. Verifica Studente"
+      verify_course: "2. Verifica Corso"
+      submit: "Conferma Presenza"
+    flash:
+      not_enrolled: "Lo studente (id: %{student_id}) non è iscritto al corso (id: %{course_id})."
+      invalid_qr: "Codice QR non valido: Studente (id: %{student_id}) o Corso (id: %{course_id}) non trovato."
+      marked_present: "%{student} è stato segnato presente per %{course}."
+      failed_present: "Impossibile segnare la presenza: %{error}"
+      student_not_enrolled: "Studente non iscritto a questo corso."
+      student_marked_present: "%{student} segnato come presente."
+    badge:
+      issued: "Emesso"
+  enrollments:
+    create:
+      success: "Studente iscritto con successo."
+      failure: "Impossibile iscrivere studente: %{error}"
+    destroy:
+      success: "Studente disiscritto con successo."
+  students:
+    index:
+      title: "Studenti"
+    show:
+      title: "Dettagli Studente"
+      enrolled_courses: "Corsi Iscritti"
+      qr_code: "Codice QR"
+      badge: "Badge"
+      view_badge: "Visualizza Badge"
+      not_available: "Non disponibile."
+      no_enrolled_courses: "Questo studente non è ancora iscritto ad alcun corso."
+      no_photo: "Nessuna foto fornita."
+    new:
+      title: "Nuovo Studente"
+    edit:
+      title: "Modifica Studente"
+    form:
+      personal_info: "Informazioni Personali"
+      contact_info: "Informazioni di Contatto"
+      enrollments: "Iscrizioni"
+      add_enrollment: "Aggiungi Iscrizione"
+      remove_enrollment: "Rimuovi Iscrizione"
+    form:
+      personal_info: "Informazioni Personali"
+      contact_info: "Informazioni di Contatto"
+      enrollments: "Iscrizioni"
+      add_enrollment: "Aggiungi Iscrizione"
+      remove_enrollment: "Rimuovi Iscrizione"
+      select_course: "Seleziona un corso"
+      upload_photo: "Carica una nuova foto"
+      take_photo: "Scatta una nuova foto"
+      start_camera: "Avvia Fotocamera"
+      take_photo_btn: "Scatta Foto"
+      photo_captured: "Foto Scattata!"
+  teachers:
+    index:
+      title: "Istruttori"
+    show:
+      title: "Dettagli Istruttore"
+      assigned_courses: "Corsi Assegnati"
+      no_courses: "Questo istruttore non è assegnato a nessun corso al momento."
+      students_count: "%{count} Studenti"
+    new:
+      title: "Nuovo Istruttore"
+    edit:
+      title: "Modifica Istruttore"
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} è stato creato con successo."
+      update:
+        notice: "%{resource_name} è stato aggiornato con successo."
+      destroy:
+        notice: "%{resource_name} è stato eliminato con successo."
+  navbar:
+    overview: "Panoramica"
+    students: "Studenti"
+    teachers: "Istruttori"
+    courses: "Corsi"
+    users: "Utenti"
+    logout: "Esci"
+    login: "Accedi"
+    my_profile: "Il mio profilo"
+    search: "Cerca..."
+  shared:
+    verification_card:
+      verified: "Verificato"
+      not_verified: "Non Verificato"
+  actions:
+    title: 'Azioni'
+    new: 'Nuovo'
+    save: 'Salva'
+    show: 'Mostra'
+    edit: 'Modifica'
+    update: 'Aggiorna'
+    delete: 'Elimina'
+    back: 'Indietro'
+    confirm: 'Sei sicuro?'
+    unenroll: 'Disiscrivi'
+    enroll: 'Iscrivi Studente'
+  errors:
+    header: "%{count} errori hanno impedito di salvare questo %{model}:"
+  footer:
+    copyright: "Non Sei Solo - Chiesa Evangelica Arca Missionaria - Via Il Prato, 40/R, 50123 Firenze FI, Italia"

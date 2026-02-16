@@ -4,7 +4,7 @@ class Attendance < ApplicationRecord
 
   validates :student_id, uniqueness: {
     scope: [:course_id, :attended_on],
-    message: "has already registered attedance for this course today."
+    message: :already_registered
   }
   validate :course_must_be_in_progress, :must_be_valid_class_day_and_time, on: :create
 
@@ -21,7 +21,7 @@ class Attendance < ApplicationRecord
     end_date = course.end_date || 1.day.from_now
 
     unless attended_on.between?(start_date, end_date)
-      errors.add(:base, "The course must be in progress to register attendance.")
+      errors.add(:base, :course_not_in_progress)
     end
   end
 
@@ -33,7 +33,7 @@ class Attendance < ApplicationRecord
     today_schedule = get_course_today_schedule
     logger.info("Today schedule: #{today_schedule}")
     if today_schedule.nil?
-      errors.add(:base, "Today is not a scheduled day for this course.")
+      errors.add(:base, :not_scheduled_today)
       return
     end
 

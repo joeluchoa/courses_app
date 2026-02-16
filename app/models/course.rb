@@ -57,7 +57,8 @@ class Course < ApplicationRecord
       # Compare the parsed time values.
       if Time.parse(start_time_str) >= Time.parse(end_time_str)
         # Add a user-friendly error to the object's base.
-        errors.add(:base, "For #{schedule['day']}, the start time must be before the end time.")
+        day_name = I18n.t("weekdays.#{schedule['day'].downcase}")
+        errors.add(:base, :schedule_start_before_end, day: day_name)
       end
     end
   end
@@ -70,7 +71,8 @@ class Course < ApplicationRecord
     weekly_schedule.each do |schedule|
       if schedule["start_time"].blank? || schedule["end_time"].blank?
         # Add a specific, user-friendly error message.
-        errors.add(:base, "For #{schedule['day']}, start and end times are required.")
+        day_name = I18n.t("weekdays.#{schedule['day'].downcase}")
+        errors.add(:base, :schedule_times_required, day: day_name)
       end
     end
   end

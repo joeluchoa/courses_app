@@ -25,7 +25,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: "Teacher was successfully created." }
+        format.html { redirect_to @teacher, notice: t('flash.actions.create.notice', resource_name: Teacher.model_name.human) }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: "Teacher was successfully updated." }
+        format.html { redirect_to @teacher, notice: t('flash.actions.update.notice', resource_name: Teacher.model_name.human) }
         format.json { render :show, status: :ok, location: @teacher }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TeachersController < ApplicationController
     @teacher.destroy!
 
     respond_to do |format|
-      format.html { redirect_to teachers_path, status: :see_other, notice: "Teacher was successfully destroyed." }
+      format.html { redirect_to teachers_path, status: :see_other, notice: t('flash.actions.destroy.notice', resource_name: Teacher.model_name.human) }
       format.json { head :no_content }
     end
   end

@@ -35,7 +35,7 @@
         </li>
       <% end %>
       <% if @recent_attendances.empty? %>
-        <li>No recent attendance records found.</li>
+        <li><%= t('dashboard.activities.no_recent') %></li>
       <% end %>
     </ul>
   </div>

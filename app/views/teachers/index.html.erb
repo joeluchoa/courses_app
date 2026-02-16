@@ -1,16 +1,16 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>Teachers</h1>
-  <%= link_to "New teacher", new_teacher_path, class: "btn btn-primary" %>
+  <h1><%= t('.title') %></h1>
+  <%= link_to t('actions.new'), new_teacher_path, class: "btn btn-primary" %>
 </div>
 
 <div class="table-responsive">
-  <table class="table table-striped table-hover table-borderless">
+  <table class="table table-striped table-hover table-responsive table-sm">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th colspan="1"></th>
+        <th><%= t('activerecord.attributes.teacher.name') %></th>
+        <th><%= t('activerecord.attributes.teacher.phone_number') %></th>
+        <th><%= t('activerecord.attributes.teacher.email') %></th>
+        <th colspan="2"><%= t('actions.title') %></th>
       </tr>
     </thead>
     <tbody class="align-middle">
@@ -20,7 +20,8 @@
           <td><%= teacher.phone_number %></td>
           <td><%= teacher.email %></td>
           <td>
-            <%= link_to "Show", teacher, class: "btn btn-sm btn-outline-primary" %>
+            <%= link_to t('actions.show'), teacher, class: "btn btn-sm btn-secondary" %>
+            <%= link_to t('actions.delete'), teacher, data: { turbo_method: :delete, turbo_confirm: t('actions.confirm') }, class: 'btn btn-danger btn-sm' %>
           </td>
         </tr>
       <% end %>

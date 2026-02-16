@@ -3,7 +3,7 @@
 <%= form_with(model: teacher, class: "needs-validation", novalidate: true) do |form| %>
   <% if teacher.errors.any? %>
     <div class="alert alert-danger">
-      <h5><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h5>
+      <h5><%= t('errors.header', count: teacher.errors.count, model: Teacher.model_name.human) %></h5>
       <ul>
         <% teacher.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -28,6 +28,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit class: "btn btn-success" %>
+    <%= form.submit t('actions.save'), class: "btn btn-success" %>
   </div>
 <% end %>

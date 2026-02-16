@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header">
-    <h3>Scan Student Badge</h3>
+    <h3><%= t('scanner.index.title') %></h3>
   </div>
   <div class="card-body text-center">
-    <p>Position the student's QR code in front of the camera.</p>
+    <p><%= t('scanner.index.instruction') %></p>
     <div style="text-align: center;" data-controller="scanner">
       <div id="qr-reader" data-scanner-target="reader" style="width: 500px; margin: 0 auto;"></div>
       <div data-scanner-target="result" id="scan-result"></div>
@@ -11,5 +11,5 @@
   </div>
 </div>
 <div style="text-align: center;">
-  <h1>Scanner</h1>
+  <h1><%= t('scanner.index.header') %></h1>
 </div>

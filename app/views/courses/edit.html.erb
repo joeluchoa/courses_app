@@ -1,12 +1,12 @@
-<% content_for :title, "Editing course" %>
+<% content_for :title, t('.title') %>
 
-<h1>Editing course</h1>
+<h1><%= t('.title') %></h1>
 
 <%= render "form", course: @course %>
 
 <br>
 
 <div>
-  <%= link_to "Show this course", @course %> |
-  <%= link_to "Back to courses", courses_path %>
+  <%= link_to t('actions.show'), @course %> |
+  <%= link_to t('actions.back'), courses_path %>
 </div>

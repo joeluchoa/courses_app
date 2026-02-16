@@ -1,56 +1,56 @@
 <div class="row">
   <div class="col-md-4">
     <p>
-      <strong>Photo:</strong>
+      <strong><%= Student.human_attribute_name(:photo) %>:</strong>
     </p>
 
     <div class="img-rsa g-4 align-self-center text-center">
       <% if @student.photo.attached? %>
         <%= image_tag @student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
       <% else %>
-        <p class="text-muted">No photo provided.</p>
+        <p class="text-muted"><%= t('students.show.no_photo') %></p>
       <% end %>
     </div>
   </div>
 
   <div class="col-md-8">
     <p>
-      <strong>First name:</strong>
+      <strong><%= Student.human_attribute_name(:first_name) %>:</strong>
       <%= student.first_name %>
     </p>
 
     <p>
-      <strong>Last name:</strong>
+      <strong><%= Student.human_attribute_name(:last_name) %>:</strong>
       <%= student.last_name %>
     </p>
 
     <p>
-      <strong>Email:</strong>
+      <strong><%= Student.human_attribute_name(:email) %>:</strong>
       <%= student.email %>
     </p>
 
     <p>
-      <strong>Date of birth:</strong>
+      <strong><%= Student.human_attribute_name(:date_of_birth) %>:</strong>
       <%= student.date_of_birth %>
     </p>
 
     <p>
-      <strong>Phone:</strong>
+      <strong><%= Student.human_attribute_name(:phone) %>:</strong>
       <%= student.phone %>
     </p>
 
     <p>
-      <strong>Tax code:</strong>
+      <strong><%= Student.human_attribute_name(:tax_code) %>:</strong>
       <%= student.tax_code %>
     </p>
 
     <p>
-      <strong>Address:</strong>
+      <strong><%= Student.human_attribute_name(:address) %>:</strong>
       <%= student.address %>
     </p>
 
     <p>
-      <strong>Total Paid:</strong>
+      <strong><%= Student.human_attribute_name(:total_paid) %>:</strong>
       <%= number_to_currency(@student.total_paid, unit: '€') %>
     </p>
   </div>

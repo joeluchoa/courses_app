@@ -1,4 +1,4 @@
-<h1>Scan Attendance for <%= @course.name %></h1>
+<h1><%= t('.title', course: @course.name) %></h1>
 
 <div id="reader" style="width: 500px;"></div>
 <div id="scan-result" style="font-weight: bold; margin-top: 20px;"></div>
@@ -9,6 +9,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', (event) => {
     const resultDiv = document.getElementById('scan-result');
+    const translations = {
+      registering: "<%= j t('.registering') %>",
+      unexpected_error: "<%= j t('.unexpected_error') %>",
+      scanned_id: "<%= j t('.scanned_id', id: 'PLACEHOLDER') %>"
+    };
 
     function onScanSuccess(decodedText, decodedResult) {
       // decodedText will be the student's ID from the QR code
@@ -16,7 +21,7 @@
 
       // Pause the scanner to prevent multiple submissions
       html5QrcodeScanner.pause();
-      resultDiv.innerHTML = `Scanned student ID: ${decodedText}. Registering...`;
+      resultDiv.innerHTML = translations.scanned_id.replace('PLACEHOLDER', decodedText) + " " + translations.registering;
 
       // Send the scanned student ID to the Rails backend
       fetch('/courses/<%= @course.id %>/register_attendance', {
@@ -45,7 +50,7 @@
       .catch(error => {
         console.error('Error:', error);
         resultDiv.style.color = 'red';
-        resultDiv.innerHTML = 'An unexpected error occurred.';
+        resultDiv.innerHTML = translations.unexpected_error;
         setTimeout(() => html5QrcodeScanner.resume(), 3000);
       });
     }

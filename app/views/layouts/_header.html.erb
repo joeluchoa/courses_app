@@ -13,27 +13,27 @@
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
-          <%= link_to "Overview", root_path, class: "nav-link px-2 text-white" %>
+          <%= link_to t('navbar.overview'), root_path, class: "nav-link px-2 text-white" %>
         </li>
         <li>
-          <%= link_to "Students", students_path, class: "nav-link px-2 text-white" %>
+          <%= link_to t('navbar.students'), students_path, class: "nav-link px-2 text-white" %>
         </li>
         <li>
-          <%= link_to "Teachers", teachers_path, class: "nav-link px-2 text-white" %>
+          <%= link_to t('navbar.teachers'), teachers_path, class: "nav-link px-2 text-white" %>
         </li>
         <li>
-          <%= link_to "Courses", courses_path, class: "nav-link px-2 text-white" %>
+          <%= link_to t('navbar.courses'), courses_path, class: "nav-link px-2 text-white" %>
         </li>
         <% if user_signed_in? and current_user.administrator? %>
           <li>
-            <%= link_to "Users", admin_users_path, class: "nav-link px-2 text-white" %>
+            <%= link_to t('navbar.users'), admin_users_path, class: "nav-link px-2 text-white" %>
           </li>
         <% end %>
       </ul>
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
       </div>
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <input type="search" class="form-control" placeholder="<%= t('navbar.search') %>" aria-label="Search">
       </form>
       <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -49,7 +49,7 @@
               <% end %>
             </li>
             <li>
-              <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
+              <%= button_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger" %>
             </li>
           <% end %>
         </ul>

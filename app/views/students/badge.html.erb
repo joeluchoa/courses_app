@@ -27,20 +27,21 @@
               <strong><%= truncate(@student.last_name, length: 20) %></strong>
             </div>
 
-            <span class="field-label">Corso</span>
+            <br/>
+            <span class="field-label"><%= t('activerecord.models.course') %></span>
             <strong class="field-value"><%= @course.name %></strong>
             <br/>
-            <span class="field-label">Insegnante</span>
+            <span class="field-label"><%= t('activerecord.attributes.course.teacher') %></span>
             <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
             <br/>
-            <span class="field-label">Inizio</span>
+            <span class="field-label"><%= t('activerecord.attributes.course.start_date') %></span>
             <strong class="field-value"><%= @course.start_date %></strong>
-            <span class="field-label">Fine</span>
+            <span class="field-label"><%= t('activerecord.attributes.course.end_date') %></span>
             <strong class="field-value"><%= @course.end_date %></strong>
             <br/>
             <% @course.weekly_schedule.each_with_index do |schedule, idx| %>
               <span class="field-label">
-                <%= schedule["day"] %>
+                <%= t("weekdays.#{schedule["day"].downcase}") %>
               </span>
               <strong class="field-value">
                 <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
@@ -49,7 +50,7 @@
                 <br/>
               <% end %>
             <% end %>
-            <span class="field-label">Indirizzo</span>
+            <span class="field-label"><%= t('activerecord.attributes.course.address') %></span>
             <strong class="field-value"><%= @course.address %></strong>
           </div>
         </td>
@@ -58,7 +59,7 @@
         <td colspan=2>
           <div class="badge-footer">
             <div class="issuing-info">
-              Issued: <%= Time.now.strftime("%m/%d/%Y") %>
+              <%= t('badge.issued') %>: <%= Time.now.strftime("%m/%d/%Y") %>
             </div>
           </div>
         </td>

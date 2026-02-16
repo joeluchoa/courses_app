@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-lg-6 d-flex flex-column">
-    <h4 class="mb-3">1. Verify Student</h4>
+    <h4 class="mb-3"><%= t('scanner.confirm.verify_student') %></h4>
     <%= render 'students/verification_card', student: @student %>
   </div>
 
   <div class="col-lg-6 d-flex flex-column">
-    <h4 class="mb-3">2. Verify Course</h4>
+    <h4 class="mb-3"><%= t('scanner.confirm.verify_course') %></h4>
     <%= render 'courses/verification_card', course: @course %>
   </div>
 </div>
@@ -17,7 +17,7 @@
     <%= form.hidden_field :course_id, value: @course.id %>
 
     <div class="d-grid">
-      <%= form.submit "Confirm Attendance", class: "btn btn-success btn-lg" %>
+      <%= form.submit t('scanner.confirm.submit'), class: "btn btn-success btn-lg" %>
     </div>
   <% end %>
 </div>

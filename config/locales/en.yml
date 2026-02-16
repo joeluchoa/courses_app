@@ -27,8 +27,9 @@ en:
     add_teacher: 'Add Instructor'
     scan_attendance: 'Scan Attendance'
     activities:
-      title: 'Recent Activity'
-      attendance: "%{student} was marked present for %{course} on %{date}."
+      title: "Recent Activities"
+      attendance: "%{student} attended %{course} on %{date}"
+      no_recent: "No recent attendance records found."
   status:
     title: 'Status'
     active: 'Active'
@@ -68,6 +69,7 @@ en:
         tax_code: "Tax code"
         address: "Address"
         total_paid: "Total paid"
+        photo: "Photo"
       teacher:
         name: "Name"
         phone_number: "Phone number"
@@ -76,7 +78,27 @@ en:
         name: "Name"
         email: "Email"
         role: "Role"
+        role: "Role"
         blocked_at: "Blocked at"
+    errors:
+      models:
+        course:
+          attributes:
+            base:
+              schedule_start_before_end: "For %{day}, the start time must be before the end time."
+              schedule_times_required: "For %{day}, start and end times are required."
+        attendance:
+          attributes:
+            student_id:
+              already_registered: "has already registered attendance for this course today."
+            base:
+              course_not_in_progress: "The course must be in progress to register attendance."
+              not_scheduled_today: "Today is not a scheduled day for this course."
+    enums:
+      user:
+        role:
+          admin: "Administrator"
+          operator: "Operator"
   users:
     index:
       title: "Users"
@@ -91,8 +113,6 @@ en:
   courses:
     index:
       title: "Courses"
-    show:
-      title: "Course Details"
     new:
       title: "New Course"
     edit:
@@ -101,3 +121,123 @@ en:
       day: 'Day'
       select_a_teacher: 'Select a instructor'
       select_the_days: 'Select the days the course will be held and set the times.'
+    show:
+      title: "Course Details"
+      enrolled_students: "Enrolled Students"
+      view_attendance_sheet: "View Attendance Sheet"
+      no_students_enrolled: "No students are currently enrolled in this course."
+      enroll_student: "Enroll a Student"
+      select_student: "Select a student"
+    scan_attendance:
+      title: "Scan Attendance for %{course}"
+      registering: "Registering..."
+      scanned_id: "Scanned student ID: %{id}."
+      unexpected_error: "An unexpected error occurred."
+  scanner:
+    index:
+      title: "Scan Student Badge"
+      instruction: "Position the student's QR code in front of the camera."
+      header: "Scanner"
+    confirm:
+      verify_student: "1. Verify Student"
+      verify_course: "2. Verify Course"
+      submit: "Confirm Attendance"
+    flash:
+      not_enrolled: "The student (id: %{student_id}) is not enrolled in the course (id: %{course_id})."
+      invalid_qr: "Invalid QR Code: Student (id: %{student_id}) or Course (id: %{course_id}) not found."
+      marked_present: "%{student} has been marked present for %{course}."
+      failed_present: "Failed to mark attendance: %{error}"
+      student_not_enrolled: "Student not enrolled in this course."
+      student_marked_present: "%{student} marked as present."
+    badge:
+      issued: "Issued"
+  enrollments:
+    create:
+      success: "Student was successfully enrolled."
+      failure: "Failed to enroll student. %{error}"
+    destroy:
+      success: "Student was successfully unenrolled."
+  students:
+    index:
+      title: "Students"
+    show:
+      title: "Student Details"
+      enrolled_courses: "Enrolled Courses"
+      qr_code: "QR Code"
+      badge: "Badge"
+      view_badge: "View Badge"
+      not_available: "Not available."
+      no_enrolled_courses: "This student is not yet enrolled in any courses."
+      no_photo: "No photo provided."
+    new:
+      title: "New Student"
+    edit:
+      title: "Editing Student"
+    form:
+      personal_info: "Personal Information"
+      contact_info: "Contact Information"
+      enrollments: "Enrollments"
+      add_enrollment: "Add Enrollment"
+      remove_enrollment: "Remove Enrollment"
+    form:
+      personal_info: "Personal Information"
+      contact_info: "Contact Information"
+      enrollments: "Enrollments"
+      add_enrollment: "Add Enrollment"
+      remove_enrollment: "Remove Enrollment"
+      select_course: "Select a course"
+      upload_photo: "Upload a new photo"
+      take_photo: "Take a new photo"
+      start_camera: "Start Camera"
+      take_photo_btn: "Take Photo"
+      photo_captured: "Photo Captured!"
+  teachers:
+    index:
+      title: "Instructors"
+    show:
+      title: "Instructor Details"
+      assigned_courses: "Assigned Courses"
+      no_courses: "This teacher is not currently assigned to any courses."
+      students_count: "%{count} Students"
+    new:
+      title: "New Instructor"
+    edit:
+      title: "Editing Instructor"
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} was successfully created."
+      update:
+        notice: "%{resource_name} was successfully updated."
+      destroy:
+        notice: "%{resource_name} was successfully destroyed."
+  navbar:
+    overview: "Overview"
+    students: "Students"
+    teachers: "Instructors"
+    courses: "Courses"
+    users: "Users"
+    logout: "Logout"
+    login: "Login"
+    my_profile: "My Profile"
+    search: "Search..."
+  shared:
+    verification_card:
+      verified: "Verified"
+      not_verified: "Not Verified"
+  actions:
+    title: 'Actions'
+    new: 'New'
+    save: 'Save'
+    show: 'Show'
+    edit: 'Edit'
+    update: 'Update'
+    delete: 'Delete'
+    back: 'Back'
+    confirm: 'Are you sure?'
+    unenroll: 'Unenroll'
+    enroll: 'Enroll Student'
+  errors:
+    header: "%{count} error(s) prohibited this %{model} from being saved:"
+  footer:
+    copyright: "Non Sei Solo - Chiesa Evangelica Arca Missionaria - Via Il Prato, 40/R, 50123 Firenze FI, Italia"

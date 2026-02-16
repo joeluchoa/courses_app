@@ -36,7 +36,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: "Course was successfully created." }
+        format.html { redirect_to @course, notice: t('flash.actions.create.notice', resource_name: Course.model_name.human) }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: "Course was successfully updated." }
+        format.html { redirect_to @course, notice: t('flash.actions.update.notice', resource_name: Course.model_name.human) }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class CoursesController < ApplicationController
     @course.destroy!
 
     respond_to do |format|
-      format.html { redirect_to courses_path, status: :see_other, notice: "Course was successfully destroyed." }
+      format.html { redirect_to courses_path, status: :see_other, notice: t('flash.actions.destroy.notice', resource_name: Course.model_name.human) }
       format.json { head :no_content }
     end
   end
@@ -78,7 +78,7 @@ class CoursesController < ApplicationController
 
     # Check if student is enrolled
     unless @course.students.include?(student)
-      render json: { status: 'error', message: 'Student not enrolled in this course.' }, status: :unprocessable_entity
+      render json: { status: 'error', message: t('scanner.flash.student_not_enrolled') }, status: :unprocessable_entity
       return
     end
 
@@ -86,7 +86,7 @@ class CoursesController < ApplicationController
     attendance = @course.attendances.new(student: student, attended_on: Date.today)
 
     if attendance.save
-      render json: { status: 'success', message: "#{student.first_name} marked as present." }
+      render json: { status: 'success', message: t('scanner.flash.student_marked_present', student: student.first_name) }
     else
       render json: { status: 'error', message: attendance.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end

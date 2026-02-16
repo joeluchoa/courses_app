@@ -14,14 +14,14 @@ RSpec.describe Attendance, type: :model do
       create(:attendance, course: course, student: student, attended_on: Date.today)
       duplicate_attendance = build(:attendance, course: course, student: student, attended_on: Date.today)
       expect(duplicate_attendance).not_to be_valid
-      expect(duplicate_attendance.errors[:student_id]).to include("has already registered attedance for this course today.")
+      expect(duplicate_attendance.errors[:student_id]).to include(I18n.t('activerecord.errors.models.attendance.attributes.student_id.already_registered'))
     end
 
     it 'validates course is in progress' do
       course.update(start_date: 2.days.ago, end_date: 1.day.ago)
       attendance.attended_on = Date.today
       expect(attendance).not_to be_valid
-      expect(attendance.errors[:base]).to include("The course must be in progress to register attendance.")
+      expect(attendance.errors[:base]).to include(I18n.t('activerecord.errors.models.attendance.attributes.base.course_not_in_progress'))
     end
 
     describe '#must_be_valid_class_day_and_time' do
@@ -35,7 +35,7 @@ RSpec.describe Attendance, type: :model do
         course.weekly_schedule = [] # Clear schedule
         attendance.attended_on = Date.today
         expect(attendance).not_to be_valid
-        expect(attendance.errors[:base]).to include("Today is not a scheduled day for this course.")
+        expect(attendance.errors[:base]).to include(I18n.t('activerecord.errors.models.attendance.attributes.base.not_scheduled_today'))
       end
     end
   end

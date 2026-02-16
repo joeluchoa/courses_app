@@ -27,8 +27,9 @@ pt:
     add_teacher: 'Adicionar Instrutor'
     scan_attendance: 'Escanear Presença'
     activities:
-      title: 'Atividade Recente'
-      attendance: "%{student} teve a presença marcada para %{course} em %{date}."
+      title: "Atividades Recentes"
+      attendance: "%{student} compareceu ao %{course} em %{date}"
+      no_recent: "Nenhum registro de presença recente encontrado."
   status:
     title: 'Status'
     active: 'Ativo'
@@ -68,6 +69,7 @@ pt:
         tax_code: "CPF"
         address: "Endereço"
         total_paid: "Total pago"
+        photo: "Foto"
       teacher:
         name: "Nome"
         phone_number: "Número de telefone"
@@ -77,6 +79,25 @@ pt:
         email: "Email"
         role: "Função"
         blocked_at: "Bloqueado em"
+    errors:
+      models:
+        course:
+          attributes:
+            base:
+              schedule_start_before_end: "Para %{day}, o horário de início deve ser anterior ao horário de término."
+              schedule_times_required: "Para %{day}, horários de início e término são obrigatórios."
+        attendance:
+          attributes:
+            student_id:
+              already_registered: "já registrou presença neste curso hoje."
+            base:
+              course_not_in_progress: "O curso deve estar em andamento para registrar presença."
+              not_scheduled_today: "Hoje não é um dia agendado para este curso."
+    enums:
+      user:
+        role:
+          admin: "Administrador"
+          operator: "Operador"
   users:
     index:
       title: "Usuários"
@@ -91,8 +112,6 @@ pt:
   courses:
     index:
       title: "Cursos"
-    show:
-      title: "Detalhes do Curso"
     new:
       title: "Novo Curso"
     edit:
@@ -101,3 +120,123 @@ pt:
       day: 'Dia'
       select_a_teacher: 'Selecione um instrutor'
       select_the_days: 'Selecione os dias e os horários das aulas do curso.'
+    show:
+      title: "Detalhes do Curso"
+      enrolled_students: "Alunos Matriculados"
+      view_attendance_sheet: "Ver Lista de Presença"
+      no_students_enrolled: "Nenhum aluno matriculado neste curso."
+      enroll_student: "Matricular Aluno"
+      select_student: "Selecione um aluno"
+    scan_attendance:
+      title: "Escanear Presença para %{course}"
+      registering: "Registrando..."
+      scanned_id: "ID do aluno escaneado: %{id}."
+      unexpected_error: "Ocorreu um erro inesperado."
+  scanner:
+    index:
+      title: "Escanear Crachá do Aluno"
+      instruction: "Posicione o QR code do aluno em frente à câmera."
+      header: "Scanner"
+    confirm:
+      verify_student: "1. Verificar Aluno"
+      verify_course: "2. Verificar Curso"
+      submit: "Confirmar Presença"
+    badge:
+      issued: "Emitido"
+    flash:
+      not_enrolled: "O aluno (id: %{student_id}) não está matriculado no curso (id: %{course_id})."
+      invalid_qr: "QR Code Inválido: Aluno (id: %{student_id}) ou Curso (id: %{course_id}) não encontrado."
+      marked_present: "%{student} teve a presença marcada para %{course}."
+      failed_present: "Falha ao marcar presença: %{error}"
+      student_not_enrolled: "Aluno não matriculado neste curso."
+      student_marked_present: "%{student} marcado como presente."
+  enrollments:
+    create:
+      success: "Aluno matriculado com sucesso."
+      failure: "Falha ao matricular aluno: %{error}"
+    destroy:
+      success: "Aluno desmatriculado com sucesso."
+  students:
+    index:
+      title: "Alunos"
+    show:
+      title: "Detalhes do Aluno"
+      enrolled_courses: "Cursos Matriculados"
+      qr_code: "QR Code"
+      badge: "Crachá"
+      view_badge: "Ver Crachá"
+      not_available: "Não disponível."
+      no_enrolled_courses: "Este aluno ainda não está matriculado em nenhum curso."
+      no_photo: "Nenhuma foto fornecida."
+    new:
+      title: "Novo Aluno"
+    edit:
+      title: "Editando Aluno"
+    form:
+      personal_info: "Informações Pessoais"
+      contact_info: "Informações de Contato"
+      enrollments: "Matrículas"
+      add_enrollment: "Adicionar Matrícula"
+      remove_enrollment: "Remover Matrícula"
+    form:
+      personal_info: "Informações Pessoais"
+      contact_info: "Informações de Contato"
+      enrollments: "Matrículas"
+      add_enrollment: "Adicionar Matrícula"
+      remove_enrollment: "Remover Matrícula"
+      select_course: "Selecione um curso"
+      upload_photo: "Carregar nova foto"
+      take_photo: "Tirar nova foto"
+      start_camera: "Iniciar Câmera"
+      take_photo_btn: "Tirar Foto"
+      photo_captured: "Foto Capturada!"
+  teachers:
+    index:
+      title: "Instrutores"
+    show:
+      title: "Detalhes do Instrutor"
+      assigned_courses: "Cursos Atribuídos"
+      no_courses: "Este instrutor não está atribuído a nenhum curso no momento."
+      students_count: "%{count} Alunos"
+    new:
+      title: "Novo Instrutor"
+    edit:
+      title: "Editando Instrutor"
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} foi criado com sucesso."
+      update:
+        notice: "%{resource_name} foi atualizado com sucesso."
+      destroy:
+        notice: "%{resource_name} foi excluído com sucesso."
+  navbar:
+    overview: "Visão Geral"
+    students: "Alunos"
+    teachers: "Instrutores"
+    courses: "Cursos"
+    users: "Usuários"
+    logout: "Sair"
+    login: "Entrar"
+    my_profile: "Meu Perfil"
+    search: "Buscar..."
+  shared:
+    verification_card:
+      verified: "Verificado"
+      not_verified: "Não Verificado"
+  actions:
+    title: 'Ações'
+    new: 'Novo'
+    save: 'Salvar'
+    show: 'Mostrar'
+    edit: 'Editar'
+    update: 'Atualizar'
+    delete: 'Excluir'
+    back: 'Voltar'
+    confirm: 'Tem certeza?'
+    unenroll: 'Desmatricular'
+    enroll: 'Matricular Aluno'
+  errors:
+    header: "%{count} erro(s) impediram que este %{model} fosse salvo:"
+  footer:
+    copyright: "Non Sei Solo - Chiesa Evangelica Arca Missionaria - Via Il Prato, 40/R, 50123 Firenze FI, Italia"

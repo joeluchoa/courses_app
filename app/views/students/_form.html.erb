@@ -1,7 +1,7 @@
 <%= form_with(model: student) do |form| %>
   <% if student.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <h2><%= t('errors.header', count: student.errors.count, model: Student.model_name.human) %></h2>
 
       <ul>
         <% student.errors.each do |error| %>
@@ -14,7 +14,7 @@
   <div class="card" data-controller="camera">
     <div class="card-header">
       <h5 class="mb-0">
-        <i class="bi bi-person-bounding-box me-2"></i>Photo
+        <i class="bi bi-person-bounding-box me-2"></i><%= t('activerecord.attributes.student.photo') %>
       </h5>
     </div>
     <div class="card-body">
@@ -34,11 +34,11 @@
         <%# --- COLUMN 2: Camera Capture --- %>
         <div class="col-md-6 border-start-md">
           <%# The file input field (with its Stimulus target) %>
-          <h6>Upload a new photo</h6>
+          <h6><%= t('students.form.upload_photo') %></h6>
           <%= form.file_field :photo, class: "form-control", accept: "image/png,image/jpeg,image/gif", data: { camera_target: "photoInput" } %>
 
           <hr class="mt-1 mb-3">
-          <h6>Take a new photo</h6>
+          <h6><%= t('students.form.take_photo') %></h6>
 
           <div class="border rounded p-3 bg-light text-center">
             <video width="320" height="240" autoplay class="d-none rounded mb-2" data-camera-target="video"></video>
@@ -46,14 +46,14 @@
 
             <div class="mt-2">
               <button type="button" class="btn btn-secondary" data-action="click->camera#start" data-camera-target="startButton">
-                <i class="bi bi-camera-video-fill me-1"></i> Start Camera
+                <i class="bi bi-camera-video-fill me-1"></i> <%= t('students.form.start_camera') %>
               </button>
 
               <button type="button" class="btn btn-primary d-none" data-action="click->camera#takePhoto" data-camera-target="takeButton">
-                <i class="bi bi-camera-fill me-1"></i> Take Photo
+                <i class="bi bi-camera-fill me-1"></i> <%= t('students.form.take_photo_btn') %>
               </button>
             </div>
-            <span class="text-success mt-2 d-none fw-bold" data-camera-target="successMsg">✓ Photo Captured!</span>
+            <span class="text-success mt-2 d-none fw-bold" data-camera-target="successMsg">✓ <%= t('students.form.photo_captured') %></span>
           </div>
         </div>
 
@@ -105,7 +105,7 @@
   </div>
 
     <div class="mb-3">
-      <h3><%= t('activerecord.models.course') %></h3>
+      <h3><%= Course.model_name.human(count: 2) %></h3>
     <%= form.fields_for :enrollments do |enrollment_form| %>
       <div class="form-check">
         <%= enrollment_form.hidden_field :course_id %>
@@ -125,6 +125,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit class: "btn btn-success" %>
+    <%= form.submit t('actions.save'), class: "btn btn-success" %>
   </div>
 <% end %>

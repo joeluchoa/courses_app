@@ -1,18 +1,17 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h1>Students</h1>
-  <%= link_to "New student", new_student_path, class: "btn btn-primary" %>
+  <h1><%= t('.title') %></h1>
+  <%= link_to t('actions.new'), new_student_path, class: "btn btn-primary" %>
 </div>
 
-<div id="students" class="table-responsive">
-  <table class="table table-striped table-hover table-borderless table-responsive">
+<table class="table table-striped table-hover table-responsive table-sm">
     <thead>
       <tr>
-        <th class="col">Name</th>
-        <th class="col">Date of birth</th>
-        <th class="col">Email</th>
-        <th class="col">Corsi</th>
-        <th class="col">Total paid</th>
-        <th class="col" colspan="3"></th>
+        <th class="col"><%= t('activerecord.attributes.student.first_name') %> / <%= t('activerecord.attributes.student.last_name') %></th>
+        <th class="col"><%= t('activerecord.attributes.student.date_of_birth') %></th>
+        <th class="col"><%= t('activerecord.attributes.student.email') %></th>
+        <th class="col"><%= t('navbar.courses') %></th>
+        <th class="col"><%= t('activerecord.attributes.student.total_paid') %></th>
+        <th colspan="2"><%= t('actions.title') %></th>
       </tr>
     </thead>
 
@@ -29,11 +28,12 @@
             <% end %>
           </td>
           <td><%= number_to_currency(student.total_paid, unit: '€') %></td>
-          <td>
-            <%= link_to "Show", student, class: "btn btn-sm btn-outline-primary" %>
+          <td class="col-2">
+            <%= link_to t('actions.show'), student, class: "btn btn-sm btn-secondary" %>
+            <%= link_to t('actions.delete'), student, data: { turbo_method: :delete, turbo_confirm: t('actions.confirm') }, class: 'btn btn-danger btn-sm' %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-</div>
+

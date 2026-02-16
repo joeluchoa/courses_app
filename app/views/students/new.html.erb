@@ -1,11 +1,11 @@
-<% content_for :title, "New student" %>
+<% content_for :title, t('.title') %>
 
-<h1>New student</h1>
+<h1><%= t('.title') %></h1>
 
 <%= render "form", student: @student %>
 
 <br>
 
 <div>
-  <%= link_to "Back to students", students_path %>
+  <%= link_to t('actions.back'), students_path %>
 </div>
