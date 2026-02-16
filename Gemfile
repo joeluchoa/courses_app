@@ -55,6 +55,7 @@ gem "faker"
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'guard-rspec', require: false
   gem 'rspec-rails'
 end
 
@@ -63,6 +64,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem 'simplecov', require: false
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
