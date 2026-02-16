@@ -2,12 +2,8 @@
 //= link_tree ../builds
 //= link application.css
 
-//= link application.js
 //= link_tree ../../javascript/controllers .js
+//= link_tree ../../../vendor/javascript .js
 
-//= link bootstrap.min.js
-//= link popper.js
-//= link html5-qrcode.min.js
-
-//= link mdb-ui-kit.js
+//= link application.js
 
