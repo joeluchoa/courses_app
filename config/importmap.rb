@@ -7,7 +7,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 
 pin "bootstrap", to: "bootstrap.js", preload: true
-pin "@popperjs/core", to: "@popperjs--core.js", preload: true
+pin "@popperjs/core", to: "popper.bundle.js", preload: true
 
 # This line loads all your Stimulus controllers
 pin "controllers/index", to: "controllers/index.js"
