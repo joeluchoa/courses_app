@@ -18,4 +18,3 @@ pin "controllers/camera", to: "controllers/camera_controller.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "mdb-ui-kit", to: "mdb-ui-kit.js"
-

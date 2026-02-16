@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # Permit the 'name' parameter for the sign-up form
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
 
     # Permit the 'name' parameter for the account update form
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])
   end
 
   private

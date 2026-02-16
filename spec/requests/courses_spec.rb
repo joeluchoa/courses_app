@@ -4,7 +4,7 @@ RSpec.describe "Courses", type: :request do
   let(:teacher) { create(:teacher) }
   let(:course) { create(:course, teacher: teacher) }
   let(:student) { create(:student) }
-  
+
   before do
     login_as(create(:user, :admin), scope: :user)
   end
@@ -59,7 +59,7 @@ RSpec.describe "Courses", type: :request do
       expect {
         post register_attendance_course_path(course, locale: :en), params: { student_id: student.id }
       }.to change(Attendance, :count).by(1)
-      
+
       expect(response).to have_http_status(:success)
       json_response = JSON.parse(response.body)
       expect(json_response['status']).to eq('success')
@@ -67,7 +67,7 @@ RSpec.describe "Courses", type: :request do
 
     it "returns error for unenrolled student" do
       unenrolled_student = create(:student)
-      
+
       expect {
         post register_attendance_course_path(course, locale: :en), params: { student_id: unenrolled_student.id }
       }.not_to change(Attendance, :count)

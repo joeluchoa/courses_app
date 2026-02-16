@@ -1,4 +1,3 @@
-end
 class CoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @course = courses(:one)

@@ -62,7 +62,7 @@ puts "Creating students..."
   Student.create!(
     first_name: Faker::Name.name.split.first,
     last_name: Faker::Name.name,
-    email: Faker::Internet.unique.email
+    email: Faker::Internet.unique.email,
     phone_number: Faker::PhoneNumber.phone_number,
   )
 end

@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: t('flash.actions.create.notice', resource_name: Student.model_name.human) }
+        format.html { redirect_to @student, notice: t("flash.actions.create.notice", resource_name: Student.model_name.human) }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: t('flash.actions.update.notice', resource_name: Student.model_name.human) }
+        format.html { redirect_to @student, notice: t("flash.actions.update.notice", resource_name: Student.model_name.human) }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
     @student.destroy!
 
     respond_to do |format|
-      format.html { redirect_to students_path, status: :see_other, notice: t('flash.actions.destroy.notice', resource_name: Student.model_name.human) }
+      format.html { redirect_to students_path, status: :see_other, notice: t("flash.actions.destroy.notice", resource_name: Student.model_name.human) }
       format.json { head :no_content }
     end
   end
@@ -64,20 +64,20 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render layout: 'badge'
+        render layout: "badge"
       end
       format.pdf do
         render pdf: "badge-#{@student.full_name.parameterize}-#{@course.name.parameterize}",
-          layout: 'badge',
+          layout: "badge",
           template: "students/badge",
-          handlers: [:erb],
-          formats: [:html],
-          disposition: 'attachment',
+          handlers: [ :erb ],
+          formats: [ :html ],
+          disposition: "attachment",
 
           page_size: nil,
           orientation: nil,
-          page_height: '132mm',
-          page_width: '206mm',
+          page_height: "132mm",
+          page_width: "206mm",
           margin: {
             top: 0,
             bottom: 0,
@@ -96,6 +96,6 @@ class StudentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :phone, :address, :photo, :tax_code, :total_paid, enrollments_attributes: [:id, :course_id, :_destroy])
+    params.require(:student).permit(:first_name, :last_name, :email, :date_of_birth, :phone, :address, :photo, :tax_code, :total_paid, enrollments_attributes: [ :id, :course_id, :_destroy ])
   end
 end

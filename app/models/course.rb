@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 class Course < ApplicationRecord
   attribute :state, :string
@@ -26,7 +26,7 @@ class Course < ApplicationRecord
         OpenStruct.new(schedule_hash[day_name].merge(enabled: true))
       else
         # No schedule for this day, create a blank one
-        OpenStruct.new(day: day_name, start_time: '', end_time: '', enabled: false)
+        OpenStruct.new(day: day_name, start_time: "", end_time: "", enabled: false)
       end
     end
   end

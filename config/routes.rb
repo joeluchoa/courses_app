@@ -7,29 +7,29 @@ Rails.application.routes.draw do
     get "enrollments/destroy"
 
     # Scanner routes.
-    get 'scanner', to: 'scanner#index'
-    get 'scanner/confirm', to: 'scanner#confirm'
-    post 'scanner/register_attendance', to: 'scanner#register_attendance'
+    get "scanner", to: "scanner#index"
+    get "scanner/confirm", to: "scanner#confirm"
+    post "scanner/register_attendance", to: "scanner#register_attendance"
 
     # User Profile routes.
-    resource :profile, only: [:show], controller: 'users'
+    resource :profile, only: [ :show ], controller: "users"
 
     # Dashboard routes.
-    get 'dashboard', to: 'dashboard#index'
+    get "dashboard", to: "dashboard#index"
 
     resources :courses do
-      get 'scan_attendance', on: :member # /courses/:id/scan_attendance
-      post 'register_attendance', on: :member # API endpoint
+      get "scan_attendance", on: :member # /courses/:id/scan_attendance
+      post "register_attendance", on: :member # API endpoint
       get :attendance_table, on: :member
 
-      resources :enrollments, only: [:create, :destroy]
+      resources :enrollments, only: [ :create, :destroy ]
     end
 
     resources :students
     get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
 
     devise_for :users, controllers: {
-      registrations: 'users/registrations'
+      registrations: "users/registrations"
     }
 
     namespace :admin do

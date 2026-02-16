@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :set_teachers, only: [:new, :create, :edit, :update]
+  before_action :set_teachers, only: [ :new, :create, :edit, :update ]
 
   # GET /courses or /courses.json
   def index
@@ -36,7 +36,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: t('flash.actions.create.notice', resource_name: Course.model_name.human) }
+        format.html { redirect_to @course, notice: t("flash.actions.create.notice", resource_name: Course.model_name.human) }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: t('flash.actions.update.notice', resource_name: Course.model_name.human) }
+        format.html { redirect_to @course, notice: t("flash.actions.update.notice", resource_name: Course.model_name.human) }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class CoursesController < ApplicationController
     @course.destroy!
 
     respond_to do |format|
-      format.html { redirect_to courses_path, status: :see_other, notice: t('flash.actions.destroy.notice', resource_name: Course.model_name.human) }
+      format.html { redirect_to courses_path, status: :see_other, notice: t("flash.actions.destroy.notice", resource_name: Course.model_name.human) }
       format.json { head :no_content }
     end
   end
@@ -78,7 +78,7 @@ class CoursesController < ApplicationController
 
     # Check if student is enrolled
     unless @course.students.include?(student)
-      render json: { status: 'error', message: t('scanner.flash.student_not_enrolled') }, status: :unprocessable_entity
+      render json: { status: "error", message: t("scanner.flash.student_not_enrolled") }, status: :unprocessable_entity
       return
     end
 
@@ -86,9 +86,9 @@ class CoursesController < ApplicationController
     attendance = @course.attendances.new(student: student, attended_on: Date.today)
 
     if attendance.save
-      render json: { status: 'success', message: t('scanner.flash.student_marked_present', student: student.first_name) }
+      render json: { status: "success", message: t("scanner.flash.student_marked_present", student: student.first_name) }
     else
-      render json: { status: 'error', message: attendance.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      render json: { status: "error", message: attendance.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
   end
 
@@ -102,7 +102,7 @@ class CoursesController < ApplicationController
     logger.info "Cource weekdays: #{wdays}"
     if @course.start_date.present? && @course.end_date.present?
       (@course.start_date..@course.end_date).each do |date|
-        day_name = date.strftime('%A').downcase
+        day_name = date.strftime("%A").downcase
         if wdays.include?(day_name)
           @class_days << date
         end
@@ -116,7 +116,7 @@ class CoursesController < ApplicationController
     # Example: { [1, '2025-08-20'] => true, [2, '2025-08-20'] => false }
     @attendance_data = @course.attendances
       .pluck(:student_id, :attended_on)
-      .to_h { |student_id, date, present| [[student_id, date.strftime("%Y-%m-%d")], true] }
+      .to_h { |student_id, date, present| [ [ student_id, date.strftime("%Y-%m-%d") ], true ] }
     logger.info "Attendance data: #{@attendance_data}"
 
     @attendance_counts = @course.attendances.group(:student_id).count
@@ -151,7 +151,7 @@ class CoursesController < ApplicationController
       :end_date,
       :address,
       :teacher_id,
-      weekly_schedule_attributes: [:day, :start_time, :end_time, :_destroy, :enabled]
+      weekly_schedule_attributes: [ :day, :start_time, :end_time, :_destroy, :enabled ]
     )
   end
 end

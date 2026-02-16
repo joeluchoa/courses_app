@@ -55,36 +55,36 @@ gem "faker"
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'guard-rspec', require: false
-  gem 'rspec-rails'
+  gem "guard-rspec", require: false
+  gem "rspec-rails"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem 'simplecov', require: false
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem "simplecov", require: false
+  gem "factory_bot_rails"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
 end
 
 # Authentication
-gem 'devise'
+gem "devise"
 # QR code
-gem 'rqrcode'
+gem "rqrcode"
 # For photos
 gem "image_processing", ">= 1.2"
 
 gem "dartsass-rails"
 gem "sass-rails"
 
-gem 'bootstrap', '~> 5.3.3'
+gem "bootstrap", "~> 5.3.3"
 
 
 gem "dockerfile-rails", ">= 1.7", group: :development
 
 gem "aws-sdk-s3", "~> 1.196", require: false
 
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary' # This is the binary executable Wicked PDF uses
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary" # This is the binary executable Wicked PDF uses
