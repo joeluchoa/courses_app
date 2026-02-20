@@ -28,7 +28,7 @@ it:
     scan_attendance: 'Scansiona Presenza'
     activities:
       title: 'Attività Recente'
-      attendance: "%{student} è stato segnato presente per %{course} il %{date}."
+      attendance_html: "%{student} è stato segnato presente per %{course} il %{date}."
       no_recent: "Nessun registro delle presenze recente trovato."
   status:
     title: 'Stato'

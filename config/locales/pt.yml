@@ -28,7 +28,7 @@ pt:
     scan_attendance: 'Escanear Presença'
     activities:
       title: "Atividades Recentes"
-      attendance: "%{student} compareceu ao %{course} em %{date}"
+      attendance_html: "%{student} compareceu ao %{course} em %{date}"
       no_recent: "Nenhum registro de presença recente encontrado."
   status:
     title: 'Status'

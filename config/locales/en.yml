@@ -28,7 +28,7 @@ en:
     scan_attendance: 'Scan Attendance'
     activities:
       title: "Recent Activities"
-      attendance: "%{student} attended %{course} on %{date}"
+      attendance_html: "%{student} attended %{course} on %{date}"
       no_recent: "No recent attendance records found."
   status:
     title: 'Status'
