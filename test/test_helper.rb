@@ -8,7 +8,8 @@ module ActiveSupport
     parallelize(workers: :number_of_processors)
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-    # fixtures :all
+    # We remove explicit order to avoid loading broken fixtures globally
+    # fixtures :teachers, :students, :courses, :enrollments, :attendances, :users
 
     # Add more helper methods to be used by all tests here...
     include Devise::Test::IntegrationHelpers

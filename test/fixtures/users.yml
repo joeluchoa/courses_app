@@ -15,3 +15,15 @@ operator:
   name: Operator User
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   role: 0
+
+one:
+  email: user_one@example.com
+  name: User One
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 0
+
+two:
+  email: user_two@example.com
+  name: User Two
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 0
