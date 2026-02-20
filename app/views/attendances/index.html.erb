@@ -1,9 +1,33 @@
-<div class="dashboard-header">
-  <h1><%= t('attendances.index.title', course: @course.name) %></h1>
+<div class="dashboard-header mb-4">
+  <h1><%= @course ? t('attendances.index.course_title', course: @course.name) : t('attendances.index.global_title') %></h1>
   <div class="quick-actions">
-    <%= link_to t('attendances.index.new_manual'), new_course_attendance_path(@course), class: "btn btn-primary" %>
-    <%= link_to t('actions.back'), attendance_table_course_path(@course), class: "btn btn-secondary" %>
+    <% if @course %>
+      <%= link_to t('attendances.index.new_manual'), new_course_attendance_path(@course), class: "btn btn-primary" %>
+      <%= link_to t('actions.back'), attendance_table_course_path(@course), class: "btn btn-secondary" %>
+    <% end %>
   </div>
+</div>
+
+<div class="card shadow-sm p-4 mb-4 bg-white rounded">
+  <%= form_with url: (@course ? course_attendances_path(@course) : attendances_path), method: :get, class: "row g-3" do |f| %>
+    <% unless @course %>
+      <div class="col-md-4">
+        <%= f.label :filter_course_id, Course.model_name.human, class: "form-label" %>
+        <%= f.collection_select :filter_course_id, @courses, :id, :name, { include_blank: t('attendances.index.all_courses'), selected: params[:filter_course_id] }, { class: "form-select" } %>
+      </div>
+    <% end %>
+    <div class="col-md-4">
+      <%= f.label :filter_student_id, Student.model_name.human, class: "form-label" %>
+      <%= f.collection_select :filter_student_id, @students, :id, :full_name, { include_blank: t('attendances.index.all_students'), selected: params[:filter_student_id] }, { class: "form-select" } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :filter_date, Attendance.human_attribute_name(:attended_on), class: "form-label" %>
+      <%= f.date_field :filter_date, value: params[:filter_date], class: "form-select" %>
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <%= f.submit t('actions.search'), class: "btn btn-outline-primary w-100" %>
+    </div>
+  <% end %>
 </div>
 
 <div class="table-container shadow-sm p-3 mb-5 bg-white rounded">
@@ -11,26 +35,40 @@
     <thead class="table-light">
       <tr>
         <th><%= Student.model_name.human %></th>
+        <% unless @course %>
+          <th><%= Course.model_name.human %></th>
+        <% end %>
         <th><%= Attendance.human_attribute_name(:attended_on) %></th>
+        <th><%= t('attendances.index.type') %></th>
         <th class="text-end"><%= t('actions.title') %></th>
       </tr>
     </thead>
     <tbody>
       <% @attendances.each do |attendance| %>
         <tr>
-          <td><%= attendance.student.full_name %></td>
+          <td><%= link_to attendance.student.full_name, student_path(attendance.student) %></td>
+          <% unless @course %>
+            <td><%= link_to attendance.course.name, course_path(attendance.course) %></td>
+          <% end %>
           <td><%= l(attendance.attended_on, format: :long) %></td>
+          <td>
+            <% if attendance.manual? %>
+              <span class="badge bg-info text-dark"><%= t('attendances.types.manual') %></span>
+            <% else %>
+              <span class="badge bg-success"><%= t('attendances.types.scanned') %></span>
+            <% end %>
+          </td>
           <td class="text-end">
             <div class="btn-group btn-group-sm">
-              <%= link_to t('actions.edit'), edit_course_attendance_path(@course, attendance), class: "btn btn-outline-primary" %>
-              <%= button_to t('actions.delete'), [@course, attendance], method: :delete, data: { confirm: t('actions.confirm') }, class: "btn btn-outline-danger" %>
+              <%= link_to t('actions.edit'), edit_course_attendance_path(attendance.course, attendance), class: "btn btn-outline-primary" %>
+              <%= button_to t('actions.delete'), [attendance.course, attendance], method: :delete, data: { confirm: t('actions.confirm') }, class: "btn btn-outline-danger" %>
             </div>
           </td>
         </tr>
       <% end %>
       <% if @attendances.empty? %>
         <tr>
-          <td colspan="3" class="text-center text-muted py-4">
+          <td colspan="5" class="text-center text-muted py-4">
             <%= t('attendances.index.no_records') %>
           </td>
         </tr>

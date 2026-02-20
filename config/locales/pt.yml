@@ -218,9 +218,16 @@ pt:
       success: "Aluno desmatriculado com sucesso."
   attendances:
     index:
-      title: "Presenças Manuais: %{course}"
+      global_title: "Presenças"
+      course_title: "Presenças: %{course}"
       new_manual: "Adicionar Novo Registro"
-      no_records: "Nenhum registro de presença manual encontrado para este curso."
+      no_records: "Nenhum registro de presença encontrado."
+      all_courses: "Todos os Cursos"
+      all_students: "Todos os Alunos"
+      type: "Tipo de Entrada"
+    types:
+      manual: "Manual"
+      scanned: "Escaneado"
     new:
       title: "Nova Presença para %{course}"
     show:
@@ -288,7 +295,7 @@ pt:
     students: "Alunos"
     teachers: "Instrutores"
     courses: "Cursos"
-    attendance: "Presença Manual"
+    attendance: "Presenças"
     users: "Usuários"
     logout: "Sair"
     login: "Entrar"

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
 
     resources :students
+    resources :attendances, only: [ :index ]
     get "badge/:student_id/:course_id", to: "students#badge", as: :student_badge # /students/:id/badge/:course_id path
 
     devise_for :users, controllers: {

@@ -219,9 +219,16 @@ en:
       success: "Student was successfully unenrolled."
   attendances:
     index:
-      title: "Manual Attendance: %{course}"
+      global_title: "Attendances"
+      course_title: "Attendances: %{course}"
       new_manual: "Add New Record"
-      no_records: "No manual attendance records found for this course."
+      no_records: "No attendance records found."
+      all_courses: "All Courses"
+      all_students: "All Students"
+      type: "Entry Type"
+    types:
+      manual: "Manual"
+      scanned: "Scanned"
     new:
       title: "New Attendance for %{course}"
     show:
@@ -289,7 +296,7 @@ en:
     students: "Students"
     teachers: "Instructors"
     courses: "Courses"
-    attendance: "Manual Attendance"
+    attendance: "Attendances"
     users: "Users"
     logout: "Logout"
     login: "Login"

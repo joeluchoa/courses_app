@@ -222,9 +222,16 @@ it:
       success: "Studente disiscritto con successo."
   attendances:
     index:
-      title: "Presenze Manuali: %{course}"
+      global_title: "Presenze"
+      course_title: "Presenze: %{course}"
       new_manual: "Aggiungi Nuovo Record"
-      no_records: "Nessun registro di presenza manuale trovato per questo corso."
+      no_records: "Nessun registro di presenza trovato."
+      all_courses: "Tutti i Corsi"
+      all_students: "Tutti gli Studenti"
+      type: "Tipo di Voce"
+    types:
+      manual: "Manuale"
+      scanned: "Scansionato"
     new:
       title: "Nuova Presenza per %{course}"
     show:
@@ -292,7 +299,7 @@ it:
     students: "Studenti"
     teachers: "Istruttori"
     courses: "Corsi"
-    attendance: "Presenze Manuali"
+    attendance: "Presenze"
     users: "Utenti"
     logout: "Esci"
     login: "Accedi"

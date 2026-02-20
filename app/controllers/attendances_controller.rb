@@ -1,10 +1,34 @@
 class AttendancesController < ApplicationController
-  before_action :set_course
+  before_action :set_course, only: %i[ new edit create update destroy ]
   before_action :set_attendance, only: %i[ show edit update destroy ]
 
-  # GET /courses/:course_id/attendances
+  # GET /attendances OR /courses/:course_id/attendances
   def index
-    @attendances = @course.attendances.includes(:student).order(attended_on: :desc)
+    if params[:course_id]
+      @course = Course.find(params[:course_id])
+      @attendances = @course.attendances.includes(:student)
+    else
+      @attendances = Attendance.includes(:student, :course)
+    end
+
+    # Apply Filters
+    @attendances = @attendances.where(course_id: params[:filter_course_id]) if params[:filter_course_id].present?
+    @attendances = @attendances.where(student_id: params[:filter_student_id]) if params[:filter_student_id].present?
+    
+    if params[:filter_date].present?
+      begin
+        filter_date = Date.parse(params[:filter_date])
+        @attendances = @attendances.where(attended_on: filter_date.all_day)
+      rescue Date::Error
+        # Ignore invalid dates
+      end
+    end
+
+    @attendances = @attendances.order(attended_on: :desc)
+    
+    # Data for filters
+    @courses = Course.all.order(:name)
+    @students = Student.all.order(:last_name, :first_name)
   end
 
   # GET /courses/:course_id/attendances/1
@@ -25,7 +49,7 @@ class AttendancesController < ApplicationController
   # POST /courses/:course_id/attendances
   def create
     @attendance = @course.attendances.new(attendance_params)
-    @attendance.manual_entry = true
+    @attendance.manual = true
 
     respond_to do |format|
       if @attendance.save
@@ -41,7 +65,8 @@ class AttendancesController < ApplicationController
 
   # PATCH/PUT /courses/:course_id/attendances/1
   def update
-    @attendance.manual_entry = true
+    # Note: We don't force manual=true on update because it might have been scanned before.
+    # But usually, it stays manual if it was manual.
     respond_to do |format|
       if @attendance.update(attendance_params)
         format.html { redirect_to course_attendances_path(@course), notice: t("flash.actions.update.notice", resource_name: Attendance.model_name.human) }
@@ -56,6 +81,7 @@ class AttendancesController < ApplicationController
 
   # DELETE /courses/:course_id/attendances/1
   def destroy
+    @course = @attendance.course # Ensure @course is set for direct top-level destroys if any
     @attendance.destroy!
 
     respond_to do |format|
@@ -71,7 +97,15 @@ class AttendancesController < ApplicationController
   end
 
   def set_attendance
-    @attendance = @course.attendances.find(params[:id])
+    # If course_id is present (nested), we find through course for safety.
+    # Otherwise, it's global access.
+    if params[:course_id]
+      set_course
+      @attendance = @course.attendances.find(params[:id])
+    else
+      @attendance = Attendance.find(params[:id])
+      @course = @attendance.course # Set for views that might expect it
+    end
   end
 
   def attendance_params
