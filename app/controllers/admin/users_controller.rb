@@ -11,11 +11,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.except(:block, :unblock))
+    if params[:user][:block] == "1"
+      @user.blocked_at = Time.current
+    end
+
     if @user.save
       redirect_to admin_users_path, notice: "User was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -39,10 +43,10 @@ class Admin::UsersController < ApplicationController
       params_to_update.delete(:password_confirmation)
     end
 
-    if @user.update(params_to_update)
+    if @user.update(params_to_update.except(:block, :unblock))
       redirect_to admin_users_path, notice: "User was successfully updated."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -58,7 +62,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :name, :block, :unblock)
   end
 
   def authenticate_administrator!
