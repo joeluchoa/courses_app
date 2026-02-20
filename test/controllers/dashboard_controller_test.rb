@@ -15,6 +15,7 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     [:en, :it, :pt].each do |locale|
       get dashboard_url(locale: locale)
       assert_response :success, "Failed for locale #{locale}"
+      assert_no_match(/Translation missing/i, response.body, "Missing translation found in #{locale}")
       assert_select "div.activity-list", 1, "Activity list missing for #{locale}" do
         assert_select "a[href=?]", student_path(attendance.student, locale: locale), text: attendance.student.full_name
         assert_select "a[href=?]", course_path(attendance.course, locale: locale), text: attendance.course.name
