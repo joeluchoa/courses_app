@@ -19,7 +19,7 @@
           <td><%= teacher.name %></td>
           <td><%= teacher.phone_number %></td>
           <td><%= teacher.email %></td>
-          <td>
+          <td class="col-2">
             <%= link_to t('actions.show'), teacher, class: "btn btn-sm btn-secondary" %>
             <%= link_to t('actions.delete'), teacher, data: { turbo_method: :delete, turbo_confirm: t('actions.confirm') }, class: 'btn btn-danger btn-sm' %>
           </td>
