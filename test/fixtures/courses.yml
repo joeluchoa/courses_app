@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  code: MyString
+  address: MyString
   description: MyText
 
 two:
   name: MyString
-  code: MyString
+  address: MyString
   description: MyText
