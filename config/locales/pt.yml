@@ -288,6 +288,7 @@ pt:
     students: "Alunos"
     teachers: "Instrutores"
     courses: "Cursos"
+    attendance: "Presença Manual"
     users: "Usuários"
     logout: "Sair"
     login: "Entrar"

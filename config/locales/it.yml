@@ -292,6 +292,7 @@ it:
     students: "Studenti"
     teachers: "Istruttori"
     courses: "Corsi"
+    attendance: "Presenze Manuali"
     users: "Utenti"
     logout: "Esci"
     login: "Accedi"

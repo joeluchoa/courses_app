@@ -32,6 +32,7 @@
         </td>
         <td>
           <%= link_to t('actions.show'), course, class: "btn btn-sm btn-secondary" %>
+          <%= link_to t('activerecord.models.attendance'), attendance_table_course_path(course), class: "btn btn-sm btn-outline-primary" %>
           <%= link_to t('actions.delete'), course, data: { turbo_method: :delete, turbo_confirm: t('actions.confirm') }, class: 'btn btn-danger btn-sm' %>
         </td>
       </tr>
