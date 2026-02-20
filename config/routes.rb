@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get :attendance_table, on: :member
 
       resources :enrollments, only: [ :create, :destroy ]
+      resources :attendances
     end
 
     resources :students

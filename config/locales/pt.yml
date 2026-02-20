@@ -216,6 +216,19 @@ pt:
       failure: "Falha ao matricular aluno: %{error}"
     destroy:
       success: "Aluno desmatriculado com sucesso."
+  attendances:
+    index:
+      title: "Presenças Manuais: %{course}"
+      new_manual: "Adicionar Novo Registro"
+      no_records: "Nenhum registro de presença manual encontrado para este curso."
+    new:
+      title: "Nova Presença para %{course}"
+    show:
+      title: "Detalhes da Presença"
+    edit:
+      title: "Editando Presença para %{course}"
+    form:
+      select_student: "Selecione um aluno"
   students:
     index:
       title: "Alunos"

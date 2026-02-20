@@ -217,6 +217,19 @@ en:
       failure: "Failed to enroll student. %{error}"
     destroy:
       success: "Student was successfully unenrolled."
+  attendances:
+    index:
+      title: "Manual Attendance: %{course}"
+      new_manual: "Add New Record"
+      no_records: "No manual attendance records found for this course."
+    new:
+      title: "New Attendance for %{course}"
+    show:
+      title: "Attendance Details"
+    edit:
+      title: "Editing Attendance for %{course}"
+    form:
+      select_student: "Select a student"
   students:
     index:
       title: "Students"

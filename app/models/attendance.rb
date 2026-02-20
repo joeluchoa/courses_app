@@ -2,11 +2,13 @@ class Attendance < ApplicationRecord
   belongs_to :student
   belongs_to :course
 
+  attr_accessor :manual_entry
+
   validates :student_id, uniqueness: {
     scope: [ :course_id, :attended_on ],
     message: :already_registered
   }
-  validate :course_must_be_in_progress, :must_be_valid_class_day_and_time, on: :create
+  validate :course_must_be_in_progress, :must_be_valid_class_day_and_time, on: :create, unless: :manual_entry
 
   private
 

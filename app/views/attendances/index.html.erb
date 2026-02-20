@@ -1,0 +1,40 @@
+<div class="dashboard-header">
+  <h1><%= t('attendances.index.title', course: @course.name) %></h1>
+  <div class="quick-actions">
+    <%= link_to t('attendances.index.new_manual'), new_course_attendance_path(@course), class: "btn btn-primary" %>
+    <%= link_to t('actions.back'), attendance_table_course_path(@course), class: "btn btn-secondary" %>
+  </div>
+</div>
+
+<div class="table-container shadow-sm p-3 mb-5 bg-white rounded">
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th><%= Student.model_name.human %></th>
+        <th><%= Attendance.human_attribute_name(:attended_on) %></th>
+        <th class="text-end"><%= t('actions.title') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attendances.each do |attendance| %>
+        <tr>
+          <td><%= attendance.student.full_name %></td>
+          <td><%= l(attendance.attended_on, format: :long) %></td>
+          <td class="text-end">
+            <div class="btn-group btn-group-sm">
+              <%= link_to t('actions.edit'), edit_course_attendance_path(@course, attendance), class: "btn btn-outline-primary" %>
+              <%= button_to t('actions.delete'), [@course, attendance], method: :delete, data: { confirm: t('actions.confirm') }, class: "btn btn-outline-danger" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      <% if @attendances.empty? %>
+        <tr>
+          <td colspan="3" class="text-center text-muted py-4">
+            <%= t('attendances.index.no_records') %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

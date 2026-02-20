@@ -51,13 +51,16 @@
   .status-na { color: #999; }
 </style>
 
-<h1>Attendance for <%= @course.name %></h1>
+<div class="d-flex justify-content-between align-items-center">
+  <h1>Attendance for <%= @course.name %></h1>
+  <%= link_to t('attendances.index.title', course: ''), course_attendances_path(@course), class: 'btn btn-outline-primary' %>
+</div>
 
 <% if @students.empty? || @class_days.empty? %>
   <p>There are no students enrolled or no scheduled class days to display for this course.</p>
 <% else %>
   <%# Wrap the table in our scrollable container %>
-  <div class="table-container">
+  <div class="table-container shadow-sm p-3 mb-4 bg-white rounded">
     <table class="attendance-table">
       <thead class="font-monospace">
         <tr>
@@ -65,7 +68,7 @@
           <th class="">#</th>
           <% @class_days.each do |day| %>
             <th class="rotated-header">
-              <div><%= day.strftime('%b %d') %></div>
+              <div><%= l(day, format: :short) %></div>
             </th>
           <% end %>
         </tr>
@@ -73,17 +76,18 @@
       <tbody>
         <% @students.each do |student| %>
           <tr>
-            <td class="student-name"><%= student.full_name %></td>
+            <td class="student-name"><%= link_to student.full_name, student_path(student) %></td>
             <td class=""><%= @attendance_counts[student.id] || 0 %></td>
             <% @class_days.each do |day| %>
+              <% date_str = day.strftime("%Y-%m-%d") %>
+              <% attendance = @course.attendances.find_by(student_id: student.id, attended_on: day) %>
               <td>
-                <% status = @attendance_data[[student.id, day.strftime("%Y-%m-%d")]] %>
-                <% if status == true %>
-                  <span class="status-present">✓</span>
-                <% elsif day > Time.now %>
+                <% if attendance %>
+                  <%= button_to "✓", course_attendance_path(@course, attendance), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { confirm: t('actions.confirm') } %>
+                <% elsif day > Date.today %>
                   <span class="status-na">-</span>
                 <% else %>
-                  <span class="status-absent">✗</span>
+                  <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none" %>
                 <% end %>
               </td>
             <% end %>
@@ -95,4 +99,7 @@
 <% end %>
 
 <br>
-<%= link_to 'Back to Course', course_path(@course), class: 'btn btn-secondary' %>
+<div class="d-flex gap-2">
+  <%= link_to t('actions.back'), course_path(@course), class: 'btn btn-secondary' %>
+  <%= link_to t('attendances.index.new_manual'), new_course_attendance_path(@course), class: "btn btn-primary" %>
+</div>

@@ -220,6 +220,19 @@ it:
       failure: "Impossibile iscrivere studente: %{error}"
     destroy:
       success: "Studente disiscritto con successo."
+  attendances:
+    index:
+      title: "Presenze Manuali: %{course}"
+      new_manual: "Aggiungi Nuovo Record"
+      no_records: "Nessun registro di presenza manuale trovato per questo corso."
+    new:
+      title: "Nuova Presenza per %{course}"
+    show:
+      title: "Dettagli Presenza"
+    edit:
+      title: "Modifica Presenza per %{course}"
+    form:
+      select_student: "Seleziona uno studente"
   students:
     index:
       title: "Studenti"

@@ -1,0 +1,19 @@
+<div class="dashboard-header">
+  <h1><%= t('attendances.show.title') %></h1>
+  <div class="quick-actions">
+    <%= link_to t('actions.edit'), edit_course_attendance_path(@course, @attendance), class: "btn btn-primary" %>
+    <%= link_to t('actions.back'), course_attendances_path(@course), class: "btn btn-secondary" %>
+  </div>
+</div>
+
+<div class="card shadow-sm p-4 mt-4 bg-white rounded">
+  <p>
+    <strong><%= Student.model_name.human %>:</strong>
+    <%= @attendance.student.full_name %>
+  </p>
+
+  <p>
+    <strong><%= Attendance.human_attribute_name(:attended_on) %>:</strong>
+    <%= l(@attendance.attended_on, format: :long) %>
+  </p>
+</div>
