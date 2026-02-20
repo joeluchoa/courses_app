@@ -8,15 +8,17 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     sign_in @user, scope: :user
   end
 
-  test "should get index and show activity links" do
+  test "should get index and show activity links in all locales" do
     create(:attendance) if Attendance.count == 0
     attendance = Attendance.first
     
-    get dashboard_url(locale: :en)
-    assert_response :success
-    assert_select "div.activity-list" do
-      assert_select "a[href=?]", student_path(attendance.student, locale: :en), text: attendance.student.full_name
-      assert_select "a[href=?]", course_path(attendance.course, locale: :en), text: attendance.course.name
+    [:en, :it, :pt].each do |locale|
+      get dashboard_url(locale: locale)
+      assert_response :success, "Failed for locale #{locale}"
+      assert_select "div.activity-list", 1, "Activity list missing for #{locale}" do
+        assert_select "a[href=?]", student_path(attendance.student, locale: locale), text: attendance.student.full_name
+        assert_select "a[href=?]", course_path(attendance.course, locale: locale), text: attendance.course.name
+      end
     end
   end
 end
