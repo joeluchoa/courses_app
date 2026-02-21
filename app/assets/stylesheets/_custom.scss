@@ -3,9 +3,9 @@
   student show page, resizing it to a more appropriate size.
 */
 .student-show-qr-code {
-  width: 100px; /* Let's make it a bit larger than the one on the badge */
-  height: 100px;
-  margin-bottom: 1rem; /* Add some space below it */
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1rem;
   border: 1px solid #dee2e6;
   padding: 5px;
   border-radius: 4px;
@@ -21,7 +21,8 @@
 }
 
 .nav-profile-link {
-  transition: background-color 0.2s ease-in-out; /* Smooth transition for the hover effect */
+  transition: background-color 0.2s ease-in-out;
+  /* Smooth transition for the hover effect */
 }
 
 .nav-profile-link:hover,
@@ -29,7 +30,8 @@
   /* On hover, change the background color to a subtle grey.
      Using rgba allows the dark theme of the navbar to show through slightly. */
   background-color: rgba(255, 255, 255, 0.1);
-  color: white; /* Ensure text stays white on hover */
+  color: white;
+  /* Ensure text stays white on hover */
 }
 
 /* Make the strong tag inside the link a slightly brighter white */
@@ -45,7 +47,8 @@
   height: 250px;
   background-color: #f8f9fa;
   border: 3px solid #dee2e6;
-  border-radius: 50%; /* Makes it a circle */
+  border-radius: 50%;
+  /* Makes it a circle */
   display: flex;
   justify-content: center;
   align-items: center;
