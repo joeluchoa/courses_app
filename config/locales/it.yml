@@ -68,15 +68,6 @@ it:
       long: "%d %B %Y %H:%M"
     am: "am"
     pm: "pm"
-  actions:
-    title: 'Azioni'
-    new: 'Nuovo'
-    save: 'Salva'
-    show: 'Mostra'
-    edit: 'Modifica'
-    update: 'Aggiorna'
-    delete: 'Elimina'
-    back: 'Indietro'
   dashboard:
     title: 'Panoramica'
     total_students: 'Studenti Totali'
@@ -262,12 +253,6 @@ it:
       enrollments: "Iscrizioni"
       add_enrollment: "Aggiungi Iscrizione"
       remove_enrollment: "Rimuovi Iscrizione"
-    form:
-      personal_info: "Informazioni Personali"
-      contact_info: "Informazioni di Contatto"
-      enrollments: "Iscrizioni"
-      add_enrollment: "Aggiungi Iscrizione"
-      remove_enrollment: "Rimuovi Iscrizione"
       select_course: "Seleziona un corso"
       upload_photo: "Carica una nuova foto"
       take_photo: "Scatta una nuova foto"
@@ -321,6 +306,7 @@ it:
     confirm: 'Sei sicuro?'
     unenroll: 'Disiscrivi'
     enroll: 'Iscrivi Studente'
+    search: 'Cerca'
   errors:
     header: "%{count} errori hanno impedito di salvare questo %{model}:"
   footer:

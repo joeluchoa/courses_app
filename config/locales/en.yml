@@ -68,15 +68,6 @@ en:
       long: "%B %d, %Y %H:%M"
     am: "am"
     pm: "pm"
-  actions:
-    title: 'Actions'
-    new: 'New'
-    save: 'Save'
-    show: 'Show'
-    edit: 'Edit'
-    update: 'Update'
-    delete: 'Delete'
-    back: 'Back'
   dashboard:
     title: 'Overview'
     total_students: 'Total Students'
@@ -137,7 +128,6 @@ en:
       user:
         name: "Name"
         email: "Email"
-        role: "Role"
         role: "Role"
         blocked_at: "Blocked at"
     errors:
@@ -259,12 +249,6 @@ en:
       enrollments: "Enrollments"
       add_enrollment: "Add Enrollment"
       remove_enrollment: "Remove Enrollment"
-    form:
-      personal_info: "Personal Information"
-      contact_info: "Contact Information"
-      enrollments: "Enrollments"
-      add_enrollment: "Add Enrollment"
-      remove_enrollment: "Remove Enrollment"
       select_course: "Select a course"
       upload_photo: "Upload a new photo"
       take_photo: "Take a new photo"
@@ -318,6 +302,7 @@ en:
     confirm: 'Are you sure?'
     unenroll: 'Unenroll'
     enroll: 'Enroll Student'
+    search: 'Search'
   errors:
     header: "%{count} error(s) prohibited this %{model} from being saved:"
   footer:

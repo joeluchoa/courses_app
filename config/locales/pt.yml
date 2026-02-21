@@ -68,15 +68,6 @@ pt:
       long: "%d de %B de %Y, %H:%M"
     am: "am"
     pm: "pm"
-  actions:
-    title: 'Ações'
-    new: 'Novo'
-    save: 'Salvar'
-    show: 'Mostrar'
-    edit: 'Editar'
-    update: 'Atualizar'
-    delete: 'Excluir'
-    back: 'Voltar'
   dashboard:
     title: 'Visão Geral'
     total_students: 'Total de Alunos'
@@ -258,12 +249,6 @@ pt:
       enrollments: "Matrículas"
       add_enrollment: "Adicionar Matrícula"
       remove_enrollment: "Remover Matrícula"
-    form:
-      personal_info: "Informações Pessoais"
-      contact_info: "Informações de Contato"
-      enrollments: "Matrículas"
-      add_enrollment: "Adicionar Matrícula"
-      remove_enrollment: "Remover Matrícula"
       select_course: "Selecione um curso"
       upload_photo: "Carregar nova foto"
       take_photo: "Tirar nova foto"
@@ -317,6 +302,7 @@ pt:
     confirm: 'Tem certeza?'
     unenroll: 'Desmatricular'
     enroll: 'Matricular Aluno'
+    search: 'Buscar'
   errors:
     header: "%{count} erro(s) impediram que este %{model} fosse salvo:"
   footer:
