@@ -183,6 +183,8 @@ pt:
       registering: "Registrando..."
       scanned_id: "ID do aluno escaneado: %{id}."
       unexpected_error: "Ocorreu um erro inesperado."
+    attendance_table:
+      no_data: "Não há alunos matriculados ou não há dias de aula agendados para este curso."
   scanner:
     index:
       title: "Escanear Crachá do Aluno"

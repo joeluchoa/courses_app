@@ -183,6 +183,8 @@ en:
       registering: "Registering..."
       scanned_id: "Scanned student ID: %{id}."
       unexpected_error: "An unexpected error occurred."
+    attendance_table:
+      no_data: "There are no students enrolled or no scheduled class days to display for this course."
   scanner:
     index:
       title: "Scan Student Badge"

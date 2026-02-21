@@ -187,6 +187,8 @@ it:
       registering: "Registrazione..."
       scanned_id: "ID studente scansionato: %{id}."
       unexpected_error: "Si è verificato un errore imprevisto."
+    attendance_table:
+      no_data: "Non ci sono studenti iscritti o non ci sono giorni di lezione programmati per questo corso."
   scanner:
     index:
       title: "Scansiona Badge Studente"

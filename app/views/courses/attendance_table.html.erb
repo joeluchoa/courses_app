@@ -52,19 +52,19 @@
 </style>
 
 <div class="d-flex justify-content-between align-items-center">
-  <h1>Attendance for <%= @course.name %></h1>
-  <%= link_to t('attendances.index.title', course: ''), course_attendances_path(@course), class: 'btn btn-outline-primary' %>
+  <h1><%= t('attendances.index.course_title', course: @course.name) %></h1>
+  <%= link_to t('attendances.index.global_title'), course_attendances_path(@course), class: 'btn btn-outline-primary' %>
 </div>
 
 <% if @students.empty? || @class_days.empty? %>
-  <p>There are no students enrolled or no scheduled class days to display for this course.</p>
+  <p><%= t('courses.attendance_table.no_data') %></p>
 <% else %>
   <%# Wrap the table in our scrollable container %>
   <div class="table-container shadow-sm p-3 mb-4 bg-white rounded">
     <table class="attendance-table">
       <thead class="font-monospace">
         <tr>
-          <th class="student-name">Student</th>
+          <th class="student-name"><%= Student.model_name.human %></th>
           <th class="">#</th>
           <% @class_days.each do |day| %>
             <th class="rotated-header">
