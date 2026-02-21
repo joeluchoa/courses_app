@@ -24,9 +24,11 @@
         <li>
           <%= link_to t('navbar.courses'), courses_path, class: "nav-link px-2 text-white" %>
         </li>
+        <!--
         <li>
           <%= link_to t('navbar.attendance'), attendances_path, class: "nav-link px-2 text-white" %>
         </li>
+        -->
         <% if user_signed_in? and current_user.administrator? %>
           <li>
             <%= link_to t('navbar.users'), admin_users_path, class: "nav-link px-2 text-white" %>
