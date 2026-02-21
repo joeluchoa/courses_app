@@ -7,7 +7,8 @@
   svg = qr_code.as_svg(
     module_size: 4,
     use_path: true,
-    viewbox: true
+    viewbox: true,
+    offset: 4
   )
 %>
 
@@ -16,4 +17,4 @@
   to correctly calculate scaling. We set these to a safe 200px, but use 100% 
   style to stay responsive to our container.
 %>
-<%= svg.gsub('<svg ', '<svg width="200" height="200" preserveAspectRatio="xMidYMid meet" style="display: block; width: 100%; height: 100%;" ').html_safe %>
+<%= svg.gsub('<svg ', '<svg width="200" height="200" preserveAspectRatio="xMidYMid meet" style="display: block; width: 95%; height: 95%;" ').html_safe %>
