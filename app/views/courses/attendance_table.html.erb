@@ -56,6 +56,11 @@
   <%= link_to t('attendances.index.global_title'), course_attendances_path(@course), class: 'btn btn-outline-primary' %>
 </div>
 
+<p class="text-muted small">
+  <i class="fas fa-info-circle me-1"></i>
+  <%= t('courses.attendance_table.legend') %>
+</p>
+
 <% if @students.empty? || @class_days.empty? %>
   <p><%= t('courses.attendance_table.no_data') %></p>
 <% else %>

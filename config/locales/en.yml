@@ -187,6 +187,7 @@ en:
       no_data: "There are no students enrolled or no scheduled class days to display for this course."
       mark_present_confirm: "Are you sure you want to mark this student as present?"
       remove_present_confirm: "Are you sure you want to remove this attendance record?"
+      legend: "Note: Click on ✗ to mark a student as present or ✓ to remove an attendance record."
   scanner:
     index:
       title: "Scan Student Badge"
