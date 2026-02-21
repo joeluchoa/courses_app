@@ -83,7 +83,7 @@
               <% attendance = @course.attendances.find_by(student_id: student.id, attended_on: day) %>
               <td>
                 <% if attendance %>
-                  <%= button_to "✓", course_attendance_path(@course, attendance), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { confirm: t('actions.confirm') } %>
+                  <%= button_to "✓", course_attendance_path(@course, attendance), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
                 <% elsif day > Date.today %>
                   <span class="status-na">-</span>
                 <% else %>

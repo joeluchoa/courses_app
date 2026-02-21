@@ -52,7 +52,7 @@
               <% end %>
             </li>
             <li>
-              <%= button_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger", data: { confirm: t('actions.confirm') } %>
+              <%= button_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "nav-link px-2 link-danger", data: { turbo_confirm: t('actions.confirm') } %>
             </li>
           <% end %>
         </ul>

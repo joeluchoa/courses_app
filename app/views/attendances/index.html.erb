@@ -61,7 +61,7 @@
           <td class="text-end">
             <div class="btn-group btn-group-sm">
               <%= link_to t('actions.edit'), edit_course_attendance_path(attendance.course, attendance), class: "btn btn-outline-primary" %>
-              <%= button_to t('actions.delete'), [attendance.course, attendance], method: :delete, data: { confirm: t('actions.confirm') }, class: "btn btn-outline-danger" %>
+              <%= button_to t('actions.delete'), [attendance.course, attendance], method: :delete, data: { turbo_confirm: t('actions.confirm') }, class: "btn btn-outline-danger" %>
             </div>
           </td>
         </tr>
