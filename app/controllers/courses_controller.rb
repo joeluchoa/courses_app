@@ -108,19 +108,15 @@ class CoursesController < ApplicationController
         end
       end
     end
-    logger.info "Attended days: #{@class_days}"
 
-    # 2. Fetch all attendance data for this course in a single, efficient query.
-    # We transform it into a Hash for instant lookups in the view.
-    # The structure will be: { [student_id, date] => present_status }
-    # Example: { [1, '2025-08-20'] => true, [2, '2025-08-20'] => false }
-    @attendance_data = @course.attendances
-      .pluck(:student_id, :attended_on)
-      .to_h { |student_id, date, present| [ [ student_id, date.strftime("%Y-%m-%d") ], true ] }
-    logger.info "Attendance data: #{@attendance_data}"
+    # 2. Fetch all attendance data for this course efficiently.
+    # We build a Hash mapping [student_id, date_string] to the actual attendance object.
+    @attendance_map = @course.attendances.each_with_object({}) do |attendance, map|
+      date_key = attendance.attended_on.to_date.to_s
+      map[[ attendance.student_id, date_key ]] = attendance
+    end
 
     @attendance_counts = @course.attendances.group(:student_id).count
-    logger.info "Counts: #{@attendance_counts}"
   end
 
   private

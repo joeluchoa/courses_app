@@ -79,15 +79,15 @@
             <td class="student-name"><%= link_to student.full_name, student_path(student) %></td>
             <td class=""><%= @attendance_counts[student.id] || 0 %></td>
             <% @class_days.each do |day| %>
-              <% date_str = day.strftime("%Y-%m-%d") %>
-              <% attendance = @course.attendances.find_by(student_id: student.id, attended_on: day) %>
+              <% date_str = day.to_s %>
+              <% attendance = @attendance_map[[ student.id, date_str ]] %>
               <td>
                 <% if attendance %>
-                  <%= button_to "✓", course_attendance_path(@course, attendance), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
+                  <%= button_to "✓", course_attendance_path(@course, attendance, origin: 'table'), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
                 <% elsif day > Date.today %>
                   <span class="status-na">-</span>
                 <% else %>
-                  <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none" %>
+                  <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }, origin: 'table'), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
                 <% end %>
               </td>
             <% end %>

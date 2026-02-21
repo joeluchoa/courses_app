@@ -53,7 +53,8 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to course_attendances_path(@course), notice: t("flash.actions.create.notice", resource_name: Attendance.model_name.human) }
+        path = params[:origin] == 'table' ? attendance_table_course_path(@course) : course_attendances_path(@course)
+        format.html { redirect_to path, notice: t("flash.actions.create.notice", resource_name: Attendance.model_name.human) }
         format.json { render :show, status: :created, location: [@course, @attendance] }
       else
         @students = @course.students.order(:last_name, :first_name)
@@ -85,7 +86,8 @@ class AttendancesController < ApplicationController
     @attendance.destroy!
 
     respond_to do |format|
-      format.html { redirect_to course_attendances_path(@course), status: :see_other, notice: t("flash.actions.destroy.notice", resource_name: Attendance.model_name.human) }
+      path = params[:origin] == 'table' ? attendance_table_course_path(@course) : course_attendances_path(@course)
+      format.html { redirect_to path, status: :see_other, notice: t("flash.actions.destroy.notice", resource_name: Attendance.model_name.human) }
       format.json { head :no_content }
     end
   end
