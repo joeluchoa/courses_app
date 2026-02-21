@@ -106,6 +106,7 @@ enrollments.each do |enrollment|
           student: student,
           course: course,
           attended_on: date.to_datetime.change(hour: 18), # Set time to match schedule
+          created_at: date.to_datetime.change(hour: 18), # Set created_at to match for realism
           manual: rand < 0.3 # 30% are manual entries
         )
         attendance_count += 1

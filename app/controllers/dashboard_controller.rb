@@ -7,6 +7,6 @@ class DashboardController < ApplicationController
 
     # Recent Activity Feed
     # Eager load student and course to avoid N+1 queries in the view
-    @recent_attendances = Attendance.includes(:student, :course).order(created_at: :desc).limit(5)
+    @recent_attendances = Attendance.includes(:student, :course).order(attended_on: :desc).limit(20)
   end
 end

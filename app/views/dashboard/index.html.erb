@@ -34,7 +34,7 @@
           <%= t('dashboard.activities.attendance_html', 
                 student: link_to(attendance.student.full_name, student_path(attendance.student)), 
                 course: link_to(attendance.course.name, course_path(attendance.course)), 
-                date: l(attendance.created_at, format: :short)) %>
+                date: l(attendance.attended_on, format: :short)) %>
         </li>
       <% end %>
       <% if @recent_attendances.empty? %>
