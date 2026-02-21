@@ -33,7 +33,7 @@
                 <%= link_to student.full_name, student_path(student) %>
                 <%# Find the specific enrollment record for this student/course combo %>
                 <% enrollment = @course.enrollments.find_by(student_id: student.id) %>
-                <%= button_to t('actions.unenroll'), course_enrollment_path(@course, enrollment), method: :delete, class: "btn btn-xs btn-outline-danger" %>
+                <%= button_to t('actions.unenroll'), course_enrollment_path(@course, enrollment), method: :delete, class: "btn btn-xs btn-outline-danger", data: { confirm: t('actions.confirm') } %>
               </li>
             <% end %>
           </ul>
