@@ -4,6 +4,7 @@
 
   qr_code = RQRCode::QRCode.new(qr_code_data)
   svg = qr_code.as_svg(
+    module_size: 1,
     standalone: true,
     viewbox: true
   )
