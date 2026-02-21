@@ -185,6 +185,8 @@ pt:
       unexpected_error: "Ocorreu um erro inesperado."
     attendance_table:
       no_data: "Não há alunos matriculados ou não há dias de aula agendados para este curso."
+      mark_present_confirm: "Tem certeza que deseja marcar a presença deste aluno?"
+      remove_present_confirm: "Tem certeza que deseja remover este registro de presença?"
   scanner:
     index:
       title: "Escanear Crachá do Aluno"

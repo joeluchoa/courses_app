@@ -189,6 +189,8 @@ it:
       unexpected_error: "Si è verificato un errore imprevisto."
     attendance_table:
       no_data: "Non ci sono studenti iscritti o non ci sono giorni di lezione programmati per questo corso."
+      mark_present_confirm: "Sei sicuro di voler segnare la presenza di questo studente?"
+      remove_present_confirm: "Sei sicuro di voler rimuovere questo registro di presenza?"
   scanner:
     index:
       title: "Scansiona Badge Studente"

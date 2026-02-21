@@ -83,11 +83,11 @@
               <% attendance = @attendance_map[[ student.id, date_str ]] %>
               <td>
                 <% if attendance %>
-                  <%= button_to "✓", course_attendance_path(@course, attendance, origin: 'table'), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
+                  <%= button_to "✓", course_attendance_path(@course, attendance, origin: 'table'), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.remove_present_confirm') } %>
                 <% elsif day > Date.today %>
                   <span class="status-na">-</span>
                 <% else %>
-                  <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }, origin: 'table'), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none", data: { turbo_confirm: t('actions.confirm') } %>
+                  <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }, origin: 'table'), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.mark_present_confirm') } %>
                 <% end %>
               </td>
             <% end %>
