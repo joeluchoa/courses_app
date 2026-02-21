@@ -56,7 +56,6 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "guard-rspec", require: false
-  gem "rspec-rails"
 end
 
 group :test do
@@ -86,5 +85,4 @@ gem "dockerfile-rails", ">= 1.7", group: :development
 
 gem "aws-sdk-s3", "~> 1.196", require: false
 
-gem "wicked_pdf"
-gem "wkhtmltopdf-binary" # This is the binary executable Wicked PDF uses
+

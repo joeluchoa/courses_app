@@ -4,6 +4,9 @@
     <title>Student Badge - <%= @student.first_name %> <%= @student.last_name %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <!-- html2pdf.js for client-side PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
       /* Page layout for printing */
       @media print {

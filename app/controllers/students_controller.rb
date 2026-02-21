@@ -66,27 +66,6 @@ class StudentsController < ApplicationController
       format.html do
         render layout: "badge"
       end
-      format.pdf do
-        render pdf: "badge-#{@student.full_name.parameterize}-#{@course.name.parameterize}",
-          layout: "badge",
-          template: "students/badge",
-          handlers: [ :erb ],
-          formats: [ :html ],
-          disposition: "attachment",
-
-          page_size: nil,
-          orientation: nil,
-          page_height: "132mm",
-          page_width: "206mm",
-          dpi: 300,
-          image_quality: 100,
-          margin: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0
-          }
-      end
     end
   end
 

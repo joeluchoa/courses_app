@@ -74,3 +74,27 @@
     </table>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('download') === 'true') {
+      const element = document.querySelector('.badge-card');
+      const filename = `badge-<%= @student.full_name.parameterize %>-<%= @course.name.parameterize %>.pdf`;
+      
+      const opt = {
+        margin:       0,
+        filename:     filename,
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { scale: 3, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: [206, 132], orientation: 'landscape' }
+      };
+
+      // New Promise-based usage:
+      html2pdf().set(opt).from(element).save().then(() => {
+        // Optional: close the tab after download if it was opened just for this
+        // window.close();
+      });
+    }
+  });
+</script>

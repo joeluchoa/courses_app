@@ -30,7 +30,8 @@
             <td>
               <% unless course.finished? %>
                 <%= link_to t('students.show.view_badge'), student_badge_path(@student, course), class: "btn btn-sm btn-outline-primary", target: "_blank" %>
-                <%= link_to "PDF", student_badge_path(@student, course, format: :pdf), download: "badge-#{@student.full_name.parameterize}-#{course.name.parameterize}.pdf", class: "btn btn-sm btn-primary" %>
+                <%= link_to "PDF", student_badge_path(@student, course, download: true), target: "_blank", class: "btn btn-sm btn-primary" %>
+<%# Previous server-side PDF link: link_to "PDF", student_badge_path(@student, course, format: :pdf), download: "badge-#{@student.full_name.parameterize}-#{course.name.parameterize}.pdf", class: "btn btn-sm btn-primary" %>
               <% else %>
                 <%= t('students.show.not_available') %>
               <% end %>
