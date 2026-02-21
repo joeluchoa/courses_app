@@ -1,15 +1,20 @@
 <%
-  # TODO: Move the qr_code_data generation to a helper library.
+  # Generate unique identifier for the QR code
   qr_code_data = student.id.to_s + '-' + course.id.to_s
-
   qr_code = RQRCode::QRCode.new(qr_code_data)
+  
   svg = qr_code.as_svg(
-    module_size: 1,
-    standalone: true,
+    use_path: true,
     viewbox: true
   )
 %>
 
 <div class="qr-code-container">
-  <%= svg.html_safe %>
+  <% 
+    # Ensure SVG has relative dimensions and proper aspect ratio handling for canvas rendering
+    final_svg = svg.gsub(/width="[^"]+"/, 'width="100%"')
+                   .gsub(/height="[^"]+"/, 'height="100%"')
+                   .gsub('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ')
+  %>
+  <%= final_svg.html_safe %>
 </div>
