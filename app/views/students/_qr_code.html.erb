@@ -3,18 +3,17 @@
   qr_code_data = student.id.to_s + '-' + course.id.to_s
   qr_code = RQRCode::QRCode.new(qr_code_data)
   
+  # Module size 4 ensures a reasonable "native" coordinate space
   svg = qr_code.as_svg(
+    module_size: 4,
     use_path: true,
     viewbox: true
   )
 %>
 
-<div class="qr-code-container">
-  <% 
-    # Ensure SVG has relative dimensions and proper aspect ratio handling for canvas rendering
-    final_svg = svg.gsub(/width="[^"]+"/, 'width="100%"')
-                   .gsub(/height="[^"]+"/, 'height="100%"')
-                   .gsub('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ')
-  %>
-  <%= final_svg.html_safe %>
-</div>
+<%# 
+  CRITICAL: html2canvas needs explicit pixel dimensions on the SVG element 
+  to correctly calculate scaling. We set these to a safe 200px, but use 100% 
+  style to stay responsive to our container.
+%>
+<%= svg.gsub('<svg ', '<svg width="200" height="200" preserveAspectRatio="xMidYMid meet" style="display: block; width: 100%; height: 100%;" ').html_safe %>
