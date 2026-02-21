@@ -1,62 +1,69 @@
 <div class="badge-container">
   <div class="badge-card">
-    <table>
+    <table class="full-width-table">
       <tr>
-        <td colspan=2>
+        <td colspan="2">
           <div class="badge-header">
-            <div class="row">
-              <div class="badge-school-name">
-                <strong>Chiesa Evangelica Arca Missionaria</strong>
-                <span> - Via Il Prato, 40R, 50123 Firenze FI, Italia</span>
-              </div>
+            <div class="badge-school-name">
+              <strong>Chiesa Evangelica Arca Missionaria</strong>
+              <span> - Via Il Prato, 40R, 50123 Firenze FI, Italia</span>
             </div>
           </div>
         </td>
       </tr>
 
-      <tr style="height: 104mm;">
-        <td>
+      <tr style="height: 100mm;">
+        <td class="align-top" style="width: 80mm;">
           <div class="qr-code-area">
             <%= render 'students/qr_code', student: @student, course: @course %>
           </div>
         </td>
-        <td>
+        <td class="align-top">
           <div class="student-details">
             <div class="student-name">
               <span><%= @student.first_name %></span>
               <strong><%= truncate(@student.last_name, length: 20) %></strong>
             </div>
 
-            <br/>
-            <span class="field-label"><%= t('activerecord.models.course') %></span>
-            <strong class="field-value"><%= @course.name %></strong>
-            <br/>
-            <span class="field-label"><%= t('activerecord.attributes.course.teacher') %></span>
-            <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
-            <br/>
-            <span class="field-label"><%= t('activerecord.attributes.course.start_date') %></span>
-            <strong class="field-value"><%= @course.start_date %></strong>
-            <span class="field-label"><%= t('activerecord.attributes.course.end_date') %></span>
-            <strong class="field-value"><%= @course.end_date %></strong>
-            <br/>
-            <% @course.weekly_schedule.each_with_index do |schedule, idx| %>
-              <span class="field-label">
-                <%= t("weekdays.#{schedule["day"].downcase}") %>
-              </span>
-              <strong class="field-value">
-                <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
-              </strong>
-              <% if idx.odd? %>
-                <br/>
+            <p>
+              <span class="field-label"><%= t('activerecord.models.course') %>:</span>
+              <strong class="field-value"><%= @course.name %></strong>
+            </p>
+            
+            <p>
+              <span class="field-label"><%= t('activerecord.attributes.course.teacher') %>:</span>
+              <strong class="field-value"><%= @course.teacher.name || "-" %></strong>
+            </p>
+
+            <p>
+              <span class="field-label"><%= t('activerecord.attributes.course.start_date') %>:</span>
+              <strong class="field-value"><%= @course.start_date %></strong>
+              <span class="field-label" style="margin-left: 10px;"><%= t('activerecord.attributes.course.end_date') %>:</span>
+              <strong class="field-value"><%= @course.end_date %></strong>
+            </p>
+
+            <div style="margin-top: 15px;">
+              <% @course.weekly_schedule.each do |schedule| %>
+                <div style="margin-bottom: 5px;">
+                  <span class="field-label">
+                    <%= t("weekdays.#{schedule["day"].downcase}") %>:
+                  </span>
+                  <strong class="field-value">
+                    <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
+                  </strong>
+                </div>
               <% end %>
-            <% end %>
-            <span class="field-label"><%= t('activerecord.attributes.course.address') %></span>
-            <strong class="field-value"><%= @course.address %></strong>
+            </div>
+
+            <p style="margin-top: 15px;">
+              <span class="field-label"><%= t('activerecord.attributes.course.address') %>:</span>
+              <strong class="field-value"><%= @course.address %></strong>
+            </p>
           </div>
         </td>
       </tr>
       <tr>
-        <td colspan=2>
+        <td colspan="2">
           <div class="badge-footer">
             <div class="issuing-info">
               <%= t('badge.issued') %>: <%= Time.now.strftime("%m/%d/%Y") %>

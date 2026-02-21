@@ -78,6 +78,8 @@ class StudentsController < ApplicationController
           orientation: nil,
           page_height: "132mm",
           page_width: "206mm",
+          dpi: 300,
+          image_quality: 100,
           margin: {
             top: 0,
             bottom: 0,
