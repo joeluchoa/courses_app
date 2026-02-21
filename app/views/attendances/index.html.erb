@@ -53,7 +53,7 @@
           <td><%= l(attendance.attended_on, format: :long) %></td>
           <td>
             <% if attendance.manual? %>
-              <span class="badge bg-info text-dark"><%= t('attendances.types.manual') %></span>
+              <span class="badge bg-warning text-dark"><%= t('attendances.types.manual') %></span>
             <% else %>
               <span class="badge bg-success"><%= t('attendances.types.scanned') %></span>
             <% end %>
