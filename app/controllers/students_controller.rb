@@ -15,7 +15,12 @@ class StudentsController < ApplicationController
         @students = @students.inactive
       end
     end
+
+    if params[:query].present?
+      @students = @students.search_by_name(params[:query])
+    end
   end
+
 
 
   # GET /students/1 or /students/1.json

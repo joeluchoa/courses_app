@@ -242,6 +242,7 @@ it:
       title: "Studenti"
       show_active: "Mostra studenti attivi"
       show_inactive: "Mostra studenti inattivi"
+      search_placeholder: "Cerca per nome"
     show:
       title: "Dettagli Studente"
       enrolled_courses: "Corsi Iscritti"

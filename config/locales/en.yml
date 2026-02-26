@@ -238,6 +238,7 @@ en:
       title: "Students"
       show_active: "Show active students"
       show_inactive: "Show inactive students"
+      search_placeholder: "Search by name"
     show:
       title: "Student Details"
       enrolled_courses: "Enrolled Courses"

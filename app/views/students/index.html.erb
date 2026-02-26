@@ -6,7 +6,13 @@
 <div class="card mb-4">
   <div class="card-body">
     <%= form_with url: students_path, method: :get, class: "row g-3 align-items-center" do |f| %>
-      <div class="col-auto">
+      <div class="col-md-4">
+        <div class="input-group">
+          <%= f.text_field :query, value: params[:query], class: "form-control", placeholder: t('students.index.search_placeholder') %>
+          <%= f.submit t('actions.search'), class: "btn btn-primary" %>
+        </div>
+      </div>
+      <div class="col-md-auto">
         <div class="form-check form-check-inline">
           <%= f.check_box :status, { multiple: true, class: "form-check-input", checked: params[:status]&.include?("active"), onchange: "this.form.requestSubmit()" }, "active", nil %>
           <%= f.label :status_active, t('students.index.show_active'), class: "form-check-label" %>
@@ -16,7 +22,7 @@
           <%= f.label :status_inactive, t('students.index.show_inactive'), class: "form-check-label" %>
         </div>
       </div>
-      <div class="col-auto">
+      <div class="col-md-auto ms-auto">
         <%= link_to t('actions.clear'), students_path, class: "btn btn-outline-secondary btn-sm" %>
       </div>
     <% end %>

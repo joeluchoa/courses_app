@@ -238,6 +238,7 @@ pt:
       title: "Alunos"
       show_active: "Mostrar alunos ativos"
       show_inactive: "Mostrar alunos inativos"
+      search_placeholder: "Buscar por nome"
     show:
       title: "Detalhes do Aluno"
       enrolled_courses: "Cursos Matriculados"

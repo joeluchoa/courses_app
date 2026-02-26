@@ -12,6 +12,11 @@ class Student < ApplicationRecord
 
   scope :active, -> { where("EXISTS (SELECT 1 FROM enrollments JOIN courses ON enrollments.course_id = courses.id WHERE enrollments.student_id = students.id AND courses.end_date >= ?)", Time.zone.now) }
   scope :inactive, -> { where.not(id: active.select(:id)) }
+  scope :search_by_name, ->(query) {
+    if query.present?
+      where("first_name ILIKE :q OR last_name ILIKE :q", q: "%#{query}%")
+    end
+  }
 
   def active?
     courses.active.exists?

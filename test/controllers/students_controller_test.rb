@@ -38,6 +38,29 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", text: active_student.full_name, count: 0
   end
 
+  test "should search students by name" do
+    student1 = create(:student, first_name: "John", last_name: "Doe")
+    student2 = create(:student, first_name: "Jane", last_name: "Smith")
+
+    # Search by first name
+    get students_url(locale: :en, query: "John")
+    assert_response :success
+    assert_select "td", text: student1.full_name
+    assert_select "td", text: student2.full_name, count: 0
+
+    # Search by last name
+    get students_url(locale: :en, query: "Smith")
+    assert_response :success
+    assert_select "td", text: student2.full_name
+    assert_select "td", text: student1.full_name, count: 0
+
+    # Case insensitive search
+    get students_url(locale: :en, query: "john")
+    assert_response :success
+    assert_select "td", text: student1.full_name
+  end
+
+
 
   test "should get new" do
     get new_student_url(locale: :en)
