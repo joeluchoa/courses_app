@@ -44,7 +44,27 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to student_url(@student, locale: :en)
   end
 
+  test "should not create student with invalid data" do
+    assert_no_difference("Student.count") do
+      post students_url(locale: :en), params: { student: { first_name: "" } }
+    end
+    assert_response :unprocessable_entity
+  end
+
+  test "should not update student with invalid data" do
+    patch student_url(@student, locale: :en), params: { student: { first_name: "" } }
+    assert_response :unprocessable_entity
+  end
+
+  test "should get badge" do
+    course = create(:course)
+    @student.courses << course
+    get student_badge_url(@student, course_id: course.id, locale: :en)
+    assert_response :success
+  end
+
   test "should destroy student" do
+
     assert_difference("Student.count", -1) do
       delete student_url(@student, locale: :en)
     end

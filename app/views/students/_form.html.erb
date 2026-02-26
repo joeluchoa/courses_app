@@ -24,18 +24,20 @@
         <div class="col-md-6">
 
           <%# Current photo display %>
-          <% if student.photo.attached? %>
             <div class="mb-3 text-center">
-              <%= image_tag student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail rounded-circle" %>
+              <% if student.photo.attached? %>
+                <%= image_tag student.photo.variant(resize_to_fill: [250, 250]), class: "img-thumbnail", data: { camera_target: "preview" } %>
+              <% else %>
+                <img src="" class="img-thumbnail d-none" style="width: 250px; height: 250px; object-fit: cover;" data-camera-target="preview">
+              <% end %>
             </div>
-          <% end %>
         </div>
 
         <%# --- COLUMN 2: Camera Capture --- %>
         <div class="col-md-6 border-start-md">
           <%# The file input field (with its Stimulus target) %>
           <h6><%= t('students.form.upload_photo') %></h6>
-          <%= form.file_field :photo, class: "form-control", accept: "image/png,image/jpeg,image/gif", data: { camera_target: "photoInput" } %>
+          <%= form.file_field :photo, class: "form-control", accept: "image/png,image/jpeg,image/gif", data: { camera_target: "photoInput", action: "change->camera#previewFile" } %>
 
           <hr class="mt-1 mb-3">
           <h6><%= t('students.form.take_photo') %></h6>
@@ -104,25 +106,7 @@
     <%= form.number_field :total_paid, step: 1.00, class: "form-control" %>
   </div>
 
-    <div class="mb-3">
-      <h3><%= Course.model_name.human(count: 2) %></h3>
-    <%= form.fields_for :enrollments do |enrollment_form| %>
-      <div class="form-check">
-        <%= enrollment_form.hidden_field :course_id %>
-        <%= enrollment_form.check_box :_destroy, { class: 'form-check-input' }, '0', '1' %>
-        <%= enrollment_form.label :course_id, enrollment_form.object.course.name, class: 'form-check-label' %>
-      </div>
-    <% end %>
 
-    <% Course.all.each do |course| %>
-      <% unless course.finished? %>
-        <div class="form-check">
-          <input type="checkbox" name="student[enrollments_attributes][][course_id]" value="<%= course.id %>" id="student_enrollments_attributes__course_id_<%= course.id %>" class="form-check-input">
-          <label class="form-check-label" for="student_enrollments_attributes__course_id_<%= course.id %>"><%= "#{course.name} (#{course.teacher.name}) - #{course.address}" %></label>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
 
   <div class="actions">
     <%= form.submit t('actions.save'), class: "btn btn-success" %>

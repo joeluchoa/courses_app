@@ -10,7 +10,8 @@ export default class extends Controller {
     "startButton",
     "takeButton",
     "successMsg",
-    "photoInput" // The actual file input field
+    "photoInput", // The actual file input field
+    "preview"
   ]
 
   // This method runs automatically when the controller is connected to the page.
@@ -43,6 +44,10 @@ export default class extends Controller {
     this.canvasTarget.height = this.videoTarget.videoHeight;
     this.canvasTarget.getContext('2d').drawImage(this.videoTarget, 0, 0);
 
+    const dataUrl = this.canvasTarget.toDataURL('image/jpeg');
+    this.previewTarget.src = dataUrl;
+    this.previewTarget.classList.remove('d-none');
+
     this.canvasTarget.toBlob(blob => {
       const file = new File([blob], 'camera_photo.jpg', { type: 'image/jpeg' });
       const dataTransfer = new DataTransfer();
@@ -53,6 +58,19 @@ export default class extends Controller {
 
       this.cleanup();
     }, 'image/jpeg');
+  }
+
+  // This method will be triggered when the user selects a file manually.
+  previewFile() {
+    const file = this.photoInputTarget.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.previewTarget.src = e.target.result;
+        this.previewTarget.classList.remove('d-none');
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   // Helper method to stop the camera and reset the UI.
