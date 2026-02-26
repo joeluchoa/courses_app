@@ -121,6 +121,7 @@ en:
         address: "Address"
         total_paid: "Total paid"
         photo: "Photo"
+        status: "Status"
       teacher:
         name: "Name"
         phone_number: "Phone number"
@@ -235,6 +236,8 @@ en:
   students:
     index:
       title: "Students"
+      show_active: "Show active students"
+      show_inactive: "Show inactive students"
     show:
       title: "Student Details"
       enrolled_courses: "Enrolled Courses"
@@ -244,6 +247,9 @@ en:
       not_available: "Not available."
       no_enrolled_courses: "This student is not yet enrolled in any courses."
       no_photo: "No photo provided."
+    status:
+      active: "Active"
+      inactive: "Inactive"
     new:
       title: "New Student"
     edit:
@@ -308,6 +314,7 @@ en:
     unenroll: 'Unenroll'
     enroll: 'Enroll Student'
     search: 'Search'
+    clear: 'Clear'
   errors:
     header: "%{count} error(s) prohibited this %{model} from being saved:"
   footer:

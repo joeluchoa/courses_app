@@ -121,6 +121,7 @@ pt:
         address: "Endereço"
         total_paid: "Total pago"
         photo: "Foto"
+        status: "Status"
       teacher:
         name: "Nome"
         phone_number: "Número de telefone"
@@ -235,6 +236,8 @@ pt:
   students:
     index:
       title: "Alunos"
+      show_active: "Mostrar alunos ativos"
+      show_inactive: "Mostrar alunos inativos"
     show:
       title: "Detalhes do Aluno"
       enrolled_courses: "Cursos Matriculados"
@@ -244,6 +247,9 @@ pt:
       not_available: "Não disponível."
       no_enrolled_courses: "Este aluno ainda não está matriculado em nenhum curso."
       no_photo: "Nenhuma foto fornecida."
+    status:
+      active: "Ativo"
+      inactive: "Inativo"
     new:
       title: "Novo Aluno"
     edit:
@@ -308,6 +314,7 @@ pt:
     unenroll: 'Desmatricular'
     enroll: 'Matricular Aluno'
     search: 'Buscar'
+    clear: 'Limpar'
   errors:
     header: "%{count} erro(s) impediram que este %{model} fosse salvo:"
   footer:

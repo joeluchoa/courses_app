@@ -14,6 +14,31 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should filter students by status" do
+    # Create an active student
+    active_course = create(:course, end_date: 1.month.from_now)
+    active_student = create(:student)
+    active_student.courses << active_course
+
+    # Create an inactive student
+    inactive_course = create(:course, end_date: 1.month.ago)
+    inactive_student = create(:student)
+    inactive_student.courses << inactive_course
+
+    # Filter by active
+    get students_url(locale: :en, status: ["active"])
+    assert_response :success
+    assert_select "td", text: active_student.full_name
+    assert_select "td", text: inactive_student.full_name, count: 0
+
+    # Filter by inactive
+    get students_url(locale: :en, status: ["inactive"])
+    assert_response :success
+    assert_select "td", text: inactive_student.full_name
+    assert_select "td", text: active_student.full_name, count: 0
+  end
+
+
   test "should get new" do
     get new_student_url(locale: :en)
     assert_response :success

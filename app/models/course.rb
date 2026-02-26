@@ -10,6 +10,9 @@ class Course < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :attendances, dependent: :destroy
 
+  scope :active, -> { where("end_date >= ?", Time.zone.now) }
+  scope :inactive, -> { where("end_date < ?", Time.zone.now) }
+
   validates :name, presence: true
   validates :address, presence: true
   validate :start_time_must_be_before_end_time

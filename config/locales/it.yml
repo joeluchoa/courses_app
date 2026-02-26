@@ -122,6 +122,7 @@ it:
         address: "Indirizzo"
         total_paid: "Totale pagato"
         photo: "Foto"
+        status: "Stato"
       teacher:
         name: "Nome"
         phone_number: "Numero di telefono"
@@ -239,6 +240,8 @@ it:
   students:
     index:
       title: "Studenti"
+      show_active: "Mostra studenti attivi"
+      show_inactive: "Mostra studenti inattivi"
     show:
       title: "Dettagli Studente"
       enrolled_courses: "Corsi Iscritti"
@@ -248,6 +251,9 @@ it:
       not_available: "Non disponibile."
       no_enrolled_courses: "Questo studente non è ancora iscritto ad alcun corso."
       no_photo: "Nessuna foto fornita."
+    status:
+      active: "Attivo"
+      inactive: "Inattivo"
     new:
       title: "Nuovo Studente"
     edit:
@@ -312,6 +318,8 @@ it:
     unenroll: 'Disiscrivi'
     enroll: 'Iscrivi Studente'
     search: 'Cerca'
+    clear: 'Cancella'
+
   errors:
     header: "%{count} errori hanno impedito di salvare questo %{model}:"
   footer:

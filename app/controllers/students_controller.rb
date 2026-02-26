@@ -3,8 +3,20 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
-    @students = Student.all
+    @students = Student.order(:first_name, :last_name)
+
+    if params[:status].present?
+      statuses = Array(params[:status])
+      if statuses.include?("active") && statuses.include?("inactive")
+        # Show all
+      elsif statuses.include?("active")
+        @students = @students.active
+      elsif statuses.include?("inactive")
+        @students = @students.inactive
+      end
+    end
   end
+
 
   # GET /students/1 or /students/1.json
   def show
