@@ -316,6 +316,7 @@ pt:
     enroll: 'Matricular Aluno'
     search: 'Buscar'
     clear: 'Limpar'
+    download_pdf: 'Baixar PDF'
   errors:
     header: "%{count} erro(s) impediram que este %{model} fosse salvo:"
   footer:

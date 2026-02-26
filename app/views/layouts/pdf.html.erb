@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PDF - <%= yield :title if content_for?(:title) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- html2pdf.js for client-side PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 2.5cm 1cm; /* Top/bottom margin for header/footer */
+        background-color: #FFF;
+        font-family: Arial, sans-serif;
+      }
+
+      .pdf-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2cm;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+      }
+
+      .pdf-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1cm;
+        text-align: right;
+        font-size: 10px;
+        color: #666;
+        border-top: 1px solid #eee;
+        padding-top: 5px;
+      }
+
+      .no-pdf {
+        display: none !important;
+      }
+
+      /* PDF specific adjustments */
+      .attendance-table {
+        font-size: 10px !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+      }
+
+      .attendance-table th, .attendance-table td {
+        padding: 5px !important;
+        border: 1px solid #ccc !important;
+        text-align: center !important;
+      }
+
+      .attendance-table th.rotated-header {
+        height: 100px !important;
+        vertical-align: bottom !important;
+        position: relative !important;
+      }
+
+      .attendance-table th.rotated-header > div {
+        position: absolute !important;
+        left: 50% !important;
+        bottom: 10px !important;
+        white-space: nowrap !important;
+        width: 100px !important;
+        text-align: left !important;
+      }
+
+      .status-present { color: #008000 !important; font-weight: bold !important; }
+      .status-absent { color: #d9534f !important; font-weight: bold !important; }
+      .status-na { color: #999 !important; }
+    </style>
+  </head>
+
+  <body>
+    <div class="pdf-footer">
+      <%= t('badge.issued') %>: <%= l(Time.now, format: :long) %>
+    </div>
+    <%= yield %>
+  </body>
+
+</html>

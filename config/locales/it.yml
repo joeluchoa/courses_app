@@ -320,6 +320,7 @@ it:
     enroll: 'Iscrivi Studente'
     search: 'Cerca'
     clear: 'Cancella'
+    download_pdf: 'Scarica PDF'
 
   errors:
     header: "%{count} errori hanno impedito di salvare questo %{model}:"

@@ -117,7 +117,16 @@ class CoursesController < ApplicationController
     end
 
     @attendance_counts = @course.attendances.group(:student_id).count
+
+    respond_to do |format|
+      format.html do
+        if params[:download] == "true"
+          render layout: "pdf"
+        end
+      end
+    end
   end
+
 
   private
 

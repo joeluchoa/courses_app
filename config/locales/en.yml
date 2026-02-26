@@ -316,6 +316,7 @@ en:
     enroll: 'Enroll Student'
     search: 'Search'
     clear: 'Clear'
+    download_pdf: 'Download PDF'
   errors:
     header: "%{count} error(s) prohibited this %{model} from being saved:"
   footer:
