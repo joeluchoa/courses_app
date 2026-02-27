@@ -164,6 +164,9 @@ en:
   courses:
     index:
       title: "Courses"
+      search_placeholder: "Search by course name"
+      show_active: "Show active courses"
+      show_inactive: "Show inactive courses"
     new:
       title: "New Course"
     edit:

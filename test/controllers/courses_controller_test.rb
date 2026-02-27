@@ -14,6 +14,30 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should filter courses by name and status" do
+    active_course = create(:course, name: "Active Ruby", end_date: 1.month.from_now)
+    inactive_course = create(:course, name: "Old Java", end_date: 1.month.ago)
+
+    # Filter by name
+    get courses_url(locale: :en, query: "Ruby")
+    assert_response :success
+    assert_match "Active Ruby", response.body
+    assert_no_match "Old Java", response.body
+
+    # Filter by active status
+    get courses_url(locale: :en, status: ["active"])
+    assert_response :success
+    assert_match "Active Ruby", response.body
+    assert_no_match "Old Java", response.body
+
+    # Filter by inactive status
+    get courses_url(locale: :en, status: ["inactive"])
+    assert_response :success
+    assert_match "Old Java", response.body
+    assert_no_match "Active Ruby", response.body
+  end
+
+
   test "should get new" do
     get new_course_url(locale: :en)
     assert_response :success

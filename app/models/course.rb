@@ -12,6 +12,11 @@ class Course < ApplicationRecord
 
   scope :active, -> { where("end_date >= ?", Time.zone.now) }
   scope :inactive, -> { where("end_date < ?", Time.zone.now) }
+  scope :search_by_name, ->(query) {
+    if query.present?
+      where("name ILIKE ?", "%#{query}%")
+    end
+  }
 
   validates :name, presence: true
   validates :address, presence: true

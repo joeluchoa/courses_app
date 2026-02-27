@@ -4,8 +4,24 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.order(Arel.sql("start_date DESC, LOWER(name) ASC"))
+
+    if params[:status].present?
+      statuses = Array(params[:status])
+      if statuses.include?("active") && statuses.include?("inactive")
+        # Show all
+      elsif statuses.include?("active")
+        @courses = @courses.active
+      elsif statuses.include?("inactive")
+        @courses = @courses.inactive
+      end
+    end
+
+    if params[:query].present?
+      @courses = @courses.search_by_name(params[:query])
+    end
   end
+
 
   # GET /courses/1 or /courses/1.json
   def show

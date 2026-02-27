@@ -16,7 +16,13 @@
         <tbody class="align-middle">
         <% @student.courses.order(:start_date).reverse_order.each do |course| %>
           <tr>
-            <td scope="col" class="text-center <%= course_row_color(course) %>"><%= t("state.#{(course.state || 'unknown').downcase}") %></td>
+            <td class="text-center">
+              <span class="badge <%= course_status_badge_class(course) %>">
+                <i class="<%= course_status_icon(course) %>"></i>
+                <%= t("state.#{(course.state || 'unknown').downcase}") %>
+              </span>
+            </td>
+
             <td><%= link_to course.name, course_path(course) %></td>
             <td>
               <% if course.in_progress? %>

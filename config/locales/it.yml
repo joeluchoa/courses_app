@@ -168,6 +168,9 @@ it:
   courses:
     index:
       title: "Corsi"
+      search_placeholder: "Cerca per nome del corso"
+      show_active: "Mostra corsi attivi"
+      show_inactive: "Mostra corsi inattivi"
     new:
       title: "Nuovo Corso"
     edit:
