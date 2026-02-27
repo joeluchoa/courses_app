@@ -153,6 +153,9 @@ en:
   users:
     index:
       title: "Users"
+      search_placeholder: "Search by name or email"
+      show_active: "Show active users"
+      show_blocked: "Show blocked users"
     new:
       title: "New user"
     edit:
@@ -273,6 +276,7 @@ en:
   teachers:
     index:
       title: "Instructors"
+      search_placeholder: "Search by name"
     show:
       title: "Instructor Details"
       assigned_courses: "Assigned Courses"

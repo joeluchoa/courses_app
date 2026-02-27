@@ -153,6 +153,9 @@ pt:
   users:
     index:
       title: "Usuários"
+      search_placeholder: "Buscar por nome ou e-mail"
+      show_active: "Mostrar usuários ativos"
+      show_blocked: "Mostrar usuários bloqueados"
     new:
       title: "Novo usuário"
     edit:
@@ -273,6 +276,7 @@ pt:
   teachers:
     index:
       title: "Instrutores"
+      search_placeholder: "Buscar por nome"
     show:
       title: "Detalhes do Instrutor"
       assigned_courses: "Cursos Atribuídos"

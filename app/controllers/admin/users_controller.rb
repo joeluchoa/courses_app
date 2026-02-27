@@ -3,8 +3,24 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @users = User.all.order(:email)
+    @users = User.order(:email)
+
+    if params[:status].present?
+      statuses = Array(params[:status])
+      if statuses.include?("active") && statuses.include?("blocked")
+        # Show all
+      elsif statuses.include?("active")
+        @users = @users.active
+      elsif statuses.include?("blocked")
+        @users = @users.blocked
+      end
+    end
+
+    if params[:query].present?
+      @users = @users.search_by_name(params[:query])
+    end
   end
+
 
   def new
     @user = User.new

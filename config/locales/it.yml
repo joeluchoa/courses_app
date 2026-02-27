@@ -154,6 +154,9 @@ it:
   users:
     index:
       title: "Utenti"
+      search_placeholder: "Cerca per nome o email"
+      show_active: "Mostra utenti attivi"
+      show_blocked: "Mostra utenti bloccati"
     new:
       title: "Nuovo utente"
     edit:
@@ -277,6 +280,7 @@ it:
   teachers:
     index:
       title: "Istruttori"
+      search_placeholder: "Cerca per nome"
     show:
       title: "Dettagli Istruttore"
       assigned_courses: "Corsi Assegnati"

@@ -3,8 +3,13 @@ class TeachersController < ApplicationController
 
   # GET /teachers or /teachers.json
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.order(:name)
+
+    if params[:query].present?
+      @teachers = @teachers.search_by_name(params[:query])
+    end
   end
+
 
   # GET /teachers/1 or /teachers/1.json
   def show
