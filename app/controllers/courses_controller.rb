@@ -110,7 +110,7 @@ class CoursesController < ApplicationController
 
   def attendance_table
     @course = Course.find(params[:id])
-    @students = @course.students.order(:last_name, :first_name)
+    @students = @course.students.order(Arel.sql("LOWER(first_name) ASC, LOWER(last_name) ASC"))
 
     # 1. Determine the columns: Calculate all the specific dates the class runs.
     @class_days = []
@@ -133,6 +133,14 @@ class CoursesController < ApplicationController
     end
 
     @attendance_counts = @course.attendances.group(:student_id).count
+
+    # 3. Chunking for pagination/visualization
+    @students_per_page = 20
+    @days_per_page = 15
+
+    @student_chunks = @students.each_slice(@students_per_page).to_a
+    @day_chunks = @class_days.each_slice(@days_per_page).to_a
+
 
     respond_to do |format|
       format.html do

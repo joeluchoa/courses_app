@@ -8,6 +8,8 @@ pt:
     friday: 'Sexta-feira'
     saturday: 'Sábado'
     sunday: 'Domingo'
+  common:
+    page: "Página"
   date:
     formats:
       default: "%d/%m/%Y"

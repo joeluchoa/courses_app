@@ -1,134 +1,172 @@
-<%# app/views/courses/attendance.html.erb %>
+<%# app/views/courses/attendance_table.html.erb %>
 
 <style>
   /* --- Main Table Styling --- */
   .attendance-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Ensures columns are of equal width */
+    table-layout: fixed;
+    margin-bottom: 20px;
   }
 
   /* --- General Cell Styling --- */
   .attendance-table th, .attendance-table td {
-    border: 1px solid #ccc;
-    padding: 15px;
+    border: 1px solid #dee2e6;
+    padding: 8px 4px;
     text-align: center;
-    width: 10px; /* Set a fixed width for data cells */
-    font-size: 14px;
+    font-size: 13px;
   }
 
   /* --- Student Name Cell --- */
   .attendance-table .student-name {
-    width: 80px; /* Give the student name column more space */
+    width: 180px;
     text-align: left;
-    font-weight: bold;
+    font-weight: 500;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .attendance-table .count-col {
+    width: 40px;
+    background-color: #f8f9fa;
   }
 
   /* --- Rotated Header Styling --- */
   .attendance-table th.rotated-header {
-    height: 30px; /* Give space for the rotated text */
-    vertical-align: button;
-    padding-bottom: 30px;
-    white-space: nowrap; /* Prevents text from wrapping */
+    height: 60px;
+    vertical-align: middle;
+    padding: 0;
+    position: relative;
+    width: 35px;
   }
 
-  .attendance-table th.rotated-header > div {
-    transform:
-      translate(0, 25px) /* Move text down */
-    width: 10px; /* Match this to the cell width */
+  .date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
   }
 
-  /* --- Container for Horizontal Scrolling --- */
-  .table-container {
-    overflow-x: auto; /* The magic for horizontal scrolling */
-    max-width: 100%;
+  .month-label {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: #6c757d;
+  }
+
+  .day-label {
+    font-size: 1.1em;
+    font-weight: bold;
   }
 
   /* --- Status Colors --- */
-  .status-present { color: #008000; font-weight: bold; font-size: 18px; }
-  .status-absent { color: #d9534f; font-weight: bold; font-size: 12px; }
-  .status-na { color: #999; }
+  .status-present { color: #198754; font-weight: bold; font-size: 16px; }
+  .status-absent { color: #dc3545; font-weight: bold; font-size: 11px; }
+  .status-na { color: #adb5bd; }
+
+  /* --- PDF Specifics --- */
+  @media print {
+    .page-break {
+      page-break-after: always;
+    }
+    .attendance-table {
+      margin-bottom: 0;
+    }
+  }
+
+  .table-page {
+    margin-bottom: 40px;
+  }
 </style>
 
 <div id="pdf-content">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <div>
-      <h1 class="mb-0"><%= t('attendances.index.course_title', course: @course.name) %></h1>
-      <div class="text-muted small">
-        <%= t('activerecord.attributes.course.start_date') %>: <strong><%= l(@course.start_date, format: :long) if @course.start_date %></strong> |
-        <%= t('badge.issued') %>: <strong><%= l(Date.today, format: :long) %></strong>
-      </div>
-    </div>
-    <div class="d-flex gap-2 no-pdf">
-      <%= link_to t('actions.download_pdf'), attendance_table_course_path(@course, download: true), class: 'btn btn-outline-secondary', target: '_blank' %>
-      <%= link_to t('attendances.index.global_title'), course_attendances_path(@course), class: 'btn btn-outline-primary' %>
-    </div>
-  </div>
+  <% @student_chunks.each_with_index do |student_chunk, s_idx| %>
+    <% @day_chunks.each_with_index do |day_chunk, d_idx| %>
+      <div class="table-page <%= 'page-break' if !(s_idx == @student_chunks.size - 1 && d_idx == @day_chunks.size - 1) %>">
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h2 class="h4 mb-0">
+              <%= @course.name %> - <%= t('activerecord.models.attendance') %>
+              <small class="text-muted">(<%= t('common.page') %> <%= s_idx * @day_chunks.size + d_idx + 1 %>)</small>
+            </h2>
+            <div class="text-muted small">
+              <%= t('activerecord.attributes.course.start_date') %>: <strong><%= l(@course.start_date, format: :long) if @course.start_date %></strong> |
+              <%= t('badge.issued') %>: <strong><%= l(Date.today, format: :long) %></strong>
+            </div>
+          </div>
+          <div class="d-flex gap-2 no-pdf">
+            <% if s_idx == 0 && d_idx == 0 %>
+              <%= link_to t('actions.download_pdf'), attendance_table_course_path(@course, download: true), class: 'btn btn-outline-secondary btn-sm', target: '_blank' %>
+              <%= link_to t('attendances.index.global_title'), course_attendances_path(@course), class: 'btn btn-outline-primary btn-sm' %>
+            <% end %>
+          </div>
+        </div>
 
-  <p class="text-muted small no-pdf">
-    <i class="fas fa-info-circle me-1"></i>
-    <%= t('courses.attendance_table.legend') %>
-  </p>
+        <div class="table-responsive shadow-sm bg-white rounded">
+          <table class="attendance-table table-bordered">
+            <thead class="bg-light">
+              <tr>
+                <th class="student-name"><%= Student.model_name.human %></th>
+                <th class="count-col">#</th>
+                <% day_chunk.each do |day| %>
+                  <th class="rotated-header">
+                    <div class="date-box">
+                      <span class="month-label"><%= l(day, format: '%b') %></span>
+                      <span class="day-label"><%= day.day %></span>
+                    </div>
+                  </th>
+                <% end %>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% student_chunk.each_with_index do |student, sc_idx| %>
+                <% student_number = (s_idx * @students_per_page) + sc_idx + 1 %>
+                <tr>
+                  <td class="student-name">
+                    <span class="text-muted small me-1"><%= student_number %>.</span>
+                    <span class="no-pdf"><%= link_to student.full_name, student_path(student), class: "text-decoration-none text-dark" %></span>
+                    <span class="d-none d-print-block"><%= student.full_name %></span>
+                  </td>
+
+                  <td class="count-col small text-muted"><%= @attendance_counts[student.id] || 0 %></td>
+                  <% day_chunk.each do |day| %>
+                    <% date_str = day.to_s %>
+                    <% attendance = @attendance_map[[ student.id, date_str ]] %>
+                    <td>
+                      <% if attendance %>
+                        <div class="no-pdf">
+                          <%= button_to "✓", course_attendance_path(@course, attendance, origin: 'table'), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.remove_present_confirm') } %>
+                        </div>
+                        <span class="d-none d-print-block status-present">✓</span>
+                      <% elsif day > Date.today %>
+                        <span class="status-na">-</span>
+                      <% else %>
+                        <div class="no-pdf">
+                          <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }, origin: 'table'), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.mark_present_confirm') } %>
+                        </div>
+                        <span class="d-none d-print-block status-absent">✗</span>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 
   <% if @students.empty? || @class_days.empty? %>
     <p><%= t('courses.attendance_table.no_data') %></p>
-  <% else %>
-    <%# Wrap the table in our scrollable container %>
-    <div class="table-container shadow-sm p-3 mb-4 bg-white rounded">
-      <table class="attendance-table">
-        <thead class="font-monospace">
-          <tr>
-            <th class="student-name"><%= Student.model_name.human %></th>
-            <th class="">#</th>
-            <% @class_days.each do |day| %>
-              <th class="rotated-header">
-                <div>
-                  <span class="text-uppercase" style="font-size: 0.8em;"><%= l(day, format: '%b') %></span><br>
-                  <span style="font-size: 1.2em;"><%= day.day %></span>
-                </div>
-              </th>
-            <% end %>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @students.each do |student| %>
-            <tr>
-              <td class="student-name">
-                <span class="no-pdf"><%= link_to student.full_name, student_path(student) %></span>
-                <span class="d-none d-print-block"><%= student.full_name %></span>
-              </td>
-              <td class=""><%= @attendance_counts[student.id] || 0 %></td>
-              <% @class_days.each do |day| %>
-                <% date_str = day.to_s %>
-                <% attendance = @attendance_map[[ student.id, date_str ]] %>
-                <td>
-                  <% if attendance %>
-                    <div class="no-pdf">
-                      <%= button_to "✓", course_attendance_path(@course, attendance, origin: 'table'), method: :delete, class: "btn btn-link p-0 status-present text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.remove_present_confirm') } %>
-                    </div>
-                    <span class="d-none d-print-block status-present">✓</span>
-                  <% elsif day > Date.today %>
-                    <span class="status-na">-</span>
-                  <% else %>
-                    <div class="no-pdf">
-                      <%= button_to "✗", course_attendances_path(@course, attendance: { student_id: student.id, attended_on: day }, origin: 'table'), method: :post, class: "btn btn-link p-0 status-absent text-decoration-none", data: { turbo_confirm: t('courses.attendance_table.mark_present_confirm') } %>
-                    </div>
-                    <span class="d-none d-print-block status-absent">✗</span>
-                  <% end %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
   <% end %>
 </div>
 
-
-<br>
-<div class="d-flex gap-2 no-pdf">
+<div class="d-flex gap-2 no-pdf mt-4">
   <%= link_to t('actions.back'), course_path(@course), class: 'btn btn-secondary' %>
   <%= link_to t('attendances.index.new_manual'), new_course_attendance_path(@course), class: "btn btn-primary" %>
 </div>
@@ -146,7 +184,7 @@
       });
 
       const opt = {
-        margin:       10,
+        margin:       [10, 5, 10, 5],
         filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { 
@@ -155,13 +193,14 @@
           logging: false,
           letterRendering: true
         },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
+        pagebreak:    { mode: 'css', after: '.page-break' }
       };
 
       html2pdf().set(opt).from(element).save().then(() => {
+        // Option to close window if it was opened just for download
         // window.close();
       });
     }
   });
 </script>
-

@@ -8,6 +8,8 @@ it:
     friday: 'Venerdì'
     saturday: 'Sabato'
     sunday: 'Domenica'
+  common:
+    page: "Pagina"
   date:
     formats:
       default: "%d/%m/%Y"
