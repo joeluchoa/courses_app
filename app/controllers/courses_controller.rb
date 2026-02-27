@@ -28,10 +28,11 @@ class CoursesController < ApplicationController
     # @course is already set by your set_course before_action
 
     # Get students who are already in the course
-    @enrolled_students = @course.students.order(:last_name, :first_name)
+    @enrolled_students = @course.students.order(Arel.sql("LOWER(first_name) ASC, LOWER(last_name) ASC"))
 
     # Get students who are NOT in the course to populate the enrollment dropdown
-    @potential_students = Student.where.not(id: @course.student_ids).order(:last_name, :first_name)
+    @potential_students = Student.where.not(id: @course.student_ids).order(Arel.sql("LOWER(first_name) ASC, LOWER(last_name) ASC"))
+
 
     # Initialize an empty enrollment object for the form helper
     @enrollment = Enrollment.new
