@@ -2,11 +2,19 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "controllers/application"
-import CameraController from "controllers/camera"
+import { application } from "./application"
 
-// Register the controllers
+import CameraController from "./camera_controller"
 application.register("camera", CameraController)
 
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+
+import ListFilterController from "./list_filter_controller"
+application.register("list-filter", ListFilterController)
+
+import ScannerController from "./scanner_controller"
+application.register("scanner", ScannerController)
+
+import ScheduleRowController from "./schedule_row_controller"
+application.register("schedule-row", ScheduleRowController)

@@ -18,6 +18,3 @@ pin "controllers/camera", to: "controllers/camera_controller.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "mdb-ui-kit", to: "mdb-ui-kit.js"
-pin "tom-select" # @2.4.3
-pin "@orchidjs/sifter", to: "@orchidjs--sifter.js" # @1.1.0
-pin "@orchidjs/unicode-variants", to: "@orchidjs--unicode-variants.js" # @1.1.2

@@ -54,22 +54,30 @@
       <div class="card-header">
         <h5><%= t('.enroll_student') %></h5>
       </div>
-      <div class="card-body">
-        <%= form_with(model: [@course, @enrollment]) do |form| %>
-          <div class="mb-3">
-            <%# Use Tom Select for searching directly in the dropdown %>
-            <%= form.select :student_id,
-            options_from_collection_for_select(@potential_students, :id, :full_name),
-            { prompt: t('.select_student') },
-            class: "form-select",
-            data: { controller: "tom-select" } %>
-          </div>
+      <div class="card-body" data-controller="list-filter">
+        <div class="mb-3">
+          <input type="text"
+                 class="form-control"
+                 placeholder="<%= t('.search_student_placeholder', default: 'Search student by name...') %>"
+                 data-list-filter-target="input"
+                 data-action="input->list-filter#filter">
+        </div>
 
-
-          <div class="d-grid">
-            <%= form.submit t('actions.enroll'), class: "btn btn-success" %>
-          </div>
-        <% end %>
+        <div class="list-group overflow-auto" style="max-height: 400px;">
+          <% @potential_students.each do |student| %>
+            <div class="list-group-item d-flex justify-content-between align-items-center"
+                 data-list-filter-target="item"
+                 data-search-value="<%= student.full_name %>">
+              <span><%= student.full_name %></span>
+              <%= button_to t('actions.enroll'), course_enrollments_path(@course, enrollment: { student_id: student.id }), method: :post, class: "btn btn-sm btn-success" %>
+            </div>
+          <% end %>
+          <% if @potential_students.empty? %>
+            <div class="list-group-item text-muted text-center italic">
+              <%= t('.all_students_enrolled') %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
