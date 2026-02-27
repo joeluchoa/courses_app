@@ -6,7 +6,7 @@ class AttendancesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
     # Create a course with a specific schedule (only Saturdays)
-    @course = create(:course)
+    @course = create(:course, start_date: 1.month.ago, end_date: 1.month.from_now)
     @course.weekly_schedule = [
       { "day" => "Saturday", "start_time" => "09:00", "end_time" => "10:00", "enabled" => "1" }
     ]
@@ -14,6 +14,7 @@ class AttendancesControllerTest < ActionDispatch::IntegrationTest
     
     @student = create(:student)
     create(:enrollment, course: @course, student: @student)
+
     
     # Ensure @valid_day is a Saturday. 
     # Today is 2026-02-21 (Saturday).
