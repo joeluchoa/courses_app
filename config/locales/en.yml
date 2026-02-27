@@ -187,6 +187,7 @@ en:
       no_students_enrolled: "No students are currently enrolled in this course."
       enroll_student: "Enroll a Student"
       select_student: "Select a student"
+      search_student_to_enroll: "Search student to enroll..."
     scan_attendance:
       title: "Scan Attendance for %{course}"
       registering: "Registering..."

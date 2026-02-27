@@ -34,6 +34,8 @@ class CoursesController < ApplicationController
     @potential_students = Student.where.not(id: @course.student_ids).order(Arel.sql("LOWER(first_name) ASC, LOWER(last_name) ASC"))
 
 
+
+
     # Initialize an empty enrollment object for the form helper
     @enrollment = Enrollment.new
   end

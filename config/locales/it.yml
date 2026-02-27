@@ -191,6 +191,7 @@ it:
       no_students_enrolled: "Nessuno studente iscritto a questo corso."
       enroll_student: "Iscrivi Studente"
       select_student: "Seleziona uno studente"
+      search_student_to_enroll: "Cerca studente da iscrivere..."
     scan_attendance:
       title: "Scansiona Presenze per %{course}"
       registering: "Registrazione..."

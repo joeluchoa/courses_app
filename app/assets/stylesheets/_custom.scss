@@ -56,3 +56,78 @@
   color: #adb5bd;
   font-size: 1.5rem;
 }
+
+/* Tom Select Bootstrap 5 Theme Minimal Styles */
+.ts-wrapper.form-select,
+.ts-wrapper.form-control {
+  padding: 0;
+  border: none;
+}
+
+.ts-dropdown,
+.ts-control,
+.ts-control input {
+  color: #495057;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+.ts-control {
+  border: 1px solid #ced4da;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: 0.375rem;
+  display: flex !important;
+  align-items: center;
+  min-height: 38px;
+}
+
+.ts-wrapper.single .ts-control {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.ts-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  margin: 0.25rem 0 0 0;
+  border-top: 0 none;
+  box-sizing: border-box;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  border-radius: 0.375rem;
+}
+
+.ts-dropdown .active {
+  background-color: #e9ecef;
+  color: #16181b;
+}
+
+.ts-dropdown .optgroup-header {
+  padding: 5px 8px;
+  line-height: 1.5;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.ts-dropdown .option {
+  padding: 0.375rem 0.75rem;
+}
+
+.ts-wrapper.focus .ts-control {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}

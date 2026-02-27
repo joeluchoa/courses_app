@@ -57,13 +57,15 @@
       <div class="card-body">
         <%= form_with(model: [@course, @enrollment]) do |form| %>
           <div class="mb-3">
-            <%= form.label :student_id, t('.select_student'), class: "form-label" %>
-            <%# The options for the select dropdown %>
+            <%# Use Tom Select for searching directly in the dropdown %>
             <%= form.select :student_id,
             options_from_collection_for_select(@potential_students, :id, :full_name),
             { prompt: t('.select_student') },
-            class: "form-select" %>
+            class: "form-select",
+            data: { controller: "tom-select" } %>
           </div>
+
+
           <div class="d-grid">
             <%= form.submit t('actions.enroll'), class: "btn btn-success" %>
           </div>

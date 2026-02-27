@@ -183,10 +183,11 @@ pt:
     show:
       title: "Detalhes do Curso"
       enrolled_students: "Alunos Matriculados"
-      view_attendance_sheet: "Ver Lista de Presença"
+      view_attendance_sheet: "Página de Presença"
       no_students_enrolled: "Nenhum aluno matriculado neste curso."
-      enroll_student: "Matricular Aluno"
-      select_student: "Selecione um aluno"
+      enroll_student: "Matricular um Aluno"
+      select_student: "Selecionar aluno"
+      search_student_to_enroll: "Buscar aluno para matricular..."
     scan_attendance:
       title: "Escanear Presença para %{course}"
       registering: "Registrando..."
