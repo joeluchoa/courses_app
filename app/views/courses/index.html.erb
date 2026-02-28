@@ -63,7 +63,7 @@
         </td>
         <td class="small"><%= course.address %></td>
         <td class="small">
-          <% course.weekly_schedule.each do |schedule| %>
+          <% (course.weekly_schedule || []).each do |schedule| %>
             <div class="text-nowrap">
               <span class="text-uppercase fw-lighter" style="font-size: 0.8em;"><%= t("weekdays.#{schedule["day"].downcase}") %>:</span>
               <%= schedule["start_time"] %> - <%= schedule["end_time"] %>
