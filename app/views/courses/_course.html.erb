@@ -1,5 +1,19 @@
 <div id="<%= dom_id course %>">
   <p>
+    <strong><%= t('state.title') %>:</strong>
+    <span class="badge <%= course.in_progress? ? 'bg-success' : (course.not_started? ? 'bg-primary' : 'bg-secondary') %>">
+      <% if course.in_progress? %>
+        <i class="fas fa-play-circle me-1"></i>
+      <% elsif course.not_started? %>
+        <i class="fas fa-calendar-alt me-1"></i>
+      <% else %>
+        <i class="fas fa-check-circle me-1"></i>
+      <% end %>
+      <%= t("state.#{course.state.downcase}") %>
+    </span>
+  </p>
+
+  <p>
     <strong><%= Course.human_attribute_name(:name) %>:</strong>
     <%= course.name %>
   </p>
