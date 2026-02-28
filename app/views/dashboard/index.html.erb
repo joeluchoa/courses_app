@@ -1,45 +1,226 @@
-<div class="dashboard-header">
-  <h1><%= t('dashboard.title') %></h1>
-  <div class="quick-actions">
-    <%= link_to t('dashboard.add_student'), new_student_path, class: "btn btn-primary" %>
-    <%= link_to t('dashboard.add_course'), new_course_path, class: "btn btn-primary" %>
-    <%= link_to t('dashboard.add_teacher'), new_teacher_path, class: "btn btn-primary" %>
-    <%# Add a link to the first course's scanner, or create a dedicated selection page %>
+<%# ============================================================ %>
+<%# Dashboard Header %>
+<%# ============================================================ %>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h1 class="mb-0"><%= t('dashboard.title') %></h1>
+    <small class="text-muted"><%= l(Time.zone.now, format: :long) %></small>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to new_student_path, class: "btn btn-outline-primary btn-sm" do %>
+      <i class="fas fa-user-plus me-1"></i><%= t('dashboard.add_student') %>
+    <% end %>
+    <%= link_to new_course_path, class: "btn btn-outline-secondary btn-sm" do %>
+      <i class="fas fa-book-open me-1"></i><%= t('dashboard.add_course') %>
+    <% end %>
+    <%= link_to new_teacher_path, class: "btn btn-outline-secondary btn-sm" do %>
+      <i class="fas fa-chalkboard-teacher me-1"></i><%= t('dashboard.add_teacher') %>
+    <% end %>
     <% if Course.any? %>
-      <%# <%= link_to "Scan Attendance", scan_attendance_course_path(Course.first), class: "btn btn-success" %>
-      <%= link_to t('dashboard.scan_attendance'), scanner_path, class: "btn btn-success" %>
+      <%= link_to scanner_path, class: "btn btn-success btn-sm" do %>
+        <i class="fas fa-qrcode me-1"></i><%= t('dashboard.scan_attendance') %>
+      <% end %>
     <% end %>
   </div>
 </div>
 
-<div class="dashboard-grid">
-  <div class="stat-card">
-    <h2><%= @student_count %></h2>
-    <p><%= t('dashboard.total_students') %></p>
-  </div>
-  <div class="stat-card">
-    <h2><%= @course_count %></h2>
-    <p><%= t('dashboard.total_courses') %></p>
-  </div>
-  <div class="stat-card">
-    <h2><%= @teacher_count %></h2>
-    <p><%= t('dashboard.total_teachers') %></p>
+<%# ============================================================ %>
+<%# Stat Cards Row %>
+<%# ============================================================ %>
+<div class="row g-3 mb-4">
+  <%# Students %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-primary bg-opacity-10 text-primary mb-2">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @student_count %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.total_students') %></div>
+        <% if @active_student_count > 0 %>
+          <div class="mt-1">
+            <span class="badge bg-success bg-opacity-10 text-success small">
+              <%= @active_student_count %> <%= t('dashboard.active') %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div class="activity-list">
-    <h3><%= t('dashboard.activities.title') %></h3>
-    <ul>
-      <% @recent_attendances.each do |attendance| %>
-        <li>
-          <%= t('dashboard.activities.attendance_html', 
-                student: link_to(attendance.student.full_name, student_path(attendance.student)), 
-                course: link_to(attendance.course.name, course_path(attendance.course)), 
-                date: l(attendance.attended_on, format: :short)) %>
-        </li>
-      <% end %>
-      <% if @recent_attendances.empty? %>
-        <li><%= t('dashboard.activities.no_recent') %></li>
-      <% end %>
-    </ul>
+  <%# Courses %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-warning bg-opacity-10 text-warning mb-2">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @course_count %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.total_courses') %></div>
+        <% if @active_course_count > 0 %>
+          <div class="mt-1">
+            <span class="badge bg-success bg-opacity-10 text-success small">
+              <%= @active_course_count %> <%= t('dashboard.active') %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# Teachers %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-info bg-opacity-10 text-info mb-2">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @teacher_count %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.total_teachers') %></div>
+      </div>
+    </div>
+  </div>
+
+  <%# Today's Attendance %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-success bg-opacity-10 text-success mb-2">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @today_attendance %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.today_attendance') %></div>
+      </div>
+    </div>
+  </div>
+
+  <%# Ongoing Courses %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-success bg-opacity-10 text-success mb-2">
+          <i class="fas fa-play-circle"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @ongoing_courses.size %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.ongoing_courses') %></div>
+      </div>
+    </div>
+  </div>
+
+  <%# Upcoming Courses %>
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card h-100 border-0 shadow-sm text-center">
+      <div class="card-body py-3">
+        <div class="dashboard-stat-icon bg-primary bg-opacity-10 text-primary mb-2">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="dashboard-stat-value"><%= @upcoming_courses.size %></div>
+        <div class="dashboard-stat-label"><%= t('dashboard.upcoming_courses') %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# ============================================================ %>
+<%# Ongoing & Upcoming Courses – side by side %>
+<%# ============================================================ %>
+<div class="row g-3 mb-4">
+  <%# Ongoing Courses %>
+  <div class="col-12 col-lg-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-header bg-transparent border-bottom d-flex align-items-center gap-2">
+        <i class="fas fa-play-circle text-success"></i>
+        <strong><%= t('dashboard.ongoing_courses_title') %></strong>
+      </div>
+      <div class="card-body p-0">
+        <% if @ongoing_courses.any? %>
+          <ul class="list-group list-group-flush">
+            <% @ongoing_courses.each do |course| %>
+              <li class="list-group-item px-3 py-2 d-flex justify-content-between align-items-start">
+                <div>
+                  <%= link_to course.name, course, class: "fw-semibold text-decoration-none" %>
+                  <div class="small text-muted">
+                    <i class="fas fa-chalkboard-teacher me-1"></i><%= course.teacher.name %>
+                  </div>
+                </div>
+                <% if course.end_date %>
+                  <span class="badge bg-secondary text-white ms-2 text-nowrap">
+                    <%= t('dashboard.ends') %> <%= l(course.end_date, format: :short) %>
+                  </span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted p-3 mb-0"><%= t('dashboard.no_ongoing') %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%# Upcoming Courses %>
+  <div class="col-12 col-lg-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-header bg-transparent border-bottom d-flex align-items-center gap-2">
+        <i class="fas fa-calendar-alt text-primary"></i>
+        <strong><%= t('dashboard.upcoming_courses_title') %></strong>
+      </div>
+      <div class="card-body p-0">
+        <% if @upcoming_courses.any? %>
+          <ul class="list-group list-group-flush">
+            <% @upcoming_courses.each do |course| %>
+              <li class="list-group-item px-3 py-2 d-flex justify-content-between align-items-start">
+                <div>
+                  <%= link_to course.name, course, class: "fw-semibold text-decoration-none" %>
+                  <div class="small text-muted">
+                    <i class="fas fa-chalkboard-teacher me-1"></i><%= course.teacher.name %>
+                  </div>
+                </div>
+                <% if course.start_date %>
+                  <span class="badge bg-primary ms-2 text-nowrap">
+                    <%= l(course.start_date, format: :short) %>
+                  </span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted p-3 mb-0"><%= t('dashboard.no_upcoming') %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# ============================================================ %>
+<%# Recent Attendance Activity %>
+<%# ============================================================ %>
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-bottom d-flex align-items-center gap-2">
+    <i class="fas fa-history text-secondary"></i>
+    <strong><%= t('dashboard.activities.title') %></strong>
+  </div>
+  <div class="card-body p-0">
+    <% if @recent_attendances.any? %>
+      <ul class="list-group list-group-flush">
+        <% @recent_attendances.each do |attendance| %>
+          <li class="list-group-item px-3 py-2 d-flex align-items-center gap-3">
+            <div class="dashboard-activity-icon text-secondary">
+              <i class="fas fa-user-check"></i>
+            </div>
+            <div class="flex-grow-1">
+              <%= link_to attendance.student.full_name, student_path(attendance.student), class: "fw-semibold text-decoration-none" %>
+              <span class="text-muted"> – </span>
+              <%= link_to attendance.course.name, course_path(attendance.course), class: "text-decoration-none text-muted" %>
+            </div>
+            <span class="badge bg-light text-muted border text-nowrap">
+              <i class="fas fa-clock me-1"></i><%= l(attendance.attended_on, format: :short) %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted p-3 mb-0"><%= t('dashboard.activities.no_recent') %></p>
+    <% end %>
   </div>
 </div>

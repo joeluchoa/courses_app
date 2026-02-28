@@ -75,12 +75,21 @@ pt:
     total_students: 'Total de Alunos'
     total_courses: 'Total de Cursos'
     total_teachers: 'Total de Instrutores'
+    active: 'Ativos'
+    today_attendance: 'Presenças Hoje'
+    ongoing_courses: 'Cursos em Andamento'
+    upcoming_courses: 'Próximos Cursos'
+    ongoing_courses_title: 'Cursos em Andamento'
+    upcoming_courses_title: 'Começando em Breve'
+    no_ongoing: 'Nenhum curso está em andamento no momento.'
+    no_upcoming: 'Nenhum curso começando em breve.'
+    ends: 'Fim'
     add_student: 'Adicionar Aluno'
     add_course: 'Adicionar Curso'
     add_teacher: 'Adicionar Instrutor'
     scan_attendance: 'Escanear Presença'
     activities:
-      title: "Atividades Recentes"
+      title: "Atividade Recente"
       attendance_html: "%{student} compareceu ao %{course} em %{date}"
       no_recent: "Nenhum registro de presença recente encontrado."
   status:

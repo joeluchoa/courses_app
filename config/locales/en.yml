@@ -75,12 +75,21 @@ en:
     total_students: 'Total Students'
     total_courses: 'Total Courses'
     total_teachers: 'Total Instructors'
+    active: 'Active'
+    today_attendance: "Today's Attendance"
+    ongoing_courses: 'Ongoing Courses'
+    upcoming_courses: 'Upcoming Courses'
+    ongoing_courses_title: 'Ongoing Courses'
+    upcoming_courses_title: 'Starting Soon'
+    no_ongoing: 'No courses are currently in progress.'
+    no_upcoming: 'No courses are starting soon.'
+    ends: 'Ends'
     add_student: 'Add Student'
     add_course: 'Add Course'
     add_teacher: 'Add Instructor'
     scan_attendance: 'Scan Attendance'
     activities:
-      title: "Recent Activities"
+      title: "Recent Activity"
       attendance_html: "%{student} attended %{course} on %{date}"
       no_recent: "No recent attendance records found."
   status:
