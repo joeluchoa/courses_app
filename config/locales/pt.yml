@@ -276,6 +276,7 @@ pt:
       start_camera: "Iniciar Câmera"
       take_photo_btn: "Tirar Foto"
       photo_captured: "Foto Capturada!"
+      enroll_in_courses: "Matricular em Cursos"
   teachers:
     index:
       title: "Instrutores"

@@ -49,12 +49,22 @@
           <td><%= student.date_of_birth %></td>
           <td><%= student.email %></td>
           <td>
-            <% student.courses.active.each do |course| %>
-              <span class="badge bg-info text-dark" title="<%= course.teacher.name %>"><%= course.name %></span>
+            <% student.courses.active.order(:name).each do |course| %>
+              <%= link_to course, class: "badge bg-light text-dark text-decoration-none mb-1", title: "#{course.teacher.name} (#{t("state.#{course.state.downcase}")})" do %>
+                <% if course.in_progress? %>
+                  <i class="fas fa-play-circle me-1 text-success"></i>
+                <% elsif course.not_started? %>
+                  <i class="fas fa-calendar-alt me-1 text-primary"></i>
+                <% end %>
+                <%= course.name %>
+              <% end %>
             <% end %>
             <% if student.courses.active.any? && student.courses.inactive.any? %><br/><% end %>
-            <% student.courses.inactive.each do |course| %>
-              <span class="badge bg-light text-muted" title="<%= course.teacher.name %>"><%= course.name %></span>
+            <% student.courses.inactive.order(:name).each do |course| %>
+              <%= link_to course, class: "badge bg-light text-muted text-decoration-none mb-1", title: "#{course.teacher.name} (#{t("state.#{course.state.downcase}")})" do %>
+                <i class="fas fa-check-circle me-1"></i>
+                <%= course.name %>
+              <% end %>
             <% end %>
           </td>
           <td>

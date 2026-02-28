@@ -280,6 +280,7 @@ it:
       start_camera: "Avvia Fotocamera"
       take_photo_btn: "Scatta Foto"
       photo_captured: "Foto Scattata!"
+      enroll_in_courses: "Iscrivi ai Corsi"
   teachers:
     index:
       title: "Istruttori"

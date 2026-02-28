@@ -276,6 +276,7 @@ en:
       start_camera: "Start Camera"
       take_photo_btn: "Take Photo"
       photo_captured: "Photo Captured!"
+      enroll_in_courses: "Enroll in Courses"
   teachers:
     index:
       title: "Instructors"
