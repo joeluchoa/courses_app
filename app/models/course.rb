@@ -10,8 +10,8 @@ class Course < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :attendances, dependent: :destroy
 
-  scope :active, -> { where("end_date >= ?", Time.zone.now) }
-  scope :inactive, -> { where("end_date < ?", Time.zone.now) }
+  scope :active, -> { where("end_date IS NOT NULL AND end_date >= ?", Time.zone.now) }
+  scope :inactive, -> { where("end_date IS NULL OR end_date < ?", Time.zone.now) }
   scope :search_by_name, ->(query) {
     if query.present?
       where("name ILIKE ?", "%#{query}%")
