@@ -96,7 +96,7 @@ class Course < ApplicationRecord
   end
 
   def finished?
-    return false if self.start_date.nil? or self.end_date.nil?
+    return true if self.end_date.nil?
     self.end_date < Time.zone.now
   end
 
